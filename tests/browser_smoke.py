@@ -1,0 +1,79 @@
+"""Real-browser smoke test (Chromium via Playwright). Needs: pip install playwright && playwright install chromium
+Usage: python3 tests/browser_smoke.py [url]   (default: opens index.html as a file)"""
+import asyncio, pathlib, sys, os, shutil
+from playwright.async_api import async_playwright
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+URL = sys.argv[1] if len(sys.argv) > 1 else (ROOT / 'index.html').as_uri()
+ok = True
+def browser_options():
+    args = ['--js-flags=--jitless'] if os.environ.get('DW_BROWSER_JITLESS') else []
+    executable = os.environ.get('DW_BROWSER_EXECUTABLE') or next(filter(None, (shutil.which(name) for name in ('chromium', 'chromium-browser', 'google-chrome'))), None)
+    return {'args': args, **({'executable_path': executable} if executable else {})}
+def check(c, m):
+    global ok
+    print(('PASS  ' if c else 'FAIL  ') + m); ok = ok and bool(c)
+async def main():
+    async with async_playwright() as p:
+        b = await p.chromium.launch(**browser_options())
+        ctx = await b.new_context(viewport={'width': 390, 'height': 800}, has_touch=True, is_mobile=True)
+        pg = await ctx.new_page(); errs = []
+        pg.on('pageerror', lambda e: errs.append(str(e)))
+        pg.on('requestfailed', lambda r: errs.append('request failed: ' + r.url))
+        await pg.goto(URL); await pg.wait_for_timeout(600)
+        check(await pg.evaluate("document.fonts.check('700 32px Oxanium')&&document.fonts.check('600 18px Rajdhani')&&document.fonts.check('400 18px Pixelify Sans')"), 'new title, interface and score fonts are available')
+        check(await pg.evaluate('SPR.length===30&&SPR.every(i=>i.complete&&i.naturalWidth>0)'), 'all 30 plane sprites loaded (' + URL.split('/')[0] + ')')
+        check(await pg.is_visible('#menu'), 'menu visible')
+        check(await pg.locator('#me,#mn,#mf').count()==0,'difficulty selector removed')
+        for sel, name in [('Hangar', '#hangar'), ('Rewards', '#rw'), ('How to play', '#help'), ('High scores', '#scores'), ('Settings', '#settings')]:
+            await pg.click('#menu >> text=' + sel); check(await pg.is_visible(name), sel + ' opens')
+            if sel == 'Rewards': check(await pg.locator('#rwc .medal').count() == 10, 'Rewards shows achievement medals')
+            if sel == 'Settings': check(await pg.locator('#setc').text_content() is not None and 'Screen effects' in await pg.locator('#setc').text_content(), 'Settings shows screen-effects control')
+            await pg.click(name + ' >> text=Back')
+        await pg.click('#menu >> text=Play'); await pg.wait_for_timeout(200)
+        check(await pg.evaluate('S') == 'play' and await pg.is_visible('#joy'), 'Play starts, steering circle visible')
+        bb = await pg.evaluate("(()=>{const r=$('joy').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2,r.width,innerHeight-r.bottom]})()")
+        check(abs(bb[2] - 120) < 1 and abs(bb[0] - 195) < 2, 'steering circle is 120 px wide (about 0.75 inch) and centred at the bottom')
+        adh = await pg.evaluate("$('ad').getBoundingClientRect().height")
+        cvb = await pg.evaluate("(()=>{const r=cv.getBoundingClientRect();return [r.top,r.bottom,innerHeight]})()")
+        check(adh >= 60 and cvb[1] <= cvb[2] - adh + 1, 'canvas stops above the blank ad strip (ad %d px)' % adh)
+        cdp = await ctx.new_cdp_session(pg)
+        a0 = await pg.evaluate('pl.a')
+        await cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': bb[0] + 40, 'y': bb[1]}]})
+        await pg.wait_for_timeout(500)
+        check(abs(await pg.evaluate('pl.a') - a0) > .3, 'pushing the circle right turns the plane')
+        await cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+        a1 = await pg.evaluate('pl.a'); await pg.wait_for_timeout(300)
+        check(abs(await pg.evaluate('pl.a') - a1) < .01, 'letting go keeps the heading')
+        await pg.touchscreen.tap(60, 300); await pg.wait_for_timeout(300)
+        a2 = await pg.evaluate('pl.a'); await pg.wait_for_timeout(300)
+        check(abs(await pg.evaluate('pl.a') - a2) < .01, 'tapping elsewhere on the screen does not steer')
+        await pg.keyboard.press('p'); check(await pg.evaluate('S') == 'paused', 'P pauses')
+        await pg.click('#pause >> text=Resume')
+        await pg.evaluate("evoStars=4;ms=[];pu=[];st=[{x:pl.x,y:pl.y,r:0}]"); await pg.wait_for_timeout(200)
+        check(await pg.evaluate('lv') == 2, 'evolves to Level 2 after 5 stars')
+        check(await pg.evaluate('st.length')==1,'one star appears after the previous collection')
+        await pg.evaluate("evoStars=39;ms=[];pu=[];st=[{x:pl.x,y:pl.y,r:0}]"); await pg.wait_for_timeout(200)
+        check(await pg.evaluate('B&&B.k') == 'heavy', 'Level 9 starts the Heavy Missile boss')
+        check(await pg.is_visible('#boss-intro'), 'boss warning introduction appears')
+        check(await pg.evaluate('st.length')==0,'stars pause during the boss')
+        await pg.evaluate('endBoss()')
+        check(await pg.evaluate('st.length')==1,'one star returns after boss defeat')
+        await pg.evaluate("B=null;lv=1;inv=0;shield=0;ms=[{x:pl.x,y:pl.y,a:0,life:8,v:0}]"); await pg.wait_for_timeout(1300)
+        check(await pg.is_visible('#over'), 'hit at Level 1 shows the game-over summary')
+        await pg.evaluate("start();lv=30;peakLv=30;evoStars=145;B=null;startBoss(30);endBoss()")
+        check(await pg.is_visible('#victory') and await pg.evaluate("$('vic').textContent.includes('Campaign complete')"), 'final challenge opens the victory screen')
+        await pg.click('#victory >> text=Play again'); check(await pg.evaluate('S') == 'play', 'victory screen can start a new flight')
+        await pg.evaluate("S='menu';show('menu')")
+        await pg.evaluate("localStorage.setItem('dw',JSON.stringify({pts:432,own:[0,1],sel:1,best:{e:4,n:8,f:12},m:{day:today(),list:['fl','unknown','stars'],prog:{fl:2,stars:14},done:{fl:1}},ach:{first:1},cu:['ice'],ct:'ice'}))")
+        await pg.reload(); await pg.wait_for_timeout(200)
+        await pg.click('#menu >> text=Rewards')
+        check(await pg.is_visible('#rw') and await pg.evaluate("$('rwc').textContent.includes('Collect 15 stars')"), 'legacy missions: Rewards opens with valid mission')
+        check(await pg.evaluate("save.pts===432&&save.sel===1&&save.own.includes(1)&&save.m.prog.fl===2&&save.m.done.fl===1&&save.ct==='ice'"), 'legacy progress survives reload')
+        await pg.click('#rw >> text=Back'); await pg.click('#menu >> text=Hangar')
+        check(await pg.is_visible('#hangar'), 'legacy save: Hangar opens')
+        await pg.click('#hangar >> text=Back'); await pg.click('#menu >> text=Play')
+        await pg.evaluate('die()'); await pg.wait_for_timeout(1000); await pg.click('#over >> text=Retry')
+        check(await pg.evaluate("S==='play'&&stars===0"), 'legacy save: game over and Retry work')
+        check(not errs, 'no JavaScript errors or failed requests ' + str(errs))
+        await b.close()
+asyncio.run(main()); sys.exit(0 if ok else 1)

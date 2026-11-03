@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build single file",
+      "type": "shell",
+      "command": "python3 tools/build.py",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run tests",
+      "type": "shell",
+      "command": "python3 tools/build.py && node tests/run-tests.js",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Serve (no extension needed)",
+      "type": "shell",
+      "command": "python3 -m http.server 5500",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

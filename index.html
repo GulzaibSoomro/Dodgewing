@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dodgewing</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2a8"/><stop offset="1" stop-color="#ffb21e"/></linearGradient>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.3l7.1-.7z" fill="url(#gs)" stroke="#a35a00" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c1 4 6 6 6 12a6 6 0 01-12 0c0-3 2-4 3-6 1 2 2 2 2 0 0-2 0-4 1-6z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3l15 9-15 9z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#34c98f"/><path d="M6.5 12.5l4 4 7-8" fill="none" stroke="#073b27" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-spk" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="#fff3e0"/><path d="M16 8a5 5 0 010 8M19 5a9 9 0 010 14" fill="none" stroke="#fff3e0" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-spkx" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="#fff3e0"/><path d="M16 8l6 8M22 8l-6 8" fill="none" stroke="#ff8a7a" stroke-width="2.4" stroke-linecap="round"/></symbol>
+</defs></svg>
+<canvas id="c"></canvas>
+<div id="st"></div>
+<div id="joy" class="hide" aria-label="Steering circle"><svg viewBox="0 0 100 100"><path d="M50 10l8 10H42zM50 90l8-10H42zM10 50l10-8v16zM90 50l-10-8v16z" fill="rgba(255,243,224,.6)"/></svg><i id="jk"></i></div>
+<div id="ad" aria-hidden="true"></div>
+<button id="pb" class="hide" onclick="pauseG()" aria-label="Pause"><i></i><i></i></button>
+
+<div class="ov" id="menu">
+  <div class="top"><div class="chip"><svg class="si"><use href="#i-star"/></svg><span id="pc">0</span></div><button id="sn" class="ic" onclick="toggleSnd()" aria-label="Sound"><svg class="si s1"><use href="#i-spk"/></svg><svg class="si s2"><use href="#i-spkx"/></svg></button></div>
+  <div class="grp" id="mh"><h1>Dodgewing</h1><p class="tag">Steer. Collect stars. Evolve. Dodge.</p></div>
+  <div class="grp" id="mb">
+    <p class="sm">30 levels. One flight. Keep evolving.</p>
+    <button class="go big" onclick="start()"><svg class="pi"><use href="#i-play"/></svg>Play</button>
+    <div class="tiles">
+      <button class="tile" onclick="hangar()"><img id="thi" alt="">Hangar</button>
+      <button class="tile" onclick="rewards()"><svg class="ti"><use href="#i-star"/></svg>Rewards</button>
+      <button class="tile" onclick="helpS()"><span class="q">?</span>How to play</button>
+    </div>
+    <div class="menu-more"><button onclick="highScores()">High scores</button><button onclick="settings()">Settings</button></div>
+    <p class="sm" id="stats"></p>
+  </div>
+</div>
+
+<div class="ov hide" id="over">
+  <h1>Run over</h1>
+  <div id="res"></div>
+  <div class="row"><button class="go" onclick="start()">Retry</button><button onclick="menu()">Menu</button></div>
+</div>
+
+<div class="ov page hide" id="rw">
+  <div class="ph"><h2>Rewards</h2></div>
+  <div class="scroll" id="rwc"></div>
+  <button class="go" onclick="menu()">Back</button>
+</div>
+
+<div class="ov page hide" id="help">
+  <div class="ph"><h2>How to play</h2></div>
+  <div class="scroll htxt">
+  <p>Put your finger on the circle at the bottom and push up, down, left or right: the plane turns that way (keyboard: arrows or A, D). It never stops moving.</p>
+  <p>The sky moves from morning to night as your plane evolves.</p>
+  <p>Stars appear one at a time. Every 5 stars your plane evolves through 30 unique aircraft. A missile hit drops you 2 levels. A hit at Level 1 ends the run.</p>
+  <p>From Level 3 your plane shoots by itself, and later planes get stronger guns and homing missiles. The glider and early biplane stages have no guns, so dodge.</p>
+  <p>Bosses arrive at Levels 9, 17 and 25, and a Final Challenge at Level 30. Survive until the red bar empties, or shoot down the big boss missile.</p>
+  <p>Pass close to a missile for near-miss bonus points. Combos stack.</p>
+    <p><i class="ring" style="color:#6ec8ff">S</i>Shield blocks one hit</p>
+  <p><i class="ring" style="color:#6ee7b7">M</i>Magnet pulls stars to you</p>
+  <p><i class="ring" style="color:#c4a1ff">L</i>Slows missiles</p>
+  <p>Daily missions and achievements (see Rewards) unlock new trail colours.</p>
+  </div>
+  <button class="go" onclick="menu()">Back</button>
+</div>
+
+<div class="ov hide" id="pause">
+  <h1>Paused</h1>
+  <div class="row"><button class="go" onclick="resume()">Resume</button><button onclick="menu()">Menu</button></div>
+</div>
+
+<div class="ov page hide" id="hangar">
+  <div class="ph"><h2>Hangar</h2><div class="chip" id="hp"></div></div>
+  <div class="scroll">
+    <b class="sec">Paint and trail</b>
+    <div id="hl" class="grid"></div>
+    <b class="sec">Evolution path</b>
+    <p class="sm">5 stars per level. Collect one star to reveal the next. A hit drops you 2 levels; a hit at Level 1 ends the run. Reach a level in a run to light it up.</p>
+    <div id="hev" class="ev"></div>
+  </div>
+  <button class="go" onclick="menu()">Back</button>
+</div>
+
+<div class="ov page hide" id="scores">
+  <div class="ph"><h2>High scores</h2></div>
+  <div class="scroll" id="scorec"></div>
+  <button class="go" onclick="menu()">Back</button>
+</div>
+
+<div class="ov page hide" id="settings">
+  <div class="ph"><h2>Settings</h2></div>
+  <div class="scroll" id="setc"></div>
+  <button class="go" onclick="menu()">Back</button>
+</div>
+
+<div class="ov hide" id="victory">
+  <h1>Victory!</h1>
+  <div id="vic" class="card"></div>
+  <div class="row"><button class="go" onclick="start()">Play again</button><button onclick="menu()">Menu</button></div>
+</div>
+
+<div id="boss-intro" class="boss-intro hide" aria-live="assertive"></div>
+<div id="unlock" class="unlock hide" aria-live="polite"></div>
+
+<script src="js/01-core.js"></script>
+<script src="js/02-save-and-assets.js"></script>
+<script src="js/03-difficulty-and-state.js"></script>
+<script src="js/04-audio.js"></script>
+<script src="js/05-missions-achievements.js"></script>
+<script src="js/06-bosses.js"></script>
+<script src="js/07-game.js"></script>
+<script src="js/08-render-helpers.js"></script>
+<script src="js/08b-weapons-sky-controls.js"></script>
+<script src="js/09-input-and-loop.js"></script>
+<script src="js/10-professional-pass.js"></script>
+</body></html>
