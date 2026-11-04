@@ -17,7 +17,7 @@ global.localStorage={getItem:k=>store[k]||null,setItem:(k,v)=>{store[k]=v}};
 global._ev={};global.addEventListener=(t,f)=>{(_ev[t]=_ev[t]||[]).push(f)};global.setTimeout=()=>{};
 global.Image=class{set src(v){this._s=v;this.complete=true;this.naturalWidth=100;this.naturalHeight=120}};
 const run0=new Function(js+`
-;return {get S(){return S},set S(v){S=v},get lv(){return lv},get stars(){return stars},start,upd,draw,evo,sz,get pl(){return pl},set pl(v){pl=v},get ms(){return ms},set ms(v){ms=v},get st(){return st},set st(v){st=v},get pu(){return pu},set pu(v){pu=v},get save(){return save},set shield(v){shield=v},hangar,pick,buy,get upT(){return upT},get banT(){return banT},get fadeT(){return fadeT},get prevLv(){return prevLv},LV,SPR,lvOf,die,get hint(){return hint},get evoStars(){return evoStars},get B(){return B},rewards,setTrail,dayMis,mEvent,chkAch,MIS,ACH,COS,curTrail,rb,get mag(){return mag},set mag(v){mag=v},get slow(){return slow},set slow(v){slow=v},get trailC(){return trailC},set peak(v){peakLv=v},get PUT(){return PUT},set B(v){B=v},get bonus(){return bonus},set bonus(v){bonus=v},get shield(){return shield},get bossSeen(){return bossSeen},get fx(){return fx},startBoss,endBoss,bossTick,get nmT(){return nmT},set ms3(v){ms=v},set evoStars(v){evoStars=v},get lvStars(){return evoStars%5},cap,M,planeSpeed,get SPRD(){return SPRD},missileKind,normalMissileSkin,RULES,STAGES,LEVEL_COUNT,levelForTier,tierOf,loop,setWH(w,h){W=w;H=h},pauseG,resume,get ms2(){return ms},addStar,get msT(){return msT},get sp(){return sp},get inv(){return inv},get peakLv(){return peakLv},get banTx(){return banTx},set lv(v){lv=v},set inv(v){inv=v},hurt,set msT(v){msT=v},get bl(){return bl},set bl(v){bl=v},WPN,skyAt,nightAmt,get skyL(){return skyL},set skyL(v){skyL=v},set autoFire(v){autoFire=v},setJoy(a){jAng=a},get H(){return H},rs,SKY,STARS}`);
+;return {get S(){return S},set S(v){S=v},get lv(){return lv},get stars(){return stars},start,upd,draw,evo,sz,get pl(){return pl},set pl(v){pl=v},get ms(){return ms},set ms(v){ms=v},get st(){return st},set st(v){st=v},get pu(){return pu},set pu(v){pu=v},get save(){return save},set shield(v){shield=v},hangar,pick,buy,get upT(){return upT},get banT(){return banT},get fadeT(){return fadeT},get prevLv(){return prevLv},LV,SPR,lvOf,die,get hint(){return hint},get evoStars(){return evoStars},get B(){return B},rewards,setTrail,dayMis,mEvent,chkAch,MIS,ACH,COS,curTrail,rb,get mag(){return mag},set mag(v){mag=v},get slow(){return slow},set slow(v){slow=v},get trailC(){return trailC},set peak(v){peakLv=v},get PUT(){return PUT},set B(v){B=v},get bonus(){return bonus},set bonus(v){bonus=v},get shield(){return shield},get bossSeen(){return bossSeen},get fx(){return fx},startBoss,endBoss,bossTick,get nmT(){return nmT},set ms3(v){ms=v},set evoStars(v){evoStars=v},get lvStars(){return evoStars%5},cap,M,planeSpeed,get SPRD(){return SPRD},missileKind,normalMissileSkin,BOSS,RULES,STAGES,LEVEL_COUNT,levelForTier,tierOf,loop,setWH(w,h){W=w;H=h},pauseG,resume,get ms2(){return ms},addStar,get msT(){return msT},get sp(){return sp},get inv(){return inv},get peakLv(){return peakLv},get banTx(){return banTx},set lv(v){lv=v},set inv(v){inv=v},hurt,set msT(v){msT=v},get bl(){return bl},set bl(v){bl=v},WPN,skyAt,nightAmt,get skyL(){return skyL},set skyL(v){skyL=v},set autoFire(v){autoFire=v},setJoy(a){jAng=a},get H(){return H},rs,SKY,STARS}`);
 const run=()=>{const r=run0();r.autoFire=false;return r};
 
 const g=run();
@@ -66,7 +66,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  g.save.mode='e';g.inv=0;clean();g.ms=[{x:g.pl.x+1,y:g.pl.y,a:0,life:8,v:0,r:1}];g.upd(.001);ok(g.lv===7,'hit after boss -> Lv7');
  for(let i=0;i<10;i++)S1();ok(g.lv===9&&g.B===null,'re-evolving to Lv9 does not repeat the boss');g.save.mode='n';
  // Heavy missile state machine
- to(40);const hm=g.ms.find(m=>m.big);ok(!!hm&&hm.st==='chase','heavy: big missile spawned in chase state');
+ to(40);const hm=g.ms.find(m=>m.big);ok(!!hm&&hm.st==='chase'&&hm.bossSkin===0&&g.B.skin===0,'Heavy Missile uses boss sprite 1 and chase state');
  g.pl.x=900;g.pl.y=700;hm.x=100;hm.y=100;const seen=new Set();for(let i=0;i<700;i++){clean2();g.upd(.016);seen.add(hm.st);if(g.S!=='play')break;g.inv=5}
  function clean2(){g.pu=[];g.st=[]}
  ok(seen.has('warn')&&seen.has('dash')&&seen.has('chase'),'heavy cycles chase -> warn -> dash -> chase ('+[...seen]+')');
@@ -78,15 +78,15 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  to(40);g.ms=g.ms.filter(m=>m.bm);g.pl.x=10;g.pl.y=10;let nn=0;for(let i=0;i<900;i++){g.pu=[];g.st=[];g.ms.forEach(m=>{if(!m.bm){m.v=0;m.x=Math.max(m.x,600);m.y=Math.max(m.y,600)}else{m.x=1000;m.y=700;m.st&&(m.stT=9)}});g.upd(.02);g.B.t=0;nn=Math.max(nn,g.ms.filter(m=>!m.bm).length);if(g.S!=='play')break}
  ok(nn<=Math.floor(g.cap(9)*.4),'heavy boss: regular missiles limited to 40% of cap ('+nn+' <= '+Math.floor(g.cap(9)*.4)+')');
  // Commander patterns
- to(80);ok(g.B.k==='cmdr','commander active');const c0=g.ms.length;g.B.cd=0;g.upd(.016);ok(g.B.wn>0,'commander telegraphs (warning '+g.B.wn.toFixed(2)+' s) before firing');
+ to(80);ok(g.B.k==='cmdr'&&g.B.skin===1,'Missile Commander uses boss sprite 2');const c0=g.ms.length;g.B.cd=0;g.upd(.016);ok(g.B.wn>0,'commander telegraphs (warning '+g.B.wn.toFixed(2)+' s) before firing');
  g.pl.x=1100;g.pl.y=700;for(let i=0;i<60;i++){g.inv=9;g.upd(.016);g.pu=[];g.st=[]}
  ok(g.ms.filter(m=>m.bm).length>=2,'commander fired a pattern ('+g.ms.filter(m=>m.bm).length+' boss missiles)');
  const kinds=new Set();for(let r=0;r<3;r++){to(80);g.B.ph=r;g.B.aim=1;g.ms=[];g.B.cfire?0:0;}
  // Advanced missile: fast, re-launches, shooting it down gives progress
- to(120);g.B.cd=0;g.upd(.016);const am=g.ms.find(m=>m.adv);ok(!!am&&am.v>g.sp*.85,'advanced missile launched (speed '+(am&&Math.round(am.v))+' vs plane '+Math.round(g.sp)+')');
+ to(120);g.B.cd=0;g.upd(.016);const am=g.ms.find(m=>m.adv);ok(!!am&&am.v>g.sp*.85&&am.bossSkin===2&&g.B.skin===2,'Advanced Seeker launches its purple boss sprite (speed '+(am&&Math.round(am.v))+' vs plane '+Math.round(g.sp)+')');
  const t0=g.B.t;am.hp=1;g.pl.x=1100;g.pl.y=700;g.inv=9;g.bl=[{x:am.x,y:am.y,a:0,v:0,d:3,life:1,w:4,c:'#fff'}];g.upd(.016);ok(g.B.t>t0+5&&!g.ms.includes(am),'shooting the advanced missile destroys it and speeds boss defeat');
  // Final challenge
- to(145);ok(g.B.k==='final','final challenge starts at Level 30');const finalSkins=new Set();for(let i=0;i<3;i++){g.ms=[];g.B.cd=0;g.bossTick(.001);g.ms.forEach(m=>finalSkins.add(m.skin))}ok([27,28,29].every(s=>finalSkins.has(s)),'final enemy waves use the three reserved late-game missile designs ('+[...finalSkins].sort().join(',')+')');g.ms=[];g.pl.x=1100;g.pl.y=700;const bb=g.bonus;let waves=0,mx=0;for(let i=0;i<4400&&g.B;i++){g.pu=[];g.st=[];g.inv=9;g.upd(.016);mx=Math.max(mx,g.ms.length)}
+ to(145);ok(g.B.k==='final'&&g.B.skin===3,'Cosmic Overlord starts at Level 30 with boss sprite 4');const finalSkins=new Set();for(let i=0;i<3;i++){g.ms=[];g.B.cd=0;g.bossTick(.001);g.ms.forEach(m=>finalSkins.add(m.skin))}ok([27,28,29].every(s=>finalSkins.has(s)),'final enemy waves use the three reserved late-game missile designs ('+[...finalSkins].sort().join(',')+')');g.ms=[];g.pl.x=1100;g.pl.y=700;const bb=g.bonus;let waves=0,mx=0;for(let i=0;i<4400&&g.B;i++){g.pu=[];g.st=[];g.inv=9;g.upd(.016);mx=Math.max(mx,g.ms.length)}
  ok(g.B===null&&g.bonus>=bb+200,'survive 60 s -> VICTORY bonus +200 (bonus '+(g.bonus-bb)+')');
  ok(mx>=8,'final waves spawn many missiles (peak '+mx+')');
  // score includes bonus
@@ -167,7 +167,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  hm.x=600;hm.y=400;hm.v=0;hm.h=0;hm.st=null;hm.hp=2;g.bl=[{x:600,y:400,a:0,v:0,d:1,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.ms.includes(hm)&&hm.hp===1,'one hit only dents the heavy missile');
  g.bl=[{x:600,y:400,a:0,v:0,d:1,life:1,w:3,c:'#fff'}];g.upd(.001);g.upd(.001);ok(!g.ms.includes(hm)&&g.B===null,'shooting the heavy missile down defeats the boss ('+g.bonus+' bonus)');
  // Commander takes damage from bullets
- prep(7);g.startBoss(17);const bt=g.B.t;g.B.x=600;g.B.y=64;g.bl=[{x:600,y:64,a:0,v:0,d:2,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.B.t>bt+.2,'bullets hitting the Commander speed up its defeat');
+ prep(7);g.startBoss(17);const bt=g.B.t;g.B.x=600;g.B.y=176;g.bl=[{x:600,y:176,a:0,v:0,d:2,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.B.t>bt+.2,'bullets hitting the Commander speed up its defeat');
  // levelling up announces the weapon
  g.start();g.save.mode='n';for(let i=0;i<15;i++){g.ms=[];g.pu=[];g.st=[{x:g.pl.x,y:g.pl.y,r:0}];g.upd(.001)}ok(g.lv===4&&/Nose gun/.test(g.banTx),'Stage 4 banner names the new weapon ("'+g.banTx+'")');
  // sky: morning -> night

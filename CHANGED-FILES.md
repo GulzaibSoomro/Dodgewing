@@ -1,5 +1,12 @@
 # Changed files
 
+## Boss variety and Android canvas stability — 0.9.12
+
+- Added `assets/bosses/boss-sheet.svg` and rendered a unique transparent sprite for each campaign boss.
+- Positioned Commander and Cosmic Overlord below the HUD, while retaining their distinct attack patterns and collision rules.
+- Replaced Android's forced WebView hardware layer with normal GPU composition to prevent stale black text and sprite tiles without falling back to slow software rendering.
+- Rebuilt the mobile APK as v0.9.12.
+
 ## Evolving missile sprites — 0.9.11
 
 - Added `assets/missiles/missile-sheet.svg`: 30 transparent rocket sprites adapted from the supplied reference for the game’s canvas scale.

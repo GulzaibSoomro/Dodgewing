@@ -1,4 +1,4 @@
-# Dodgewing 0.9.11
+# Dodgewing 0.9.12
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -18,7 +18,7 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 - Stages 1–3 have no guns. Auto-fire begins at stage 4 with the nose gun and evolves through twin/wing guns, jet cannons, homing missiles and plasma. Stages 14–30 extend the plasma-storm set with a bounded rate/damage increase.
 - The game contains a transparent 30-cell missile sheet based on the supplied rocket designs. Levels 1–3 use its first missile; Levels 4–29 advance through the normal designs. The three final futuristic designs are reserved for Final Challenge enemy waves.
 - The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style, with slow horizontal and vertical cloud drift to convey forward flight.
-- Boss encounters: Heavy at 9, Commander at 17, Advanced at 25, Final Challenge at 30. Each opens with a warning card, warning sound and large health bar. Survive the timer or damage the applicable boss to accelerate defeat.
+- Boss encounters: Heavy Missile at 9 uses a telegraphed charge; Missile Commander at 17 uses target lasers, fan volleys and rings; Advanced Seeker at 25 launches fast tracking attacks; Cosmic Overlord at 30 sends wall, ring and homing waves. Each has its own lightweight, transparent sprite, warning card, sound and large health bar.
 - Each evolution displays a plane-unlocked card with the new aircraft and weapon. Level 1 also gives short “move,” “collect stars” and “avoid missiles” prompts. Finishing the Level 30 boss opens a final victory screen with the run score, best plane and a Play again button.
 - S = shield; M = magnet; L = slow missiles. Active power-up names and remaining seconds appear in a transparent bar beneath the top HUD. Near misses give combo bonuses.
 - Points = `(whole seconds + stars × 5 + bonus) × 2`. Paint prices remain 0 / 400 / 1200 / 3000. Three daily missions, ten achievements and unlocked trail rewards remain.
@@ -37,7 +37,7 @@ Progress requires the same browser and origin. Opening the file under a new orig
 |---|---|
 | `index.html`, `css/style.css` | Menus, overlays, responsive layout and styles |
 | `js/01-core.js` | Canvas sizing and helpers |
-| `js/02-save-and-assets.js`, `assets/missiles/missile-sheet.svg` | Save migration, aircraft assets and 30 missile skins |
+| `js/02-save-and-assets.js`, `assets/missiles/missile-sheet.svg`, `assets/bosses/boss-sheet.svg` | Save migration, aircraft, missile and boss assets |
 | `js/03-difficulty-and-state.js` | Single-campaign difficulty curve and evolution state |
 | `js/04-audio.js` | Generated audio |
 | `js/05-missions-achievements.js` | Missions, achievements, rewards and results |

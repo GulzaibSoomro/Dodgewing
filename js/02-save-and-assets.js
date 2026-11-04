@@ -19,6 +19,7 @@ const AIRCRAFT=["Wooden Glider", "Early Biplane", "Classic Biplane", "Marked Bip
 const BASE_SPRD=["assets/planes/plane_01.png", "assets/planes/plane_02.png", "assets/planes/plane_03.png", "assets/planes/plane_04.png", "assets/planes/plane_05.png", "assets/planes/plane_06.png", "assets/planes/plane_07.png", "assets/planes/plane_08.png", "assets/planes/plane_09.png", "assets/planes/plane_10.png", "assets/planes/plane_11.png", "assets/planes/plane_12.png", "assets/planes/plane_13.png", "assets/planes/plane_14.png", "assets/planes/plane_15.png", "assets/planes/plane_16.png", "assets/planes/plane_17.png", "assets/planes/plane_18.png", "assets/planes/plane_19.png", "assets/planes/plane_20.png", "assets/planes/plane_21.png", "assets/planes/plane_22.png", "assets/planes/plane_23.png", "assets/planes/plane_24.png", "assets/planes/plane_25.png", "assets/planes/plane_26.png", "assets/planes/plane_27.png", "assets/planes/plane_28.png", "assets/planes/plane_29.png", "assets/planes/plane_30.png"];
 const BASE_SPR=BASE_SPRD.map(u=>{const i=new Image();i.src=u;return i});
 const MISSILE_SHEET_SRC='assets/missiles/missile-sheet.svg',MISSILE_SHEET=new Image();MISSILE_SHEET.src=MISSILE_SHEET_SRC;
+const BOSS_SHEET_SRC='assets/bosses/boss-sheet.svg',BOSS_SHEET=new Image();BOSS_SHEET.src=BOSS_SHEET_SRC;
 const normalMissileSkin=L=>L<=3?0:Math.min(26,Math.max(1,Math.floor(L)-3));
 const sz=()=>Math.max(48,Math.min(78,Math.min(W,H)*.11));
 const LEVEL_COUNT=30, STARS_PER_LEVEL=5;

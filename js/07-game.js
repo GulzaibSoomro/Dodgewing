@@ -81,7 +81,7 @@ function draw(){
   for(const p of pu){const k=PUC[p.ty||'s'];x.fillStyle='rgba(16,14,40,.65)';x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.fill();x.strokeStyle=k[0];x.lineWidth=3;x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.stroke();x.fillStyle=k[0];x.font='15px Pixelta,monospace';x.textAlign='center';x.fillText(k[1],p.x,p.y+5);x.textAlign='left'}
   for(const p of pt){ctxDot(p.x,p.y,p.r,'rgba('+p.c+','+Math.max(0,p.l/p.m)+')')}
   for(const m of ms){x.save();x.translate(m.x,m.y);x.rotate(m.a);
-    if(m.r>1)x.scale(m.r,m.r);drawEnemyMissile(m);if(m.st==='warn'){x.strokeStyle='rgba(255,60,60,'+(m.stT<.3?.9:.45)+')';x.lineWidth=3;x.beginPath();x.moveTo(20,0);x.lineTo(700,0);x.stroke()}x.restore()}
+    if(m.r>1&&!Number.isFinite(m.bossSkin))x.scale(m.r,m.r);drawEnemyMissile(m);if(m.st==='warn'){x.strokeStyle='rgba(255,60,60,'+(m.stT<.3?.9:.45)+')';x.lineWidth=3;x.beginPath();x.moveTo(20,0);x.lineTo(700,0);x.stroke()}x.restore()}
   drawBullets();drawFx();
   if(S==='menu'&&menuOn)showcase();
   if(S==='play'||S==='paused'){x.save();x.translate(pl.x,pl.y);x.rotate(pl.a+Math.PI/2);

@@ -23,15 +23,18 @@ public final class MainActivity extends Activity {
         enterImmersiveMode();
 
         game = new WebView(this);
-        // Keep the corrected opaque canvas on the fast hardware path.
+        // Use normal hardware composition, without a cached forced layer. This avoids stale black tiles on some phone GPUs.
         game.setBackgroundColor(Color.rgb(5, 5, 7));
-        game.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        game.setLayerType(View.LAYER_TYPE_NONE, null);
         WebSettings settings = game.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            game.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_IMPORTANT, true);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             settings.setAllowFileAccessFromFileURLs(false);
             settings.setAllowUniversalAccessFromFileURLs(false);

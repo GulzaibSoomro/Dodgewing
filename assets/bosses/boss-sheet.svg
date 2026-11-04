@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
+  <defs>
+    <linearGradient id="steel" x1="0" x2="1"><stop stop-color="#eef5fb"/><stop offset=".45" stop-color="#8896a7"/><stop offset="1" stop-color="#384556"/></linearGradient>
+    <linearGradient id="redSteel" x1="0" x2="1"><stop stop-color="#ff6a5d"/><stop offset=".5" stop-color="#b62f3d"/><stop offset="1" stop-color="#56152c"/></linearGradient>
+    <linearGradient id="violetSteel" x1="0" x2="1"><stop stop-color="#bda5ff"/><stop offset=".45" stop-color="#6042ad"/><stop offset="1" stop-color="#201738"/></linearGradient>
+    <linearGradient id="goldSteel" x1="0" x2="1"><stop stop-color="#ffe5a0"/><stop offset=".42" stop-color="#d59a31"/><stop offset="1" stop-color="#6a3c13"/></linearGradient>
+    <radialGradient id="cyan"><stop stop-color="#fff"/><stop offset=".24" stop-color="#b9f8ff"/><stop offset=".62" stop-color="#32d7ff"/><stop offset="1" stop-color="#1266a7"/></radialGradient>
+    <linearGradient id="flame" x2="0" y2="1"><stop stop-color="#fff3a0"/><stop offset=".45" stop-color="#ffb12f"/><stop offset="1" stop-color="#f04b23"/></linearGradient>
+    <g id="heavy">
+      <path d="M90 12C65 29 57 55 57 102v28h66v-28c0-47-8-73-33-90Z" fill="url(#steel)" stroke="#171b27" stroke-width="5"/>
+      <path d="M90 12C78 22 70 34 66 47h48C110 34 102 22 90 12Z" fill="url(#redSteel)"/>
+      <path d="m58 77-34 34 30 18 19-24m53-28 30 34-30 18-19-24" fill="url(#redSteel)" stroke="#171b27" stroke-width="5" stroke-linejoin="round"/>
+      <path d="m55 108-38 29 37 6 14-20m58-15 37 29-37 6-14-20" fill="url(#steel)" stroke="#171b27" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M62 61h56v13H62z" fill="#d63a42"/><path d="M68 81h44v7H68z" fill="#f9d565"/><path d="M72 94h36v10H72z" fill="#313a48"/>
+      <path d="M90 105 103 124 90 139 77 124Z" fill="#f0f7ff"/><path d="M76 130h28l-5 15H81Z" fill="#252c36"/>
+      <path d="M90 145c-13 13-11 25 0 36 11-11 13-23 0-36Z" fill="url(#flame)"/><path d="M90 151c-5 8-5 15 0 23 5-8 5-15 0-23Z" fill="#fff9c6"/>
+      <path d="M72 65h9m18 0h9M72 70h9m18 0h9" stroke="#f7ffff" stroke-width="2" opacity=".72"/>
+    </g>
+    <g id="commander">
+      <path d="M37 77 57 51h66l20 26v54l-20 18H57l-20-18Z" fill="url(#redSteel)" stroke="#171b27" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M18 78h31v52H18l-10-15V93Z" fill="url(#steel)" stroke="#171b27" stroke-width="5"/><path d="M131 78h31l10 15v22l-10 15h-31Z" fill="url(#steel)" stroke="#171b27" stroke-width="5"/>
+      <path d="M20 89h25v9H20m0 13h25v9H20m115-31h25v9h-25m0 13h25v9h-25" stroke="#ffcb68" stroke-width="4"/>
+      <circle cx="90" cy="103" r="26" fill="#251a35" stroke="#fb674e" stroke-width="4"/><circle cx="90" cy="103" r="13" fill="#ff4e45"/><circle cx="90" cy="103" r="5" fill="#fff6ca"/>
+      <path d="M90 51V27m-32 15L43 27m79 15 15-15" stroke="#d1dce8" stroke-width="5"/><circle cx="90" cy="23" r="7" fill="#ff554d"/><circle cx="40" cy="24" r="5" fill="#ff554d"/><circle cx="140" cy="24" r="5" fill="#ff554d"/>
+      <path d="M90 26c-23 0-36 12-36 24 18-9 54-9 72 0 0-12-13-24-36-24Z" fill="#8c94a4" stroke="#171b27" stroke-width="4"/><path d="M57 40c18-8 48-8 66 0" stroke="#f2d77b" stroke-width="3" fill="none"/>
+      <path d="M77 149h26l-5 18H82Z" fill="#303846"/><path d="M90 164c-9 10-8 18 0 25 8-7 9-15 0-25Z" fill="url(#flame)"/>
+    </g>
+    <g id="seeker">
+      <path d="M90 13 119 55v72l21 25-31-10-19 29-19-29-31 10 21-25V55Z" fill="url(#violetSteel)" stroke="#131526" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M90 20 105 58 90 83 75 58Z" fill="#e9dcff"/><path d="M90 48 101 67 90 91 79 67Z" fill="#c65cff"/>
+      <path d="M69 73h42v49H69Z" fill="#201a35" stroke="#b55dff" stroke-width="3"/><path d="M90 78c-13 14-13 31 0 43 13-12 13-29 0-43Z" fill="#d55cff"/>
+      <path d="m63 98-45 35 47-14m52-21 45 35-47-14" fill="none" stroke="#9f4dff" stroke-width="8" stroke-linecap="round"/><path d="m61 108-36 28m94-28 36 28" stroke="#ffe09e" stroke-width="2"/>
+      <path d="M77 139h26l-5 15H82Z" fill="#222b3a"/><path d="M90 151c-12 13-11 23 0 33 11-10 12-20 0-33Z" fill="#69e9ff"/><path d="M90 158c-5 8-5 15 0 22 5-7 5-14 0-22Z" fill="#fff"/>
+    </g>
+    <g id="overlord">
+      <path d="M90 12 113 45v50l31 23 21 34-46-13-29 35-29-35-46 13 21-34 31-23V45Z" fill="url(#steel)" stroke="#171b27" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M90 12 106 48 90 76 74 48Z" fill="url(#goldSteel)"/><path d="M66 68h48v47H66Z" fill="#2b3544" stroke="#d69f35" stroke-width="4"/>
+      <circle cx="90" cy="105" r="25" fill="#183d63" stroke="#ffd770" stroke-width="5"/><circle cx="90" cy="105" r="17" fill="url(#cyan)"/><circle cx="90" cy="105" r="5" fill="#fff"/>
+      <path d="m49 91-34 22 26 15 25-11m73-26 34 22-26 15-25-11" fill="url(#goldSteel)" stroke="#171b27" stroke-width="5"/><path d="M18 115h31m102 0h31" stroke="#55eaff" stroke-width="7" stroke-linecap="round"/>
+      <path d="m57 130-26 22 31-8 13-20m48 6 26 22-31-8-13-20" fill="#aebdcb" stroke="#171b27" stroke-width="4"/>
+      <path d="M76 140h28l-5 16H81Z" fill="#2a3444"/><path d="M90 153c-15 14-14 27 0 38 14-11 15-24 0-38Z" fill="#4ee9ff"/><path d="M90 160c-6 9-6 18 0 27 6-9 6-18 0-27Z" fill="#fff8bd"/>
+    </g>
+  </defs>
+  <use href="#heavy"/>
+  <use href="#commander" x="180"/>
+  <use href="#seeker" y="180"/>
+  <use href="#overlord" x="180" y="180"/>
+</svg>

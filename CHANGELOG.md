@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.12 — 2026-11-05
+
+- Add four distinct, lightweight boss sprites: Heavy Missile, Missile Commander, Advanced Seeker and Cosmic Overlord, with their existing charge, laser/volley, tracking and final-wave attack patterns.
+- Fix Android canvas artefacts by removing the forced hardware texture layer while retaining normal GPU composition and mobile-safe canvas settings.
+- Keep mobile rendering smooth with a 1.5× pixel cap, low-cost Android image smoothing and existing projectile/particle caps.
+
 ## 0.9.11 — 2026-11-04
 
 - Add a transparent game-ready missile sprite sheet based on the supplied rocket artwork, embedded in the offline browser and Android builds.
