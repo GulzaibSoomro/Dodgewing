@@ -1,5 +1,11 @@
 # Changed files
 
+## Android Safe Render build — 0.9.14
+
+- Added raster runtime sheets at `assets/missiles/missile-sheet.png` and `assets/bosses/boss-sheet.png`; the editable SVGs remain in the repository.
+- Added Android-only Safe Render limits for resolution, frame cadence, effects, particles, projectiles and storm lines.
+- Switched the Android WebView to software composition and rebuilt the mobile APK as v0.9.14.
+
 ## Smaller reference missile sprites — 0.9.13
 
 - Replaced `assets/missiles/missile-sheet.svg` with a thin 30-rocket sheet based on the latest supplied reference image.

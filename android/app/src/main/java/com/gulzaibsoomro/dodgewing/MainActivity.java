@@ -23,9 +23,10 @@ public final class MainActivity extends Activity {
         enterImmersiveMode();
 
         game = new WebView(this);
-        // Use normal hardware composition, without a cached forced layer. This avoids stale black tiles on some phone GPUs.
+        // The game now uses low-cost 1x canvas frames. Software composition prevents
+        // unstable mobile GPU texture tiles from appearing over text and sprites.
         game.setBackgroundColor(Color.rgb(5, 5, 7));
-        game.setLayerType(View.LAYER_TYPE_NONE, null);
+        game.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         WebSettings settings = game.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);

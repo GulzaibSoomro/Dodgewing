@@ -15,7 +15,7 @@ def check(c, m):
 async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch(**browser_options())
-        ctx = await b.new_context(viewport={'width': 390, 'height': 800}, has_touch=True, is_mobile=True)
+        ctx = await b.new_context(viewport={'width': 390, 'height': 800}, has_touch=True, is_mobile=True, user_agent='Mozilla/5.0 (Linux; Android 13; Dodgewing Test) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36')
         pg = await ctx.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.on('requestfailed', lambda r: errs.append('request failed: ' + r.url))
@@ -31,6 +31,8 @@ async def main():
         check(await pg.evaluate('SPR.length===30&&SPR.every(i=>i.complete&&i.naturalWidth>0)'), 'all 30 plane sprites loaded (' + URL.split('/')[0] + ')')
         check(await pg.evaluate('MISSILE_SHEET.complete&&MISSILE_SHEET.naturalWidth===720&&MISSILE_SHEET.naturalHeight===600'), '30-cell missile sprite sheet is loaded')
         check(await pg.evaluate('BOSS_SHEET.complete&&BOSS_SHEET.naturalWidth===360&&BOSS_SHEET.naturalHeight===360'), 'four-cell boss sprite sheet is loaded')
+        check(await pg.evaluate("(()=>{const a=x.getContextAttributes&&x.getContextAttributes();return !!a&&a.alpha===false})()"), 'canvas is opaque for stable mobile composition')
+        check(await pg.evaluate('SAFE_RENDER===true&&SAFE_FRAME_MS===25&&DPR===1'), 'Android Safe Render mode uses the stable 1x canvas path')
         check(await pg.is_visible('#menu'), 'menu visible')
         check(await pg.locator('#me,#mn,#mf').count()==0,'difficulty selector removed')
         for sel, name in [('Hangar', '#hangar'), ('Rewards', '#rw'), ('How to play', '#help'), ('High scores', '#scores'), ('Settings', '#settings')]:
@@ -59,7 +61,8 @@ async def main():
         check(abs(await pg.evaluate('pl.a') - a2) < .01, 'tapping elsewhere on the screen does not steer')
         await pg.keyboard.press('p'); check(await pg.evaluate('S') == 'paused', 'P pauses')
         await pg.click('#pause >> text=Resume')
-        await pg.evaluate("evoStars=4;ms=[];pu=[];st=[{x:pl.x,y:pl.y,r:0}]"); await pg.wait_for_timeout(200)
+        check(await pg.evaluate('S') == 'play', 'Resume returns to the active flight')
+        await pg.evaluate("start();inv=999;msT=99;puT=99;evoStars=4;ms=[];pu=[];st=[{x:pl.x,y:pl.y,r:0}];upd(.04);draw()"); await pg.wait_for_timeout(80)
         check(await pg.evaluate('lv') == 2, 'evolves to Level 2 after 5 stars')
         check(await pg.evaluate('sp===160'), 'Level 2 applies the next plane-speed step')
         check(await pg.evaluate("banT===0&&!$('unlock').classList.contains('hide')"), 'unlock card replaces the overlapping level banner')

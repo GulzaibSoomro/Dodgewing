@@ -17,6 +17,8 @@ let js=sources.map(read).join('\n');
 js=js.replace(/assets\/planes\/[\w-]+\.png/g,file=>'data:image/png;base64,'+data(file));
 js=js.replace(/assets\/missiles\/[\w-]+\.svg/g,file=>'data:image/svg+xml;base64,'+data(file));
 js=js.replace(/assets\/bosses\/[\w-]+\.svg/g,file=>'data:image/svg+xml;base64,'+data(file));
+js=js.replace(/assets\/missiles\/[\w-]+\.png/g,file=>'data:image/png;base64,'+data(file));
+js=js.replace(/assets\/bosses\/[\w-]+\.png/g,file=>'data:image/png;base64,'+data(file));
 html=html.replace(/(<script src="[^"]+"><\/script>\s*)+/, '<script>\n'+js+'\n</script>\n');
 const out=path.join(root,'dist','dodgewing.html');
 fs.mkdirSync(path.dirname(out),{recursive:true});

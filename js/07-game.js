@@ -69,7 +69,7 @@ function upd(d){
   }
   if(S==='dying'){dieT-=d;if(dieT<=0){S='over';show('over')}}
   for(let i=pt.length-1;i>=0;i--){const p=pt[i];p.x+=p.vx*d;p.y+=p.vy*d;p.l-=d;if(p.l<=0)pt.splice(i,1)}
-  const particleCap=phone()?150:240;if(pt.length>particleCap)pt.splice(0,pt.length-particleCap);
+  const particleCap=SAFE_RENDER?70:phone()?150:240;if(pt.length>particleCap)pt.splice(0,pt.length-particleCap);
   for(const c of clouds){c.x-=c.v*.72*d/W;c.y+=c.v*.42*d/H;if(c.x<-.2)c.x=1.2;if(c.y>1.25){c.y=-.25;c.x=Math.random()*1.2-.1}}
 }
 
@@ -85,11 +85,11 @@ function draw(){
   drawBullets();drawFx();
   if(S==='menu'&&menuOn)showcase();
   if(S==='play'||S==='paused'){x.save();x.translate(pl.x,pl.y);x.rotate(pl.a+Math.PI/2);
-    x.shadowColor='rgba('+trailC+',.8)';x.shadowBlur=10;
+    x.shadowColor='rgba('+trailC+',.8)';x.shadowBlur=SAFE_RENDER?0:10;
     const pop=1+.3*Math.sin(Math.min(1,upT/1.4)*Math.PI),ia=inv>0&&Math.floor(t*14)%2?.35:1;
     if(fadeT>0){const f=fadeT/.5;drawSpr(prevLv-1,f*ia,pop);drawSpr(lv-1,(1-f)*ia,pop)}else drawSpr(lv-1,ia,pop);
     x.shadowBlur=0;
-    if(shield>0){const sa=shield<1.5?.5+.5*Math.sin(t*20):1;x.fillStyle='rgba(110,200,255,'+.12*sa+')';x.beginPath();x.arc(0,0,sz()*.4,0,TAU);x.fill();x.shadowColor='rgba(110,200,255,.9)';x.shadowBlur=14;x.strokeStyle='rgba(150,220,255,'+sa+')';x.lineWidth=2.5;x.beginPath();x.arc(0,0,sz()*.4,0,TAU);x.stroke();x.shadowBlur=0}
+    if(shield>0){const sa=shield<1.5?.5+.5*Math.sin(t*20):1;x.fillStyle='rgba(110,200,255,'+.12*sa+')';x.beginPath();x.arc(0,0,sz()*.4,0,TAU);x.fill();x.shadowColor='rgba(110,200,255,.9)';x.shadowBlur=SAFE_RENDER?0:14;x.strokeStyle='rgba(150,220,255,'+sa+')';x.lineWidth=2.5;x.beginPath();x.arc(0,0,sz()*.4,0,TAU);x.stroke();x.shadowBlur=0}
     x.restore();
     drawHud();
     if(upT>0){const p=upT/1.4;x.strokeStyle='rgba(255,224,102,'+p+')';x.lineWidth=4;x.beginPath();x.arc(pl.x,pl.y,sz()*(.4+(1-p)*1.6),0,TAU);x.stroke()}

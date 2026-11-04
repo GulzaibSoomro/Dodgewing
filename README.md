@@ -1,4 +1,4 @@
-# Dodgewing 0.9.13
+# Dodgewing 0.9.14
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -37,7 +37,7 @@ Progress requires the same browser and origin. Opening the file under a new orig
 |---|---|
 | `index.html`, `css/style.css` | Menus, overlays, responsive layout and styles |
 | `js/01-core.js` | Canvas sizing and helpers |
-| `js/02-save-and-assets.js`, `assets/missiles/missile-sheet.svg`, `assets/bosses/boss-sheet.svg` | Save migration, aircraft, missile and boss assets |
+| `js/02-save-and-assets.js`, `assets/missiles/missile-sheet.png`, `assets/bosses/boss-sheet.png` | Save migration, aircraft, missile and boss assets |
 | `js/03-difficulty-and-state.js` | Single-campaign difficulty curve and evolution state |
 | `js/04-audio.js` | Generated audio |
 | `js/05-missions-achievements.js` | Missions, achievements, rewards and results |

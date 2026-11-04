@@ -48,11 +48,11 @@ endBoss=function(){const finalBoss=!!(B&&B.k==='final');proEndBoss();if(finalBos
 
 function shake(power){if(save.fx!==false){proShake=Math.max(proShake,.24);proShakePower=Math.max(proShakePower,power)}}
 const proBoom=boom;
-boom=function(px,py,color,count){proBoom(px,py,color,count);if(save.fx!==false){const extra=Math.min(10,Math.max(2,Math.floor(count/4)));for(let i=0;i<extra;i++){const a=Math.random()*TAU,v=rnd(70,260);pt.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:.35,m:.35,c:'255,240,180',r:rnd(1,3)})}shake(count>=20?6:2)}};
+boom=function(px,py,color,count){proBoom(px,py,color,count);if(save.fx!==false){const extra=SAFE_RENDER?2:Math.min(10,Math.max(2,Math.floor(count/4)));for(let i=0;i<extra;i++){const a=Math.random()*TAU,v=rnd(70,260);pt.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:.35,m:.35,c:'255,240,180',r:rnd(1,3)})}shake(count>=20?6:2)}};
 
 const proCtxStar=ctxStar;
 ctxStar=function(px,py,rot){proCtxStar(px,py,rot);if(save.fx===false)return;const pulse=1+Math.sin(t*6+rot)*.18;x.save();x.translate(px,py);x.globalAlpha=.35;x.strokeStyle='#fff4b0';x.lineWidth=1.5;x.beginPath();x.moveTo(-18*pulse,0);x.lineTo(18*pulse,0);x.moveTo(0,-18*pulse);x.lineTo(0,18*pulse);x.stroke();x.restore()};
-function drawWorldAtmosphere(){const world=proWorld(Math.round(S==='menu'?1:lv));if(world.n==='STORM FRONT'){x.save();x.strokeStyle='rgba(205,232,255,.28)';x.lineWidth=1;for(let i=0;i<26;i++){const q=(i*73+t*180)%Math.max(1,W+H),px=(q%W),py=(q*1.7%H);x.beginPath();x.moveTo(px,py);x.lineTo(px-14,py+32);x.stroke()}if(Math.sin(t*2.7)> .986){x.fillStyle='rgba(235,248,255,.16)';x.fillRect(0,0,W,H)}x.restore()}else if(world.n==='DEEP SPACE'||world.n==='COSMIC FINALE'){x.save();const g=x.createRadialGradient(W*.78,H*.2,0,W*.78,H*.2,W*.32);g.addColorStop(0,world.n==='COSMIC FINALE'?'rgba(255,105,220,.2)':'rgba(80,218,255,.16)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,W,H);x.restore()}}
+function drawWorldAtmosphere(){const world=proWorld(Math.round(S==='menu'?1:lv));if(world.n==='STORM FRONT'){x.save();x.strokeStyle='rgba(205,232,255,.28)';x.lineWidth=1;for(let i=0;i<(SAFE_RENDER?10:26);i++){const q=(i*73+t*180)%Math.max(1,W+H),px=(q%W),py=(q*1.7%H);x.beginPath();x.moveTo(px,py);x.lineTo(px-14,py+32);x.stroke()}if(Math.sin(t*2.7)> .986){x.fillStyle='rgba(235,248,255,.16)';x.fillRect(0,0,W,H)}x.restore()}else if(world.n==='DEEP SPACE'||world.n==='COSMIC FINALE'){x.save();const g=x.createRadialGradient(W*.78,H*.2,0,W*.78,H*.2,W*.32);g.addColorStop(0,world.n==='COSMIC FINALE'?'rgba(255,105,220,.2)':'rgba(80,218,255,.16)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,W,H);x.restore()}}
 const proDrawSky=drawSky;
 drawSky=function(){proDrawSky();drawWorldAtmosphere()};
 

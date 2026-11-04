@@ -1,12 +1,12 @@
-# Testing — 0.9.13
+# Testing — 0.9.14
 
 ## Results executed for this completion pass
 
 | Check | Result |
 |---|---|
 | Deterministic Node logic suite | Passed: 422 checks, 0 failures |
-| Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 104 checks, 0 failures |
-| Self-contained `dist/dodgewing.html` browser smoke test | Passed: 44 checks, 0 failures |
+| Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 107 checks, 0 failures |
+| Self-contained `dist/dodgewing.html` browser smoke test | Passed: 47 checks, 0 failures |
 | Android debug APK | Passed: compiled for Android 15; package metadata, embedded offline game and v1/v2 signatures verified |
 | JavaScript syntax checks | Passed |
 | Physical Android device | Not tested |

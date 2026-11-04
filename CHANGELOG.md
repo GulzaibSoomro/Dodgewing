@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.14 — 2026-11-05
+
+- Add Android Safe Render mode to stop black/stale tiles affecting canvas text, aircraft and missiles on unstable phone GPU drivers.
+- Render gameplay missile and boss sheets from pre-rasterized transparent PNGs instead of the runtime SVG texture path.
+- Use a 1× Android canvas, bounded 40 FPS update cadence, lower particle/projectile limits and low-cost effects so the software compositor remains responsive.
+
 ## 0.9.13 — 2026-11-05
 
 - Replace the missile sheet with 30 thin rocket designs based on the latest supplied reference.
