@@ -25,6 +25,7 @@ async def main():
         check(await pg.is_visible('#loading'), 'loading screen follows the splash')
         await pg.wait_for_function("$('splash').classList.contains('hide')&&$('loading').classList.contains('hide')")
         check(await pg.evaluate("$('loading-bar').style.width==='100%'&&$('loading-count').textContent==='100%'"), 'loading screen completes asset progress')
+        check(await pg.evaluate("(()=>{const icon=document.querySelector('link[rel=icon][sizes=\"32x32\"]'),apple=document.querySelector('link[rel=apple-touch-icon]'),manifest=document.querySelector('link[rel=manifest]');return !!(icon&&apple&&manifest&&icon.getAttribute('href')&&apple.getAttribute('href'))})()"), 'browser and mobile app-icon metadata is present')
         check(await pg.evaluate("document.fonts.check('700 32px Oxanium')&&document.fonts.check('600 18px Rajdhani')&&document.fonts.check('400 18px Pixelify Sans')"), 'new title, interface and score fonts are available')
         check(await pg.evaluate('SPR.length===30&&SPR.every(i=>i.complete&&i.naturalWidth>0)'), 'all 30 plane sprites loaded (' + URL.split('/')[0] + ')')
         check(await pg.is_visible('#menu'), 'menu visible')

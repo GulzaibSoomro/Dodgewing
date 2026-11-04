@@ -39,4 +39,9 @@ Compared with the original uploaded project snapshot:
 - Added `js/11-intro-sequence.js` to preload game aircraft and fonts before showing the home screen.
 - Rebuilt the self-contained mobile release and expanded browser coverage for the startup flow.
 
+## App icon — 0.9.5
+
+- Added the editable Dodgewing aircraft icon SVG and browser, iPhone and Android/PWA PNG exports in `assets/icons/`.
+- Added `manifest.webmanifest`, browser and mobile home-screen icon metadata, and embedded icon references in the offline build.
+
 The original snapshot backup is `backup/dodgewing-original.zip`; a separate pre-integration rollback is `backup/dodgewing-v0.8-before-30-planes.zip`.

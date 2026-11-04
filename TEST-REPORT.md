@@ -1,4 +1,4 @@
-# Dodgewing 0.9.4 completion report
+# Dodgewing 0.9.5 completion report
 
 ## Delivered
 
@@ -10,10 +10,11 @@
 - Six five-level sky worlds, polished engine/smoke/explosion/star effects, boss warning introductions and large boss health bars.
 - A full home screen, tutorial prompts, plane-unlock cards, medal-style achievements, sound feedback, settings and a final Level 30 victory screen.
 - A branded splash screen followed by an asset-aware loading screen before the home screen.
+- A Dodgewing aircraft app icon in browser, iPhone and Android/PWA sizes, plus web-app metadata.
 
 ## Verification
 
-`npm test` passed 418 logic checks. The Chromium source suite passed 95 checks over five viewport sizes, and the self-contained release file passed 35 browser smoke checks. The release file has 30 embedded PNGs, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 418 logic checks. The Chromium source suite passed 96 checks over five viewport sizes, and the self-contained release file passed 36 browser smoke checks. The release file has embedded aircraft and app-icon data, the three new font families, and no external source-script or aircraft references.
 
 ## Remaining manual work
 

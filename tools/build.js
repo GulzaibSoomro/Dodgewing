@@ -10,6 +10,7 @@ let html=read('index.html');
 let css=read('css/style.css');
 css=css.replace(/url\("\.\.\/(assets\/fonts\/[\w\-.]+)"\)/g,(_,file)=>'url("data:font/ttf;base64,'+data(file)+'")');
 html=html.replace('<link rel="stylesheet" href="css/style.css">','<style>\n'+css+'\n</style>');
+html=html.replace(/href="(assets\/icons\/[^\"]+\.(?:png|ico))"/g,(_,file)=>'href="data:'+(file.endsWith('.ico')?'image/x-icon':'image/png')+';base64,'+data(file)+'"');
 const sources=[...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map(m=>m[1]);
 let js=sources.map(read).join('\n');
 js=js.replace(/assets\/planes\/[\w-]+\.png/g,file=>'data:image/png;base64,'+data(file));

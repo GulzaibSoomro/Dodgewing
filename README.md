@@ -1,4 +1,4 @@
-# Dodgewing 0.9.4
+# Dodgewing 0.9.5
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -47,6 +47,7 @@ Progress requires the same browser and origin. Opening the file under a new orig
 | `js/09-input-and-loop.js` | Input, pause and animation timing |
 | `js/10-professional-pass.js` | World themes, tutorial, boss introductions, unlock and victory cards, polished effects and settings |
 | `js/11-intro-sequence.js` | Splash screen, real asset preloading and loading progress |
+| `assets/icons/`, `manifest.webmanifest` | Source SVG, platform app icons and installable-web-app metadata |
 | `tools/build.js`, `tools/serve.js` | Build the self-contained game and run the local source server without Python |
 | `tools/build.py` | Original Python build script, retained for compatible environments |
 | `tests/run-tests.js` | Deterministic mocked-DOM logic tests |
@@ -71,4 +72,4 @@ See `TESTING.md` and `TEST-REPORT.md` for executed results and limitations, and 
 
 ## Assets and release work
 
-The game now uses Oxanium, Rajdhani and Pixelify Sans, each included with its SIL Open Font License in `assets/fonts`. The original Pixelta files are retained but are no longer loaded by the game or bundled release. Aircraft licensing remains unconfirmed. No commercial licensing, ad SDK, app-store packaging or release work was done. The bottom strip remains an empty ad placeholder.
+The game now uses Oxanium, Rajdhani and Pixelify Sans, each included with its SIL Open Font License in `assets/fonts`. The original Pixelta files are retained but are no longer loaded by the game or bundled release. The new Dodgewing icon is supplied as editable SVG and PNGs for browser, iPhone and Android/PWA use. Aircraft licensing remains unconfirmed. No commercial licensing, ad SDK, app-store packaging or release work was done. The bottom strip remains an empty ad placeholder.

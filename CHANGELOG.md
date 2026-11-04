@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.5 — 2026-11-04
+
+- Add the Dodgewing aircraft app icon in standard browser, iPhone and Android/PWA sizes, with an editable SVG source and web manifest.
+- Embed browser icon data in the self-contained release file.
+
 ## 0.9.4 — 2026-11-04
 
 - Add a branded Dodgewing splash screen followed by a real asset-loading screen with plane and font progress before the home screen.

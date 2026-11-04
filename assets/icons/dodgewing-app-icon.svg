@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Dodgewing app icon</title>
+  <desc id="desc">A bright futuristic aircraft flying through a gold star over a purple sky.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4f3d9a"/>
+      <stop offset=".48" stop-color="#261b56"/>
+      <stop offset="1" stop-color="#120d2d"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="45%" r="54%">
+      <stop stop-color="#9b82e8" stop-opacity=".72"/>
+      <stop offset=".56" stop-color="#5f4aa9" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#1b123e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff4ad"/>
+      <stop offset=".46" stop-color="#ffd35f"/>
+      <stop offset="1" stop-color="#e68a1e"/>
+    </linearGradient>
+    <linearGradient id="hull" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f8fbff"/>
+      <stop offset=".34" stop-color="#aee8ff"/>
+      <stop offset=".7" stop-color="#3986d9"/>
+      <stop offset="1" stop-color="#173b86"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#8beeff"/>
+      <stop offset=".5" stop-color="#467fd5"/>
+      <stop offset="1" stop-color="#29266d"/>
+    </linearGradient>
+    <linearGradient id="canopy" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset=".18" stop-color="#b6f6ff"/>
+      <stop offset=".56" stop-color="#479ce9"/>
+      <stop offset="1" stop-color="#20286e"/>
+    </linearGradient>
+    <linearGradient id="engine" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ee8eff"/>
+      <stop offset=".52" stop-color="#a04df7"/>
+      <stop offset="1" stop-color="#29d9ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+  <rect width="1024" height="1024" fill="url(#halo)"/>
+
+  <g fill="#fff7d0" opacity=".72">
+    <circle cx="146" cy="175" r="9"/><circle cx="820" cy="159" r="7"/><circle cx="880" cy="386" r="10"/>
+    <circle cx="141" cy="680" r="7"/><circle cx="825" cy="734" r="8"/><circle cx="231" cy="374" r="5"/>
+  </g>
+  <g fill="url(#gold)" opacity=".93">
+    <path d="M198 296l13 35 35 13-35 13-13 35-13-35-35-13 35-13z"/>
+    <path d="M827 592l10 27 27 10-27 10-10 27-10-27-27-10 27-10z"/>
+    <path d="M753 234l7 19 19 7-19 7-7 19-7-19-19-7 19-7z"/>
+  </g>
+
+  <g opacity=".34" fill="url(#gold)">
+    <path d="M512 180l52 195 192 52-192 52-52 195-52-195-192-52 192-52z"/>
+  </g>
+  <path d="M512 177l38 208 203 43-203 43-38 208-38-208-203-43 203-43z" fill="none" stroke="#ffe68d" stroke-width="10" opacity=".55"/>
+
+  <g stroke="#0d1230" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M512 184C472 254 451 349 449 429l-229 151 43 90 183-62 12 151 54 92 54-92 12-151 183 62 43-90-229-151C573 349 552 254 512 184z" fill="url(#wing)" stroke-width="32"/>
+    <path d="M512 184C481 266 476 355 480 470l-25 303 57 91 57-91-25-303c4-115-1-204-32-286z" fill="url(#hull)" stroke-width="28"/>
+    <path d="M480 470l-222 121 31 48 167-53 24-116zM544 470l222 121-31 48-167-53-24-116z" fill="url(#wing)" stroke-width="22"/>
+    <path d="M474 669l-89 44 43 57 49-21M550 669l89 44-43 57-49-21" fill="none" stroke="#aeb8ff" stroke-width="23"/>
+  </g>
+
+  <path d="M512 250c-25 51-31 123-25 190 10 21 28 31 50 31 22 0 40-10 50-31 6-67 0-139-25-190-13-19-37-19-50 0z" fill="url(#canopy)" stroke="#0d1230" stroke-width="22"/>
+  <path d="M500 278c-16 47-17 98-10 135" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" opacity=".8"/>
+  <path d="M512 488l-38 174 38 64 38-64z" fill="url(#engine)" stroke="#111335" stroke-width="20" stroke-linejoin="round"/>
+  <path d="M512 728l-34 61 34 92 34-92z" fill="url(#engine)" stroke="#101335" stroke-width="19" stroke-linejoin="round"/>
+  <path d="M512 759l-17 44 17 55 17-55z" fill="#d6ffff"/>
+  <path d="M384 598l65-32M640 598l-65-32" fill="none" stroke="#ffe595" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="512" cy="530" r="22" fill="#ffb5f5" stroke="#162053" stroke-width="12"/>
+
+  <path d="M313 777c73 45 141 65 199 65s126-20 199-65" fill="none" stroke="#7cecff" stroke-width="10" opacity=".42" stroke-linecap="round"/>
+</svg>
