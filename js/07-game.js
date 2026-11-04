@@ -1,6 +1,6 @@
 // 07-game.js: Game state, screen navigation, start/die/evolve/hurt, main update and draw
 // Classic script (no modules): all files share one global scope and load in numeric order.
-let menuOn=true,S='menu',pl={x:0,y:0,a:0},ms=[],st=[],pu=[],pt=[],t=0,stars=0,shield=0,sp=205,msT=0,puT=0,dieT=0,keys={},hint=0;
+let menuOn=true,S='menu',pl={x:0,y:0,a:0},ms=[],st=[],pu=[],pt=[],t=0,stars=0,shield=0,sp=150,msT=0,puT=0,dieT=0,keys={},hint=0;
 const clouds=Array.from({length:8},()=>({x:Math.random(),y:Math.random(),s:50+Math.random()*90,v:6+Math.random()*12}));
 const rnd=(a,b)=>a+Math.random()*(b-a),wrap=(v,m)=>(v+m)%m,angd=(a,b)=>((a-b+Math.PI*3)%TAU)-Math.PI;
 
@@ -18,7 +18,7 @@ function buy(i){if(save.pts>=PLANES[i].p){save.pts-=PLANES[i].p;save.own.push(i)
 
 function addStar(){if(st.length||B)return;let px,py;for(let i=0;i<8;i++){px=rnd(40,W-40);py=rnd(Math.min(110,H*.4),Math.max(Math.min(110,H*.4),H-160));if(Math.hypot(px-pl.x,py-pl.y)>120)break}st.push({x:px,y:py,r:rnd(0,TAU)})}
 function start(){initAudio();S='play';pl={x:W/2,y:H/2,a:-Math.PI/2};ms=[];st=[];pu=[];pt=[];t=0;stars=0;shield=0;msT=1.5;puT=12;hint=4;lv=1;prevLv=1;upT=0;fadeT=0;banT=0;evoStars=0;inv=0;B=null;bossSeen={};fx=[];bl=[];wcd=[];wLv=0;skyL=1;joyRel();nmCombo=0;nmT=0;bonus=0;mag=0;slow=0;runNew=[];dnT=0;peakLv=1;banTx='';trailC=hexRgb(PLANES[save.sel].c);
-  sp=M().sp;addStar();show(null)}
+  sp=planeSpeed(lv);addStar();show(null)}
 function missileKind(L,r){if(L<8)return 'standard';if(L>=17&&r>.82)return 'armored';if(L>=12&&r>.58)return 'weaver';if(r>.25)return 'interceptor';return 'standard'}
 function spawnMissile(){const s=Math.random()*4|0,m=30;
   const x=s===0?-m:s===1?W+m:rnd(0,W),y=s===2?-m:s===3?H+m:rnd(0,H),kind=missileKind(lv,Math.random());
@@ -33,8 +33,8 @@ function die(){S='dying';dieT=.8;snd('boom');B=null;bl=[];joyRel();save.stat.run
   save.top.push(entry);save.top.sort((a,b)=>(b.score||0)-(a.score||0)||(b.level||0)-(a.level||0));save.top=save.top.slice(0,5);store();
   showRes(earned,nb,k)}
 
-function evo(){evoStars=Math.min((LEVEL_COUNT-1)*STARS_PER_LEVEL,evoStars+1);const n=lvOf(evoStars);if(n>lv){prevLv=lv;lv=n;peakLv=Math.max(peakLv,lv);upT=1.4;dnT=0;fadeT=.5;banT=2.4;banTx='LEVEL '+lv+': '+LV[lv-1]+(WPN[lv]?' - '+WPN[lv].n:'')+(lv%5===1&&lv>1?' - '+STAGES[lv-1].zone:'');banC='#ffe066';banIc=1;snd('up');boom(pl.x,pl.y,trailC,24);boom(pl.x,pl.y,'255,224,102',14);if(BOSS[lv]&&!bossSeen[lv]&&!B)startBoss(lv);mEvent('lvl',lv);chkAch()}}
-function hurt(){prevLv=lv;evoStars=Math.max(0,evoStars-5*M().drop);lv=lvOf(evoStars);upT=0;dnT=1;fadeT=.5;inv=M().prot;banT=2.4;banTx='HIT! Back to Level '+lv+': '+LV[lv-1];banC='#ff6b5e';banIc=1;snd('dn');boom(pl.x,pl.y,'255,107,94',22)}
+function evo(){evoStars=Math.min((LEVEL_COUNT-1)*STARS_PER_LEVEL,evoStars+1);const n=lvOf(evoStars);if(n>lv){prevLv=lv;lv=n;sp=planeSpeed(lv);peakLv=Math.max(peakLv,lv);upT=1.4;dnT=0;fadeT=.5;banT=2.4;banTx='LEVEL '+lv+': '+LV[lv-1]+(WPN[lv]?' - '+WPN[lv].n:'')+(lv%5===1&&lv>1?' - '+STAGES[lv-1].zone:'');banC='#ffe066';banIc=1;snd('up');boom(pl.x,pl.y,trailC,24);boom(pl.x,pl.y,'255,224,102',14);if(BOSS[lv]&&!bossSeen[lv]&&!B)startBoss(lv);mEvent('lvl',lv);chkAch()}}
+function hurt(){prevLv=lv;evoStars=Math.max(0,evoStars-5*M().drop);lv=lvOf(evoStars);sp=planeSpeed(lv);upT=0;dnT=1;fadeT=.5;inv=M().prot;banT=2.4;banTx='HIT! Back to Level '+lv+': '+LV[lv-1];banC='#ff6b5e';banIc=1;snd('dn');boom(pl.x,pl.y,'255,107,94',22)}
 function upd(d){
   updateSky(d);
   if(S==='play'){
@@ -43,7 +43,6 @@ function upd(d){
     if(keys.ArrowLeft||keys.a)pl.a-=tr;if(keys.ArrowRight||keys.d)pl.a+=tr;
     if(jAng!==null)pl.a+=Math.max(-tr,Math.min(tr,angd(jAng,pl.a)));
     pl.x=wrap(pl.x+Math.cos(pl.a)*sp*d,W);pl.y=wrap(pl.y+Math.sin(pl.a)*sp*d,H);fireTick(d);bulletTick(d);
-    pt.push({x:pl.x-Math.cos(pl.a)*sz()*.4,y:pl.y-Math.sin(pl.a)*sz()*.4,vx:0,vy:0,l:.35,m:.35,c:trailC,r:2.5});
     if(shield>0)shield-=d;
     msT-=d;if(msT<=0){const cf=B?(B.k==='heavy'||B.k==='adv'?.4:0):1;if(ms.filter(m=>!m.bm).length<Math.floor(cap(lv)*cf))spawnMissile();msT=M().s0+(M().s1-M().s0)*difficulty(lv)}
     puT-=d;if(puT<=0){pu.push({x:rnd(60,W-60),y:rnd(80,H-60),ty:PUT[Math.random()*PUT.length|0]});puT=rnd(11,17)}
@@ -94,5 +93,5 @@ function draw(){
     if(upT>0){const p=upT/1.4;x.strokeStyle='rgba(255,224,102,'+p+')';x.lineWidth=4;x.beginPath();x.arc(pl.x,pl.y,sz()*(.4+(1-p)*1.6),0,TAU);x.stroke()}
     if(dnT>0){x.strokeStyle='rgba(255,107,94,'+dnT+')';x.lineWidth=4;x.beginPath();x.arc(pl.x,pl.y,sz()*(.4+(1-dnT)*1.2),0,TAU);x.stroke()}
     if(banT>0){const a=Math.min(1,banT/.5),tx=banTx;const ic=banIc?40:0,fs=Math.max(12,Math.min(22,Math.floor((W-60-ic)/(tx.length*.5))));x.font=fs+'px Pixelta,monospace';x.textAlign='center';const w=x.measureText(tx).width+36+ic;x.globalAlpha=a;x.fillStyle='rgba(20,18,50,.85)';x.beginPath();x.roundRect(W/2-w/2,130,w,40,12);x.fill();x.strokeStyle='rgba(255,243,224,.28)';x.lineWidth=1;x.stroke();if(ic){const im=SPR[lv-1];if(im.complete&&im.naturalWidth){const k=34/Math.max(im.naturalWidth,im.naturalHeight);x.drawImage(im,W/2-w/2+8,133+(34-im.naturalHeight*k)/2,im.naturalWidth*k,im.naturalHeight*k)}}x.fillStyle=banC;x.fillText(tx,W/2+ic/2,158);x.globalAlpha=1;x.textAlign='left';x.font='20px Pixelta,monospace'}
-    if(hint>0){x.textAlign='center';ctxA(Math.min(1,hint));otext(phone()?'Drag the circle to steer':'Drag the circle, or use arrow keys / A, D',W/2,H-172,'#fff3e0');ctxA(1);x.textAlign='left'}}
+    if(hint>0&&(typeof proTutorial==='undefined'||proTutorial<0)){x.textAlign='center';ctxA(Math.min(1,hint));otext(phone()?'Drag the circle to steer':'Drag the circle, or use arrow keys / A, D',W/2,H-172,'#fff3e0');ctxA(1);x.textAlign='left'}}
 }

@@ -1,4 +1,4 @@
-# Dodgewing 0.9.7 completion report
+# Dodgewing 0.9.8 completion report
 
 ## Delivered
 
@@ -7,7 +7,7 @@
 - Safer save loading: invalid values no longer break the menu, Hangar or Rewards screens.
 - Corrected Level 3 auto-fire help text and responsive menu/Hangar labels.
 - A rebuilt self-contained `dist/dodgewing.html` with all 30 aircraft sprites and the current font set embedded.
-- Six five-level sky worlds, polished engine/smoke/explosion/star effects, boss warning introductions and large boss health bars.
+- Six five-level sky worlds, smoke/explosion/star effects, short translucent boss warnings and large boss health bars.
 - A full home screen, tutorial prompts, plane-unlock cards, medal-style achievements, sound feedback, settings and a final Level 30 victory screen.
 - A black, no-text splash screen with a centered rounded Sunset Run aircraft panel, followed by an asset-aware loading screen.
 - A Dodgewing aircraft app icon in browser, iPhone and Android/PWA sizes, plus web-app metadata.
@@ -15,7 +15,7 @@
 
 ## Verification
 
-`npm test` passed 418 logic checks. The Chromium source suite passed 100 checks over five viewport sizes, and the self-contained release file passed 40 browser smoke checks. The release file has embedded aircraft, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 419 logic checks. The Chromium source suite passed 102 checks over five viewport sizes, and the self-contained release file passed 42 browser smoke checks. The release file has embedded aircraft, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
 
 The Android debug APK compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
 

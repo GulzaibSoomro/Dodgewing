@@ -1,4 +1,4 @@
-# Dodgewing 0.9.7
+# Dodgewing 0.9.8
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -13,7 +13,7 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 - 30 evolution stages use 30 distinct transparent aircraft sprites supplied for this update. Sprite art is preserved as provided; each stage has a unique plane.
 - Start at Level 1; each five collected stars advances one stage. Level 30 takes 145 stars without damage (29 level-ups).
 - Exactly one collectible star appears at a time. Collect it to reveal the next. During a boss, stars pause; one returns when the encounter ends. HUD pips show progress toward the next five-star milestone.
-- Difficulty grows across the 30 levels: regular missile speed rises from 55% to 93% of plane speed, spawn interval decreases from 2.8 to 0.55 seconds, turning grows, and the desktop missile cap rises from 2 to 16 (phone cap 2 to 8). Plane speed remains 250 px/s.
+- Difficulty grows across the 30 levels: the plane starts at 150 px/s and gains 10 px/s at each even-numbered level, reaching 300 px/s at Level 30. Regular missile speed rises from 55% to 93% of the current plane speed, spawn interval decreases from 2.8 to 0.55 seconds, turning grows, and the desktop missile cap rises from 2 to 16 (phone cap 2 to 8).
 - A hit loses two levels / ten evolution stars, with 1.5 seconds of protection. A hit at Level 1 ends the run. Collected run stars and earned points are not removed. Weapons follow the current stage, including after damage.
 - Stages 1–2 have no guns. Auto-fire begins at stage 3 and evolves through twin/wing guns, jet cannons, homing missiles and plasma. Stages 13–30 extend the plasma-storm set with a bounded rate/damage increase.
 - The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style.

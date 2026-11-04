@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.8 — 2026-11-04
+
+- Make boss warnings and new-plane cards translucent and reduce their display time.
+- Remove the player aircraft exhaust attachment and scale plane speed from 150 px/s at Level 1 to 300 px/s at Level 30.
+
 ## 0.9.7 — 2026-11-04
 
 - Remove the unused black ad bar so gameplay and menus use the complete phone screen.

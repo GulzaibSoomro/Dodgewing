@@ -1,5 +1,11 @@
 # Changed files
 
+## Flight presentation and speed — 0.9.8
+
+- Made boss warnings and new-plane cards translucent, with short display times.
+- Removed the player aircraft exhaust attachment and added the 150–300 px/s level-based speed curve.
+- Rebuilt the mobile APK as v0.9.8.
+
 Compared with the original uploaded project snapshot:
 
 - Added 30 supplied airplane sprites: `assets/planes/plane_01.png` through `assets/planes/plane_30.png`.
@@ -11,7 +17,7 @@ Compared with the original uploaded project snapshot:
 - Updated `js/07-game.js` for the 30-stage hangar path, zone banners, and local score records.
 - Updated `js/08b-weapons-sky-controls.js` for late-stage weapon scaling and missile variants.
 - Updated `js/05-missions-achievements.js` for safe unknown mission handling and the local best-runs list.
-- Updated `tests/run-tests.js`; 418 logic checks pass in the current run.
+- Updated `tests/run-tests.js`; 419 logic checks pass in the current run.
 - Retained the existing source modules for game state, bosses, rendering, controls, and audio.
 
 ## Completion pass — 0.9.1

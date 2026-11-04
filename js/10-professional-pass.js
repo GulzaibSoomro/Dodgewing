@@ -28,11 +28,11 @@ snd=function(k){
 const proStart=start;
 start=function(){proStart();proTutorial=save.tutorial? -1:0;proTutorialT=0;proShake=0;proBossIntro=0;$('unlock').classList.add('hide');$('boss-intro').classList.add('hide')};
 
-function showUnlock(){const card=$('unlock'),weapon=WPN[lv]?WPN[lv].n:'Evasive flying';card.innerHTML='<img src="'+SPRD[lv-1]+'" alt=""><span><b>NEW PLANE · LEVEL '+lv+'</b><small>'+LV[lv-1]+' · '+weapon+' · '+proWorld(lv).n+'</small></span>';card.classList.remove('hide');setTimeout(()=>card.classList.add('hide'),2600)}
+function showUnlock(){const card=$('unlock'),weapon=WPN[lv]?WPN[lv].n:'Evasive flying';card.innerHTML='<img src="'+SPRD[lv-1]+'" alt=""><span><b>NEW PLANE · LEVEL '+lv+'</b><small>'+LV[lv-1]+' · '+weapon+' · '+proWorld(lv).n+'</small></span>';card.classList.remove('hide');setTimeout(()=>card.classList.add('hide'),1050)}
 const proEvo=evo;
 evo=function(){const before=lv;proEvo();if(lv>before){banT=0;showUnlock()}};
 
-function showBossIntro(){if(!B)return;proBossIntro=2.6;const card=$('boss-intro');card.innerHTML='WARNING: '+BOSS[B.L].n+'<small>Survive the encounter or destroy its threat</small>';card.classList.remove('hide')}
+function showBossIntro(){if(!B)return;proBossIntro=1.15;const card=$('boss-intro');card.innerHTML='WARNING: '+BOSS[B.L].n+'<small>Survive the encounter or destroy its threat</small>';card.classList.remove('hide')}
 const proStartBoss=startBoss;
 startBoss=function(L){proStartBoss(L);showBossIntro();snd('warn');shake(7)};
 
@@ -52,16 +52,13 @@ boom=function(px,py,color,count){proBoom(px,py,color,count);if(save.fx!==false){
 
 const proCtxStar=ctxStar;
 ctxStar=function(px,py,rot){proCtxStar(px,py,rot);if(save.fx===false)return;const pulse=1+Math.sin(t*6+rot)*.18;x.save();x.translate(px,py);x.globalAlpha=.35;x.strokeStyle='#fff4b0';x.lineWidth=1.5;x.beginPath();x.moveTo(-18*pulse,0);x.lineTo(18*pulse,0);x.moveTo(0,-18*pulse);x.lineTo(0,18*pulse);x.stroke();x.restore()};
-const proDrawSpr=drawSpr;
-drawSpr=function(i,alpha,scale){if((S==='play'||S==='paused')&&save.fx!==false){x.save();x.globalAlpha=alpha*.9;const flame=18*scale+Math.random()*9;x.fillStyle='#ff7b42';x.beginPath();x.moveTo(-sz()*.38,0);x.lineTo(-sz()*.38-flame,-5);x.lineTo(-sz()*.38-flame,5);x.closePath();x.fill();x.fillStyle='#ffe27a';x.beginPath();x.moveTo(-sz()*.38,0);x.lineTo(-sz()*.38-flame*.62,-2.4);x.lineTo(-sz()*.38-flame*.62,2.4);x.closePath();x.fill();x.restore()}proDrawSpr(i,alpha,scale)};
-
 function drawWorldAtmosphere(){const world=proWorld(Math.round(S==='menu'?1:lv));if(world.n==='STORM FRONT'){x.save();x.strokeStyle='rgba(205,232,255,.28)';x.lineWidth=1;for(let i=0;i<26;i++){const q=(i*73+t*180)%Math.max(1,W+H),px=(q%W),py=(q*1.7%H);x.beginPath();x.moveTo(px,py);x.lineTo(px-14,py+32);x.stroke()}if(Math.sin(t*2.7)> .986){x.fillStyle='rgba(235,248,255,.16)';x.fillRect(0,0,W,H)}x.restore()}else if(world.n==='DEEP SPACE'||world.n==='COSMIC FINALE'){x.save();const g=x.createRadialGradient(W*.78,H*.2,0,W*.78,H*.2,W*.32);g.addColorStop(0,world.n==='COSMIC FINALE'?'rgba(255,105,220,.2)':'rgba(80,218,255,.16)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,W,H);x.restore()}}
 const proDrawSky=drawSky;
 drawSky=function(){proDrawSky();drawWorldAtmosphere()};
 
 function updateTutorial(d){if(proTutorial<0||S!=='play')return;if(proTutorial===0&&(jAng!==null||keys.ArrowLeft||keys.ArrowRight||keys.a||keys.d))proTutorial=1;if(proTutorial===1&&stars>0)proTutorial=2;if(proTutorial===2&&(ms.length>0||t>8)){proTutorial=3;proTutorialT=4.5}if(proTutorial===3){proTutorialT-=d;if(proTutorialT<=0){save.tutorial=true;store();proTutorial=-1}}}
-function tutorialLayout(){const lines=[['MOVE · Use arrows or A / D','Or drag the steering circle'],['COLLECT · Fly into','the glowing star'],['DODGE · Keep away','from red missiles'],['READY · Evolve every five stars!']][proTutorial]||[];const w=Math.min(W-28,420),h=lines.length>1?60:44,px=(W-w)/2,py=Math.max(132,H-h-148);return{lines,w,h,px,py,font:Math.max(13,Math.min(17,(w-28)/(Math.max(1,...lines.map(line=>line.length))*.57)))}}
-function drawTutorial(){if(proTutorial<0||S!=='play')return;const box=tutorialLayout();glass(box.px,box.py,box.w,box.h,14);x.font=box.font+'px Pixelta,monospace';x.textAlign='center';x.fillStyle=proTutorial===2?'#ffb0a6':'#fff3e0';box.lines.forEach((line,i)=>x.fillText(line,W/2,box.py+(box.h-(box.lines.length-1)*18)/2+6+i*18));x.textAlign='left'}
+function tutorialLayout(){const lines=[['MOVE · Use arrows or A / D','Or drag the steering circle'],['COLLECT · Fly into','the glowing star'],['DODGE · Keep away','from red missiles'],['READY · Evolve every five stars!']][proTutorial]||[];const w=Math.min(W-28,420),h=lines.length>1?72:44,px=(W-w)/2,py=Math.max(132,H-h-148);return{lines,w,h,px,py,font:Math.max(13,Math.min(17,(w-28)/(Math.max(1,...lines.map(line=>line.length))*.57)))}}
+function drawTutorial(){if(proTutorial<0||S!=='play')return;const box=tutorialLayout(),gap=24;glass(box.px,box.py,box.w,box.h,14);x.font=box.font+'px Pixelta,monospace';x.textAlign='center';x.fillStyle=proTutorial===2?'#ffb0a6':'#fff3e0';box.lines.forEach((line,i)=>x.fillText(line,W/2,box.py+(box.h-(box.lines.length-1)*gap)/2+6+i*gap));x.textAlign='left'}
 const proUpd=upd;
 upd=function(d){proUpd(d);proShake=Math.max(0,proShake-d*2.8);proBossIntro=Math.max(0,proBossIntro-d);if(proBossIntro<=0)$('boss-intro').classList.add('hide');updateTutorial(d)};
 const proDraw=draw;
