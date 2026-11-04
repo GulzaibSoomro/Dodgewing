@@ -1,4 +1,4 @@
-# Dodgewing 0.9.9
+# Dodgewing 0.9.10
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -16,10 +16,10 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 - Difficulty grows across the 30 levels: the plane starts at 150 px/s and gains 10 px/s at each even-numbered level, reaching 300 px/s at Level 30. Regular missile speed rises from 55% to 93% of the current plane speed, spawn interval decreases from 2.8 to 0.55 seconds, turning grows, and the desktop missile cap rises from 2 to 16 (phone cap 2 to 8).
 - A hit loses two levels / ten evolution stars, with 1.5 seconds of protection. A hit at Level 1 ends the run. Collected run stars and earned points are not removed. Weapons follow the current stage, including after damage.
 - Stages 1–2 have no guns. Auto-fire begins at stage 3 and evolves through twin/wing guns, jet cannons, homing missiles and plasma. Stages 13–30 extend the plasma-storm set with a bounded rate/damage increase.
-- The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style.
+- The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style, with slow horizontal and vertical cloud drift to convey forward flight.
 - Boss encounters: Heavy at 9, Commander at 17, Advanced at 25, Final Challenge at 30. Each opens with a warning card, warning sound and large health bar. Survive the timer or damage the applicable boss to accelerate defeat.
 - Each evolution displays a plane-unlocked card with the new aircraft and weapon. Level 1 also gives short “move,” “collect stars” and “avoid missiles” prompts. Finishing the Level 30 boss opens a final victory screen with the run score, best plane and a Play again button.
-- S = shield; M = magnet; L = slow missiles. Near misses give combo bonuses.
+- S = shield; M = magnet; L = slow missiles. Active power-up names and remaining seconds appear in a transparent bar beneath the top HUD. Near misses give combo bonuses.
 - Points = `(whole seconds + stars × 5 + bonus) × 2`. Paint prices remain 0 / 400 / 1200 / 3000. Three daily missions, ten achievements and unlocked trail rewards remain.
 
 ## Saves and compatibility

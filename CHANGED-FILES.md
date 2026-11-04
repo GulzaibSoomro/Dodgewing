@@ -1,5 +1,10 @@
 # Changed files
 
+## Smooth flight presentation — 0.9.10
+
+- Restored hardware canvas acceleration, added mobile particle limits and vertical cloud parallax.
+- Moved active power-up timer cards into the top HUD and rebuilt the APK as v0.9.10.
+
 ## Android canvas stability — 0.9.9
 
 - Added a stable opaque canvas frame path and Android WebView software rendering to avoid black plane and text artefacts on phones.

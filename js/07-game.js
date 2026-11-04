@@ -69,7 +69,8 @@ function upd(d){
   }
   if(S==='dying'){dieT-=d;if(dieT<=0){S='over';show('over')}}
   for(let i=pt.length-1;i>=0;i--){const p=pt[i];p.x+=p.vx*d;p.y+=p.vy*d;p.l-=d;if(p.l<=0)pt.splice(i,1)}
-  for(const c of clouds){c.x-=c.v*d/W;if(c.x<-.2)c.x=1.2}
+  const particleCap=phone()?150:240;if(pt.length>particleCap)pt.splice(0,pt.length-particleCap);
+  for(const c of clouds){c.x-=c.v*.72*d/W;c.y+=c.v*.42*d/H;if(c.x<-.2)c.x=1.2;if(c.y>1.25){c.y=-.25;c.x=Math.random()*1.2-.1}}
 }
 
 function draw(){

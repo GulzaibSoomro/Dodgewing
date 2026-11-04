@@ -389,8 +389,8 @@ function drawFx(){
         else if(p===1)x.arc(B.x,B.y,40+(1-B.wn/.9)*80,0,TAU);
         else for(const sd of[-.3,.3]){x.moveTo(B.x,B.y);x.lineTo(B.x+Math.cos(B.aim+sd)*600,B.y+Math.sin(B.aim+sd)*600)}
         x.stroke()}}
-    const bw=Math.min(W-32,340),bx=(W-bw)/2;x.textAlign='center';otext(BOSS[B.L].n,W/2,98,'#ffb0a6');
-    x.fillStyle='rgba(0,0,0,.5)';x.beginPath();x.roundRect(bx,104,bw,16,8);x.fill();x.strokeStyle='rgba(255,255,255,.2)';x.lineWidth=1;x.stroke();const bf=Math.max(0,1-B.t/B.T);if(bf>0){const bg=x.createLinearGradient(0,106,0,118);bg.addColorStop(0,'#ff9a8f');bg.addColorStop(1,'#e5392a');x.fillStyle=bg;x.beginPath();x.roundRect(bx+2,106,Math.max(12,(bw-4)*bf),12,6);x.fill()}
+    const powerOffset=shield>0||mag>0||slow>0?36:0,bw=Math.min(W-32,340),bx=(W-bw)/2,by=104+powerOffset;x.textAlign='center';otext(BOSS[B.L].n,W/2,98+powerOffset,'#ffb0a6');
+    x.fillStyle='rgba(0,0,0,.5)';x.beginPath();x.roundRect(bx,by,bw,16,8);x.fill();x.strokeStyle='rgba(255,255,255,.2)';x.lineWidth=1;x.stroke();const bf=Math.max(0,1-B.t/B.T);if(bf>0){const bg=x.createLinearGradient(0,by+2,0,by+14);bg.addColorStop(0,'#ff9a8f');bg.addColorStop(1,'#e5392a');x.fillStyle=bg;x.beginPath();x.roundRect(bx+2,by+2,Math.max(12,(bw-4)*bf),12,6);x.fill()}
     x.textAlign='left'}
   if(S==='play'||S==='paused')for(const f of fx){x.globalAlpha=Math.min(1,f.l*2);x.font='18px Pixelta,monospace';x.textAlign='center';x.lineJoin='round';x.lineWidth=4;x.strokeStyle='rgba(0,0,0,.55)';x.strokeText(f.s,f.x,f.y);x.fillStyle=f.c;x.fillText(f.s,f.x,f.y);x.globalAlpha=1;x.textAlign='left'}}
 
@@ -465,7 +465,8 @@ function upd(d){
   }
   if(S==='dying'){dieT-=d;if(dieT<=0){S='over';show('over')}}
   for(let i=pt.length-1;i>=0;i--){const p=pt[i];p.x+=p.vx*d;p.y+=p.vy*d;p.l-=d;if(p.l<=0)pt.splice(i,1)}
-  for(const c of clouds){c.x-=c.v*d/W;if(c.x<-.2)c.x=1.2}
+  const particleCap=phone()?150:240;if(pt.length>particleCap)pt.splice(0,pt.length-particleCap);
+  for(const c of clouds){c.x-=c.v*.72*d/W;c.y+=c.v*.42*d/H;if(c.x<-.2)c.x=1.2;if(c.y>1.25){c.y=-.25;c.x=Math.random()*1.2-.1}}
 }
 
 function draw(){
@@ -526,7 +527,8 @@ function drawHud(){
   glass(rx,14,rw,66,14);
   starAt(rx+24,38,.85,0,1);x.font='22px Pixelta,monospace';x.fillStyle='#fff3e0';x.fillText(String(stars),rx+44,45);
   x.font='13px Pixelta,monospace';x.fillStyle=bonus>0?'#6ee7b7':'rgba(255,243,224,.8)';x.fillText(Math.floor(t)+' s   +'+bonus,rx+12,70);
-  let ey=H-150;for(const [n,v,c] of [['Shield',shield,'#6ec8ff'],['Magnet',mag,'#6ee7b7'],['Slow',slow,'#c4a1ff']])if(v>0){glass(16,ey-20,128,28,10);ctxDot(31,ey-6,5,c);x.font='14px Pixelta,monospace';x.fillStyle='#fff3e0';x.fillText(n+' '+Math.ceil(v)+' s',44,ey-1);ey-=34}
+  const powers=[['Shield',shield,'#6ec8ff'],['Magnet',mag,'#6ee7b7'],['Slow',slow,'#c4a1ff']].filter(p=>p[1]>0);
+  if(powers.length){const py=86,pw=W-32,step=pw/powers.length;glass(16,py,pw,30,10);x.font='13px Pixelta,monospace';powers.forEach(([n,v,c],i)=>{const px=16+i*step+12;ctxDot(px,py+15,5,c);x.fillStyle='#fff3e0';x.fillText(n+' '+Math.ceil(v)+' s',px+11,py+20)})}
 }
 
 // 08b-weapons-sky-controls.js: auto-fire weapons per plane level, sky / time of day by level, on-screen joystick

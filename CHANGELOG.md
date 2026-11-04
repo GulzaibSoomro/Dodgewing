@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.10 — 2026-11-04
+
+- Restore the Android hardware canvas layer for smooth gameplay while retaining the opaque canvas fix for black artefacts.
+- Add slow vertical cloud drift alongside horizontal movement and move active power-up timers from the joystick area into a transparent top-HUD bar.
+
 ## 0.9.9 — 2026-11-04
 
 - Stabilize Android canvas rendering by using an opaque medium-quality canvas, resetting frame state and using the WebView software layer to prevent black sprite and text artefacts.

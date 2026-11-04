@@ -31,5 +31,6 @@ function drawHud(){
   glass(rx,14,rw,66,14);
   starAt(rx+24,38,.85,0,1);x.font='22px Pixelta,monospace';x.fillStyle='#fff3e0';x.fillText(String(stars),rx+44,45);
   x.font='13px Pixelta,monospace';x.fillStyle=bonus>0?'#6ee7b7':'rgba(255,243,224,.8)';x.fillText(Math.floor(t)+' s   +'+bonus,rx+12,70);
-  let ey=H-150;for(const [n,v,c] of [['Shield',shield,'#6ec8ff'],['Magnet',mag,'#6ee7b7'],['Slow',slow,'#c4a1ff']])if(v>0){glass(16,ey-20,128,28,10);ctxDot(31,ey-6,5,c);x.font='14px Pixelta,monospace';x.fillStyle='#fff3e0';x.fillText(n+' '+Math.ceil(v)+' s',44,ey-1);ey-=34}
+  const powers=[['Shield',shield,'#6ec8ff'],['Magnet',mag,'#6ee7b7'],['Slow',slow,'#c4a1ff']].filter(p=>p[1]>0);
+  if(powers.length){const py=86,pw=W-32,step=pw/powers.length;glass(16,py,pw,30,10);x.font='13px Pixelta,monospace';powers.forEach(([n,v,c],i)=>{const px=16+i*step+12;ctxDot(px,py+15,5,c);x.fillStyle='#fff3e0';x.fillText(n+' '+Math.ceil(v)+' s',px+11,py+20)})}
 }
