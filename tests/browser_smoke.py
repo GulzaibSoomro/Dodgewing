@@ -21,6 +21,7 @@ async def main():
         pg.on('requestfailed', lambda r: errs.append('request failed: ' + r.url))
         await pg.goto(URL)
         check(await pg.is_visible('#splash'), 'branded splash screen opens first')
+        check(await pg.evaluate("(()=>{const art=$('splash-art'),s=getComputedStyle($('splash'));return !!(art&&art.getAttribute('src')&&s.backgroundColor==='rgb(5, 5, 7)')})()"), 'splash uses the centered black-and-orange no-text design')
         await pg.wait_for_function("!$('loading').classList.contains('hide')")
         check(await pg.is_visible('#loading'), 'loading screen follows the splash')
         await pg.wait_for_function("$('splash').classList.contains('hide')&&$('loading').classList.contains('hide')")

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.6 — 2026-11-04
+
+- Replace the text-based launch splash with a black no-text layout featuring a centered, rounded orange Sunset Run aircraft panel.
+- Embed the splash artwork in the self-contained mobile build.
+
 ## 0.9.5 — 2026-11-04
 
 - Add the Dodgewing aircraft app icon in standard browser, iPhone and Android/PWA sizes, with an editable SVG source and web manifest.

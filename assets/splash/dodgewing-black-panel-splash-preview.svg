@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" role="img" aria-labelledby="title desc">
+  <title id="title">Dodgewing black frame Sunset Run splash</title>
+  <desc id="desc">A black mobile splash screen with Dodgewing title above a centered square orange sunset aircraft panel.</desc>
+  <defs>
+    <radialGradient id="outerGlow" cx="50%" cy="52%" r="48%">
+      <stop stop-color="#5a2515" stop-opacity=".65"/>
+      <stop offset=".62" stop-color="#190d10" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#050507" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panelSky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffe5a3"/>
+      <stop offset=".38" stop-color="#ffc071"/>
+      <stop offset=".72" stop-color="#f47f52"/>
+      <stop offset="1" stop-color="#ab5a9d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="45%" r="53%">
+      <stop stop-color="#fffbd4"/>
+      <stop offset=".7" stop-color="#ffe58a"/>
+      <stop offset="1" stop-color="#ffc873"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff4ba"/>
+      <stop offset=".48" stop-color="#ffd05d"/>
+      <stop offset="1" stop-color="#e77d25"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c8f7ff"/>
+      <stop offset=".43" stop-color="#62b7ee"/>
+      <stop offset="1" stop-color="#4257b3"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff"/>
+      <stop offset=".4" stop-color="#c8f5ff"/>
+      <stop offset=".75" stop-color="#5a89d8"/>
+      <stop offset="1" stop-color="#283878"/>
+    </linearGradient>
+    <linearGradient id="engine" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#f4a2ff"/>
+      <stop offset=".52" stop-color="#a95bf0"/>
+      <stop offset="1" stop-color="#38dbff"/>
+    </linearGradient>
+    <clipPath id="panelClip"><rect x="49" y="276" width="292" height="292" rx="24"/></clipPath>
+  </defs>
+
+  <rect width="390" height="844" fill="#050507"/>
+  <rect width="390" height="844" fill="url(#outerGlow)"/>
+  <rect x="49" y="276" width="292" height="292" rx="24" fill="url(#panelSky)"/>
+  <g clip-path="url(#panelClip)">
+    <g transform="translate(0 -29)">
+    <circle cx="195" cy="412" r="110" fill="url(#sun)" opacity=".96"/>
+    <circle cx="195" cy="412" r="121" fill="none" stroke="#fff0bd" stroke-width="2" opacity=".54"/>
+    <g fill="#fff5d7" opacity=".55">
+      <path d="M36 427c28-20 62-15 82 7 23-12 54-7 69 14H36z"/>
+      <path d="M223 459c23-20 52-19 75-2 20-8 40-2 57 13H223z"/>
+      <path d="M35 518c28-16 59-14 79 7 27-12 58-5 75 15H35z"/>
+    </g>
+    <g fill="#fff7d9" opacity=".88">
+      <circle cx="79" cy="356" r="3"/><circle cx="305" cy="366" r="3"/>
+      <path d="M294 422l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+    </g>
+    <g transform="translate(195 460) scale(.5)" stroke="#17234b" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M0-171C-19-128-29-76-27-28l-130 85 25 49 108-37 8 89L0 190l16-32 8-89 108 37 25-49L27-28C29-76 19-128 0-171z" fill="url(#wing)" stroke-width="16"/>
+      <path d="M0-171c-19 49-23 103-19 168l-15 173L0 200l34-30L19-3c4-65 0-119-19-168z" fill="url(#body)" stroke-width="14"/>
+      <path d="M-24 65l-104 48 17 27 85-29M24 65l104 48-17 27-85-29" fill="none" stroke="#f7d47a" stroke-width="8"/>
+      <path d="M-15 101l-48 25 28 32 26-12M15 101l48 25-28 32-26-12" fill="none" stroke="#b6bdff" stroke-width="14"/>
+      <path d="M0-125c-15 29-18 69-13 102 6 12 16 18 26 18 10 0 20-6 26-18 5-33 2-73-13-102-7-10-19-10-26 0z" transform="translate(-13)" fill="#4b9fe1" stroke-width="11"/>
+      <path d="M0 8l-20 96 20 33 20-33z" fill="url(#engine)" stroke-width="10"/>
+      <path d="M0 140l-16 31 16 42 16-42z" fill="url(#engine)" stroke-width="9"/>
+      <circle cy="31" r="12" fill="#ffc0f3" stroke-width="7"/>
+      <path d="M0-100C-9-73-9-46-5-28" fill="none" stroke="#fff" stroke-width="6" opacity=".85"/>
+    </g>
+    </g>
+  </g>
+
+</svg>

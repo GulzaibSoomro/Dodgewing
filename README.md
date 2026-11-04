@@ -1,4 +1,4 @@
-# Dodgewing 0.9.5
+# Dodgewing 0.9.6
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -6,7 +6,7 @@ Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework 
 
 Open `index.html`, or run `npm start` and visit `http://localhost:5500`. `dist/dodgewing.html` is a self-contained offline build with embedded sprites and font.
 
-At launch, a short Dodgewing splash screen leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** to control sound and visual effects. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
+At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** to control sound and visual effects. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
 
 ## Campaign
 

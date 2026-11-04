@@ -10,7 +10,7 @@
   function progress(message){complete=Math.min(total,complete+1);const percent=Math.round(complete/total*100);bar.style.width=percent+'%';count.textContent=percent+'%';if(message)copy.textContent=message}
   function loadImage(src){return new Promise(done=>{const img=new Image();let settled=false,finish=()=>{if(settled)return;settled=true;progress();done()};img.onload=finish;img.onerror=finish;img.src=src;setTimeout(finish,2800)})}
   const featured=SPRD[Math.min(LEVEL_COUNT-1,29)]||SPRD[0]||'';
-  $('splash-plane').src=featured;$('loading-plane').src=featured;
+  $('loading-plane').src=featured;
   const sprites=Promise.all(sources.map(loadImage));
   const fonts=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();
   fonts.then(()=>progress('Calibrating flight controls'),()=>progress('Calibrating flight controls'));

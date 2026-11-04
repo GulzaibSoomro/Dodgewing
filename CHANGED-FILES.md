@@ -44,4 +44,9 @@ Compared with the original uploaded project snapshot:
 - Added the editable Dodgewing aircraft icon SVG and browser, iPhone and Android/PWA PNG exports in `assets/icons/`.
 - Added `manifest.webmanifest`, browser and mobile home-screen icon metadata, and embedded icon references in the offline build.
 
+## Final startup splash — 0.9.6
+
+- Added the active no-text Sunset Run splash SVG in `assets/splash/`.
+- Updated startup markup, styles, loading setup, browser tests and the self-contained build to use the centered orange panel on black.
+
 The original snapshot backup is `backup/dodgewing-original.zip`; a separate pre-integration rollback is `backup/dodgewing-v0.8-before-30-planes.zip`.
