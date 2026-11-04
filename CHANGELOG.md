@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.4 — 2026-11-04
+
+- Add a branded Dodgewing splash screen followed by a real asset-loading screen with plane and font progress before the home screen.
+- Rebuild and test the single-file mobile browser release with the startup sequence.
+
 ## 0.9.3 — 2026-11-03
 
 - Add six themed five-level sky worlds, a first-level tutorial, engine flames, smoke, explosion, screen-shake and star-sparkle effects.

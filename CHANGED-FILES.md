@@ -33,4 +33,10 @@ Compared with the original uploaded project snapshot:
 - Updated the home screen, settings, local scores, achievement badges and responsive panel styling in `index.html` and `css/style.css`.
 - Updated save defaults, zones, tests, documentation and the self-contained release build.
 
+## Startup sequence — 0.9.4
+
+- Added the branded splash screen and loading screen markup and styling in `index.html` and `css/style.css`.
+- Added `js/11-intro-sequence.js` to preload game aircraft and fonts before showing the home screen.
+- Rebuilt the self-contained mobile release and expanded browser coverage for the startup flow.
+
 The original snapshot backup is `backup/dodgewing-original.zip`; a separate pre-integration rollback is `backup/dodgewing-v0.8-before-30-planes.zip`.

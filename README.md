@@ -1,4 +1,4 @@
-# Dodgewing 0.9.3
+# Dodgewing 0.9.4
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -6,7 +6,7 @@ Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework 
 
 Open `index.html`, or run `npm start` and visit `http://localhost:5500`. `dist/dodgewing.html` is a self-contained offline build with embedded sprites and font.
 
-Use **Play** to start a run, **Hangar** to view planes, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** to control sound and visual effects. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
+At launch, a short Dodgewing splash screen leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** to control sound and visual effects. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
 
 ## Campaign
 
@@ -46,6 +46,7 @@ Progress requires the same browser and origin. Opening the file under a new orig
 | `js/08b-weapons-sky-controls.js` | Weapons, morning-to-night sky and joystick |
 | `js/09-input-and-loop.js` | Input, pause and animation timing |
 | `js/10-professional-pass.js` | World themes, tutorial, boss introductions, unlock and victory cards, polished effects and settings |
+| `js/11-intro-sequence.js` | Splash screen, real asset preloading and loading progress |
 | `tools/build.js`, `tools/serve.js` | Build the self-contained game and run the local source server without Python |
 | `tools/build.py` | Original Python build script, retained for compatible environments |
 | `tests/run-tests.js` | Deterministic mocked-DOM logic tests |

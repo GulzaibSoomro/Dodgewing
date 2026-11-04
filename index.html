@@ -20,6 +20,21 @@
 <div id="ad" aria-hidden="true"></div>
 <button id="pb" class="hide" onclick="pauseG()" aria-label="Pause"><i></i><i></i></button>
 
+<section id="splash" class="intro-screen" aria-label="Dodgewing splash screen">
+  <div class="splash-stars" aria-hidden="true">✦　·　✧　·　✦</div>
+  <div class="splash-mark"><span>SKY ARCADE</span><h1>Dodgewing</h1><p>One flight. Thirty evolutions.</p></div>
+  <img id="splash-plane" class="splash-plane" alt="">
+  <div class="splash-launch"><i aria-hidden="true"></i><span>PREPARE FOR TAKEOFF</span></div>
+</section>
+
+<section id="loading" class="intro-screen loading hide" role="status" aria-live="polite">
+  <div class="loading-mark"><span>LOADING</span><b>Dodgewing</b></div>
+  <img id="loading-plane" class="loading-plane" alt="">
+  <p id="loading-copy">Preparing your flight</p>
+  <div class="loading-track" aria-hidden="true"><i id="loading-bar"></i></div>
+  <small id="loading-count">0%</small>
+</section>
+
 <div class="ov" id="menu">
   <div class="top"><div class="chip"><svg class="si"><use href="#i-star"/></svg><span id="pc">0</span></div><button id="sn" class="ic" onclick="toggleSnd()" aria-label="Sound"><svg class="si s1"><use href="#i-spk"/></svg><svg class="si s2"><use href="#i-spkx"/></svg></button></div>
   <div class="grp" id="mh"><h1>Dodgewing</h1><p class="tag">Steer. Collect stars. Evolve. Dodge.</p></div>
@@ -114,4 +129,5 @@
 <script src="js/08b-weapons-sky-controls.js"></script>
 <script src="js/09-input-and-loop.js"></script>
 <script src="js/10-professional-pass.js"></script>
+<script src="js/11-intro-sequence.js"></script>
 </body></html>

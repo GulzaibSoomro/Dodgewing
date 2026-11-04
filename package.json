@@ -1,6 +1,6 @@
 {
   "name": "dodgewing",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "private": true,
   "description": "Dodgewing: survival + aircraft evolution + boss arcade game (HTML5 canvas, no dependencies)",
   "scripts": {

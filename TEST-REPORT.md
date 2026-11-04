@@ -1,4 +1,4 @@
-# Dodgewing 0.9.3 completion report
+# Dodgewing 0.9.4 completion report
 
 ## Delivered
 
@@ -9,10 +9,11 @@
 - A rebuilt self-contained `dist/dodgewing.html` with all 30 aircraft sprites and the current font set embedded.
 - Six five-level sky worlds, polished engine/smoke/explosion/star effects, boss warning introductions and large boss health bars.
 - A full home screen, tutorial prompts, plane-unlock cards, medal-style achievements, sound feedback, settings and a final Level 30 victory screen.
+- A branded splash screen followed by an asset-aware loading screen before the home screen.
 
 ## Verification
 
-`npm test` passed 418 logic checks. The Chromium source suite passed 92 checks over five viewport sizes, and the self-contained release file passed 32 browser smoke checks. The release file has 30 embedded PNGs, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 418 logic checks. The Chromium source suite passed 95 checks over five viewport sizes, and the self-contained release file passed 35 browser smoke checks. The release file has 30 embedded PNGs, the three new font families, and no external source-script or aircraft references.
 
 ## Remaining manual work
 

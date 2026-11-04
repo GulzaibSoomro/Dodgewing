@@ -24,6 +24,9 @@ async def main():
    # Deterministic stepping; real pointer interaction is covered by browser_smoke.py.
    await page.add_init_script('window.requestAnimationFrame=()=>0')
    await page.goto(URL);await page.evaluate('document.fonts.ready');await page.wait_for_function('BASE_SPR.every(i=>i.complete&&i.naturalWidth)')
+   # This suite freezes animation scheduling for deterministic campaign stepping.
+   # The real splash/loading sequence is exercised in browser_smoke.py.
+   await page.evaluate("$('splash').classList.add('hide');$('loading').classList.add('hide')")
    label=f'{width}x{height}'
    check(await page.evaluate("(()=>{const r=$('mb').getBoundingClientRect();return (r.top>=$('mh').getBoundingClientRect().bottom||r.left>=$('mh').getBoundingClientRect().right)&&r.bottom<=$('ad').getBoundingClientRect().top&&document.documentElement.scrollWidth<=innerWidth})()"),label+' menu fits above ad strip')
    await page.evaluate('layoutShow();draw()')
