@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="600" viewBox="0 0 720 600">
+  <defs>
+    <g id="rocket" transform="translate(10 3) scale(.84)">
+      <path d="M60 7C43 22 37 44 38 78v18h44V78c1-34-5-56-22-71Z" fill="currentColor" stroke="#171d24" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M60 7C51 15 45 25 42 37h36C75 25 69 15 60 7Z" fill="#b83232"/>
+      <path d="M39 63 17 87l20 13 10-20m34-17 22 24-20 13-10-20" fill="#687480" stroke="#171d24" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="43" y="42" width="34" height="8" rx="2" fill="#e7bb42"/>
+      <rect x="47" y="56" width="26" height="5" rx="2" fill="#39434d" opacity=".85"/>
+      <path d="M60 66 66 79 60 89 54 79Z" fill="#dce9ee" opacity=".9"/>
+      <path d="M52 96h16l-3 11h-10Z" fill="#242c35"/>
+      <path d="M60 107c-7 9-6 18 0 27 6-9 7-18 0-27Z" fill="#ff8d28"/>
+      <path d="M60 111c-3 6-3 12 0 18 3-6 3-12 0-18Z" fill="#ffe37a"/>
+      <path d="M44 68h8m-8 7h8m16-7h8m-8 7h8" stroke="#edf5f6" stroke-width="1.5" opacity=".6"/>
+    </g>
+    <g id="future" transform="translate(10 3) scale(.82)">
+      <path d="M60 5 79 34v61L94 111 76 105 60 122 44 105 26 111 41 95V34Z" fill="currentColor" stroke="#111722" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M60 12 69 35 60 53 51 35Z" fill="#30dcff"/>
+      <path d="M48 42h24v41H48Z" fill="#172230" stroke="#8cf1ff" stroke-width="2"/>
+      <path d="M60 50c-7 8-7 19 0 28 7-9 7-20 0-28Z" fill="#30dcff"/>
+      <path d="m41 79-22 25 24-8m36-17 22 25-24-8" fill="#71839b" stroke="#111722" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="60" cy="89" r="7" fill="#30dcff" stroke="#d9fbff" stroke-width="2"/>
+      <path d="M60 112c-8 10-7 20 0 29 7-9 8-19 0-29Z" fill="#59eaff"/>
+      <path d="M60 117c-3 6-3 12 0 18 3-6 3-12 0-18Z" fill="#ffffff"/>
+    </g>
+  </defs>
+  <g transform="translate(0 0)" color="#c6cbd0"><use href="#rocket"/></g>
+  <g transform="translate(120 0)" color="#65754c"><use href="#rocket"/></g>
+  <g transform="translate(240 0)" color="#e0ded5"><use href="#rocket"/></g>
+  <g transform="translate(360 0)" color="#71805a"><use href="#rocket"/></g>
+  <g transform="translate(480 0)" color="#354966"><use href="#rocket"/></g>
+  <g transform="translate(600 0)" color="#8c8981"><use href="#rocket"/></g>
+  <g transform="translate(0 120)" color="#708057"><use href="#rocket"/></g>
+  <g transform="translate(120 120)" color="#aeb1ad"><use href="#rocket"/></g>
+  <g transform="translate(240 120)" color="#59616a"><use href="#rocket"/></g>
+  <g transform="translate(360 120)" color="#d9d8d0"><use href="#rocket"/></g>
+  <g transform="translate(480 120)" color="#6f7953"><use href="#rocket"/></g>
+  <g transform="translate(600 120)" color="#c9c8c2"><use href="#rocket"/></g>
+  <g transform="translate(0 240)" color="#d5d5ce"><use href="#rocket"/></g>
+  <g transform="translate(120 240)" color="#d8dcdd"><use href="#rocket"/></g>
+  <g transform="translate(240 240)" color="#a9afb0"><use href="#rocket"/></g>
+  <g transform="translate(360 240)" color="#d8d9d5"><use href="#rocket"/></g>
+  <g transform="translate(480 240)" color="#3d4348"><use href="#rocket"/></g>
+  <g transform="translate(600 240)" color="#c8cdcf"><use href="#rocket"/></g>
+  <g transform="translate(0 360)" color="#e0e4e2"><use href="#future"/></g>
+  <g transform="translate(120 360)" color="#252c36"><use href="#future"/></g>
+  <g transform="translate(240 360)" color="#cbd5d7"><use href="#future"/></g>
+  <g transform="translate(360 360)" color="#d4d0c4"><use href="#future"/></g>
+  <g transform="translate(480 360)" color="#29323a"><use href="#future"/></g>
+  <g transform="translate(600 360)" color="#dbe2e2"><use href="#future"/></g>
+  <g transform="translate(0 480)" color="#e2e9e7"><use href="#future"/></g>
+  <g transform="translate(120 480)" color="#272b31"><use href="#future"/></g>
+  <g transform="translate(240 480)" color="#3d3b51"><use href="#future"/></g>
+  <g transform="translate(360 480)" color="#3f454d"><use href="#future"/></g>
+  <g transform="translate(480 480)" color="#e6edf1"><use href="#future"/></g>
+  <g transform="translate(600 480)" color="#b99a53"><use href="#future"/></g>
+</svg>

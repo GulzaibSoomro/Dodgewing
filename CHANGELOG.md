@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.11 — 2026-11-04
+
+- Add a transparent game-ready missile sprite sheet based on the supplied rocket artwork, embedded in the offline browser and Android builds.
+- Keep the opening missile for Levels 1–3, then evolve normal missile visuals with the campaign; reserve the three final futuristic missiles for Final Challenge waves.
+- Delay player auto-fire until Level 4, starting with the nose gun.
+
 ## 0.9.10 — 2026-11-04
 
 - Restore the Android hardware canvas layer for smooth gameplay while retaining the opaque canvas fix for black artefacts.

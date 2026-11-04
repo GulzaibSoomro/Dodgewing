@@ -24,7 +24,7 @@ function spawnMissile(){const s=Math.random()*4|0,m=30;
   const x=s===0?-m:s===1?W+m:rnd(0,W),y=s===2?-m:s===3?H+m:rnd(0,H),kind=missileKind(lv,Math.random());
   const hp=lv>=25?3:lv>=17?2:1,base=sp*(M().v0+(M().v1-M().v0)*difficulty(lv));
   const cfg={standard:[1,1],interceptor:[1.3,.78],weaver:[1.05,1],armored:[.72,1.3]}[kind];
-  ms.push({x,y,a:Math.atan2(pl.y-y,pl.x-x),life:M().chase,v:base*cfg[0],hp,hp0:hp,kind,r:cfg[1],phase:rnd(0,TAU),h:kind==='armored'?.7:kind==='weaver'?1.15:1})}
+  ms.push({x,y,a:Math.atan2(pl.y-y,pl.x-x),life:M().chase,v:base*cfg[0],hp,hp0:hp,kind,r:cfg[1],phase:rnd(0,TAU),h:kind==='armored'?.7:kind==='weaver'?1.15:1,skin:normalMissileSkin(lv)})}
 function boom(x,y,c,n){for(let i=0;i<n;i++){const a=rnd(0,TAU),v=rnd(40,220);pt.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:.7,m:.7,c,r:rnd(2,4)})}}
 function die(){S='dying';dieT=.8;snd('boom');B=null;bl=[];joyRel();save.stat.runs++;save.stat.bestLv=Math.max(save.stat.bestLv,peakLv);save.stat.bestT=Math.max(save.stat.bestT,Math.floor(t));mEvent('surv',Math.floor(t));mEvent('lvl',peakLv);mEvent('bonus',bonus);chkAch();boom(pl.x,pl.y,'255,179,71',36);
   const earned=(Math.floor(t)+stars*5+bonus)*M().mult,k='play';save.pts+=earned;
@@ -81,7 +81,7 @@ function draw(){
   for(const p of pu){const k=PUC[p.ty||'s'];x.fillStyle='rgba(16,14,40,.65)';x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.fill();x.strokeStyle=k[0];x.lineWidth=3;x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.stroke();x.fillStyle=k[0];x.font='15px Pixelta,monospace';x.textAlign='center';x.fillText(k[1],p.x,p.y+5);x.textAlign='left'}
   for(const p of pt){ctxDot(p.x,p.y,p.r,'rgba('+p.c+','+Math.max(0,p.l/p.m)+')')}
   for(const m of ms){x.save();x.translate(m.x,m.y);x.rotate(m.a);
-    if(m.r>1)x.scale(m.r,m.r);ctxMissile(m.adv?'#b05cff':m.big?'#d9372f':m.kind==='armored'?'#8f57d6':m.kind==='weaver'?'#5bc7d5':m.kind==='interceptor'?'#e59646':'#ece8e0',m.adv?'#5a1fa8':m.big?'#7a1010':m.kind==='weaver'?'#185c82':'#e5533d');if(m.st==='warn'){x.strokeStyle='rgba(255,60,60,'+(m.stT<.3?.9:.45)+')';x.lineWidth=3;x.beginPath();x.moveTo(20,0);x.lineTo(700,0);x.stroke()}x.restore()}
+    if(m.r>1)x.scale(m.r,m.r);drawEnemyMissile(m);if(m.st==='warn'){x.strokeStyle='rgba(255,60,60,'+(m.stT<.3?.9:.45)+')';x.lineWidth=3;x.beginPath();x.moveTo(20,0);x.lineTo(700,0);x.stroke()}x.restore()}
   drawBullets();drawFx();
   if(S==='menu'&&menuOn)showcase();
   if(S==='play'||S==='paused'){x.save();x.translate(pl.x,pl.y);x.rotate(pl.a+Math.PI/2);

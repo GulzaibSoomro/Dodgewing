@@ -3,7 +3,7 @@
 let B=null,bossSeen={},fx=[],nmT=0,nmCombo=0,bonus=0,mag=0,slow=0,banIc=0,runNew=[];
 const BOSS={9:{k:'heavy',n:'HEAVY MISSILE',T:30},17:{k:'cmdr',n:'MISSILE COMMANDER',T:35},25:{k:'adv',n:'ADVANCED MISSILE',T:35},30:{k:'final',n:'FINAL CHALLENGE',T:60}};
 function edge(){const s=Math.random()*4|0,m=30;return{x:s===0?-m:s===1?W+m:rnd(0,W),y:s===2?-m:s===3?H+m:rnd(0,H)}}
-function mk(x,y,a,o){const m={x,y,a,life:o.life||M().chase,v:o.v,h:o.h,r:o.r||1,big:o.big,st:o.st,stT:o.stT||0,bm:1,hp:o.hp||1,hp0:o.hp||1};ms.push(m);return m}
+function mk(x,y,a,o){const m={x,y,a,life:o.life||M().chase,v:o.v,h:o.h,r:o.r||1,big:o.big,st:o.st,stT:o.stT||0,bm:1,hp:o.hp||1,hp0:o.hp||1,skin:o.skin===undefined?normalMissileSkin(lv):o.skin};ms.push(m);return m}
 function nearMiss(){nmCombo=nmT>0?nmCombo+1:1;nmT=4;const b=2*Math.min(nmCombo,5);bonus+=b;fx.push({x:pl.x,y:pl.y-34,s:'NEAR MISS +'+b+(nmCombo>1?' x'+nmCombo:''),l:1.2,c:'#ffe066'});snd('nm');save.stat.nm++;mEvent('nm',1);mEvent('bonus',bonus);chkAch()}
 function updFx(d){
   for(let i=fx.length-1;i>=0;i--){const f=fx[i];f.y-=30*d;f.l-=d;if(f.l<=0)fx.splice(i,1)}
@@ -25,10 +25,10 @@ function bossTick(d){B.t+=d;B.cd-=d;const k=B.k;
     if(B.cd<=0){B.ph++;B.cd=3.4*B.bi;B.wn=.9;B.aim=Math.atan2(pl.y-B.y,pl.x-B.x)}
     if(B.wn>0){if(B.wn>.25)B.aim=Math.atan2(pl.y-B.y,pl.x-B.x);B.wn-=d;if(B.wn<=0)cfire()}}
   else if(k==='adv'){if(B.cd<=0){B.cd=4.8*B.bi;if(ms.filter(m=>m.adv).length<2){const e=edge(),m=mk(e.x,e.y,Math.atan2(pl.y-e.y,pl.x-e.x),{v:sp*.9,h:1.6,life:9,r:1.15,hp:10});m.adv=1}}}
-  else if(k==='final'&&B.cd<=0){B.cd=3.6;B.ph++;const w=B.ph%3;
-    if(w===1){const hz=Math.random()<.5,gap=rnd(.15,.85);for(let i=0;i<9;i++){const u=(i+.5)/9;if(Math.abs(u-gap)<.11)continue;if(hz)mk(u*W,-120,Math.PI/2,{v:sp*.55,h:0,life:8});else mk(-120,u*H,0,{v:sp*.55,h:0,life:10})}}
-    else if(w===2){const R=Math.max(W,H)*.6;for(let i=0;i<10;i++){const a=i/10*TAU+Math.random()*.3;mk(pl.x+Math.cos(a)*R,pl.y+Math.sin(a)*R,a+Math.PI,{v:sp*.5,h:0,life:9})}}
-    else for(let i=0;i<3;i++){const e=edge();mk(e.x,e.y,Math.atan2(pl.y-e.y,pl.x-e.x),{v:sp*.7,h:1,life:7})}}}
+  else if(k==='final'&&B.cd<=0){B.cd=3.6;B.ph++;const w=B.ph%3,skin=27+w;
+    if(w===1){const hz=Math.random()<.5,gap=rnd(.15,.85);for(let i=0;i<9;i++){const u=(i+.5)/9;if(Math.abs(u-gap)<.11)continue;if(hz)mk(u*W,-120,Math.PI/2,{v:sp*.55,h:0,life:8,skin});else mk(-120,u*H,0,{v:sp*.55,h:0,life:10,skin})}}
+    else if(w===2){const R=Math.max(W,H)*.6;for(let i=0;i<10;i++){const a=i/10*TAU+Math.random()*.3;mk(pl.x+Math.cos(a)*R,pl.y+Math.sin(a)*R,a+Math.PI,{v:sp*.5,h:0,life:9,skin})}}
+    else for(let i=0;i<3;i++){const e=edge();mk(e.x,e.y,Math.atan2(pl.y-e.y,pl.x-e.x),{v:sp*.7,h:1,life:7,skin})}}}
 function drawFx(){
   if(B){
     if(B.k==='cmdr'){const w=B.wn>0;x.fillStyle=w&&Math.floor(B.wn*14)%2?'#ffffff':'#8c1d2b';x.fillRect(B.x-34,B.y-16,68,32);x.fillStyle='#4a0f18';x.fillRect(B.x-8,B.y+10,16,16);

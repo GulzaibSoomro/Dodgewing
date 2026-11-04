@@ -1,20 +1,20 @@
 // 08b-weapons-sky-controls.js: auto-fire weapons per plane level, sky / time of day by level, on-screen joystick
 // Classic script (no modules): all files share one global scope and load in numeric order.
-// ---- Weapons. Stages 1 and 2 (glider, early biplane) have no guns. e = emitters: r shots/s, d damage, v speed,
+// ---- Weapons. Stages 1–3 have no guns; firing begins with the fourth aircraft. e = emitters: r shots/s, d damage, v speed,
 // o = [sideways px, forward px, angle offset], c colour, w size, h homing, sp random spread (rad).
 const BASE_WPN={
- 3:{n:'Nose gun',e:[{r:2.5,d:1,v:520,o:[[0,0]],c:'#ffe27a',w:3}]},
- 4:{n:'Twin guns',e:[{r:3,d:1,v:560,o:[[-9,0],[9,0]],c:'#ffe27a',w:3}]},
- 5:{n:'Wing guns x4',e:[{r:4,d:1,v:600,o:[[-15,0],[-6,0],[6,0],[15,0]],c:'#ffd24d',w:3}]},
- 6:{n:'Jet cannons',e:[{r:3,d:2,v:640,o:[[-8,0],[8,0]],c:'#ff9d4d',w:4}]},
- 7:{n:'Rapid cannon',e:[{r:7,d:1.5,v:700,o:[[0,0]],c:'#ff9d4d',w:4,sp:.04}]},
- 8:{n:'Vulcan and homing',e:[{r:6,d:1,v:760,o:[[0,0]],c:'#ffe27a',w:3,sp:.04},{h:1,r:.6,d:3,v:380,o:[[-14,0]],c:'#fff',w:5}]},
- 9:{n:'Stealth missiles',e:[{r:2.5,d:2,v:700,o:[[0,0]],c:'#9fd0ff',w:4},{h:1,r:.9,d:3,v:400,o:[[-12,0],[12,0]],c:'#fff',w:5}]},
- 10:{n:'Vulcan and twin homing',e:[{r:6,d:1,v:780,o:[[-6,0],[6,0]],c:'#ffe27a',w:3,sp:.05},{h:1,r:.8,d:3,v:420,o:[[-14,0],[14,0]],c:'#fff',w:5}]},
- 11:{n:'Plasma fan',e:[{r:3,d:1.5,v:700,o:[[0,0,-.2],[0,0,0],[0,0,.2]],c:'#7fe7ff',w:4},{h:1,r:.8,d:3,v:440,o:[[-14,0],[14,0]],c:'#fff',w:5}]},
- 12:{n:'Plasma storm',e:[{r:3.5,d:1.5,v:760,o:[[0,0,-.26],[0,0,-.13],[0,0,0],[0,0,.13],[0,0,.26]],c:'#8af0ff',w:4},{h:1,r:1,d:3,v:460,o:[[-14,0],[14,0]],c:'#fff',w:5}]}};
+ 4:{n:'Nose gun',e:[{r:2.5,d:1,v:520,o:[[0,0]],c:'#ffe27a',w:3}]},
+ 5:{n:'Twin guns',e:[{r:3,d:1,v:560,o:[[-9,0],[9,0]],c:'#ffe27a',w:3}]},
+ 6:{n:'Wing guns x4',e:[{r:4,d:1,v:600,o:[[-15,0],[-6,0],[6,0],[15,0]],c:'#ffd24d',w:3}]},
+ 7:{n:'Jet cannons',e:[{r:3,d:2,v:640,o:[[-8,0],[8,0]],c:'#ff9d4d',w:4}]},
+ 8:{n:'Rapid cannon',e:[{r:7,d:1.5,v:700,o:[[0,0]],c:'#ff9d4d',w:4,sp:.04}]},
+ 9:{n:'Vulcan and homing',e:[{r:6,d:1,v:760,o:[[0,0]],c:'#ffe27a',w:3,sp:.04},{h:1,r:.6,d:3,v:380,o:[[-14,0]],c:'#fff',w:5}]},
+ 10:{n:'Stealth missiles',e:[{r:2.5,d:2,v:700,o:[[0,0]],c:'#9fd0ff',w:4},{h:1,r:.9,d:3,v:400,o:[[-12,0],[12,0]],c:'#fff',w:5}]},
+ 11:{n:'Vulcan and twin homing',e:[{r:6,d:1,v:780,o:[[-6,0],[6,0]],c:'#ffe27a',w:3,sp:.05},{h:1,r:.8,d:3,v:420,o:[[-14,0],[14,0]],c:'#fff',w:5}]},
+ 12:{n:'Plasma fan',e:[{r:3,d:1.5,v:700,o:[[0,0,-.2],[0,0,0],[0,0,.2]],c:'#7fe7ff',w:4},{h:1,r:.8,d:3,v:440,o:[[-14,0],[14,0]],c:'#fff',w:5}]},
+ 13:{n:'Plasma storm',e:[{r:3.5,d:1.5,v:760,o:[[0,0,-.26],[0,0,-.13],[0,0,0],[0,0,.13],[0,0,.26]],c:'#8af0ff',w:4},{h:1,r:1,d:3,v:460,o:[[-14,0],[14,0]],c:'#fff',w:5}]}};
 const WPN={};
-for(let L=1;L<=LEVEL_COUNT;L++){const base=BASE_WPN[Math.min(12,L)];if(base){const rank=Math.max(0,L-12),rate=1+Math.min(.5,rank*.025),dmg=1+Math.min(.3,rank*.015);WPN[L]={n:base.n+(rank?' Mk '+rank:''),e:base.e.map(e=>({...e,r:e.r*rate,d:e.d*dmg}))}}}
+for(let L=1;L<=LEVEL_COUNT;L++){const base=BASE_WPN[Math.min(13,L)];if(base){const rank=Math.max(0,L-13),rate=1+Math.min(.5,rank*.025),dmg=1+Math.min(.3,rank*.015);WPN[L]={n:base.n+(rank?' Mk '+rank:''),e:base.e.map(e=>({...e,r:e.r*rate,d:e.d*dmg}))}}}
 let bl=[],wcd=[],wLv=0,autoFire=true;
 function fireTick(d){
   const w=WPN[lv];if(!w||!autoFire){wLv=0;return}

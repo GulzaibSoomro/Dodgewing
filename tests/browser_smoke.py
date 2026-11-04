@@ -29,6 +29,7 @@ async def main():
         check(await pg.evaluate("(()=>{const icon=document.querySelector('link[rel=icon][sizes=\"32x32\"]'),apple=document.querySelector('link[rel=apple-touch-icon]'),manifest=document.querySelector('link[rel=manifest]');return !!(icon&&apple&&manifest&&icon.getAttribute('href')&&apple.getAttribute('href'))})()"), 'browser and mobile app-icon metadata is present')
         check(await pg.evaluate("document.fonts.check('700 32px Oxanium')&&document.fonts.check('600 18px Rajdhani')&&document.fonts.check('400 18px Pixelify Sans')"), 'new title, interface and score fonts are available')
         check(await pg.evaluate('SPR.length===30&&SPR.every(i=>i.complete&&i.naturalWidth>0)'), 'all 30 plane sprites loaded (' + URL.split('/')[0] + ')')
+        check(await pg.evaluate('MISSILE_SHEET.complete&&MISSILE_SHEET.naturalWidth===720&&MISSILE_SHEET.naturalHeight===600'), '30-cell missile sprite sheet is loaded')
         check(await pg.is_visible('#menu'), 'menu visible')
         check(await pg.locator('#me,#mn,#mf').count()==0,'difficulty selector removed')
         for sel, name in [('Hangar', '#hangar'), ('Rewards', '#rw'), ('How to play', '#help'), ('High scores', '#scores'), ('Settings', '#settings')]:

@@ -5,7 +5,7 @@
   const splash=$('splash'),loading=$('loading'),bar=$('loading-bar'),count=$('loading-count'),copy=$('loading-copy');
   if(!splash||!loading||!bar||!count||!copy)return;
   const pause=ms=>new Promise(done=>setTimeout(done,ms));
-  const sources=[...new Set(SPRD||[])],total=sources.length+1;
+  const sources=[...new Set([...(SPRD||[]),typeof MISSILE_SHEET_SRC==='string'?MISSILE_SHEET_SRC:''].filter(Boolean))],total=sources.length+1;
   let complete=0;
   function progress(message){complete=Math.min(total,complete+1);const percent=Math.round(complete/total*100);bar.style.width=percent+'%';count.textContent=percent+'%';if(message)copy.textContent=message}
   function loadImage(src){return new Promise(done=>{const img=new Image();let settled=false,finish=()=>{if(settled)return;settled=true;progress();done()};img.onload=finish;img.onerror=finish;img.src=src;setTimeout(finish,2800)})}

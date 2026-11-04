@@ -1,5 +1,11 @@
 # Changed files
 
+## Evolving missile sprites — 0.9.11
+
+- Added `assets/missiles/missile-sheet.svg`: 30 transparent rocket sprites adapted from the supplied reference for the game’s canvas scale.
+- Added level-to-missile mapping, Final Challenge-only final missile waves, preloading and offline-build asset embedding.
+- Moved player auto-fire from Level 3 to Level 4 and rebuilt the Android APK as v0.9.11.
+
 ## Smooth flight presentation — 0.9.10
 
 - Restored hardware canvas acceleration, added mobile particle limits and vertical cloud parallax.

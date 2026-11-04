@@ -17,7 +17,7 @@ global.localStorage={getItem:k=>store[k]||null,setItem:(k,v)=>{store[k]=v}};
 global._ev={};global.addEventListener=(t,f)=>{(_ev[t]=_ev[t]||[]).push(f)};global.setTimeout=()=>{};
 global.Image=class{set src(v){this._s=v;this.complete=true;this.naturalWidth=100;this.naturalHeight=120}};
 const run0=new Function(js+`
-;return {get S(){return S},set S(v){S=v},get lv(){return lv},get stars(){return stars},start,upd,draw,evo,sz,get pl(){return pl},set pl(v){pl=v},get ms(){return ms},set ms(v){ms=v},get st(){return st},set st(v){st=v},get pu(){return pu},set pu(v){pu=v},get save(){return save},set shield(v){shield=v},hangar,pick,buy,get upT(){return upT},get banT(){return banT},get fadeT(){return fadeT},get prevLv(){return prevLv},LV,SPR,lvOf,die,get hint(){return hint},get evoStars(){return evoStars},get B(){return B},rewards,setTrail,dayMis,mEvent,chkAch,MIS,ACH,COS,curTrail,rb,get mag(){return mag},set mag(v){mag=v},get slow(){return slow},set slow(v){slow=v},get trailC(){return trailC},set peak(v){peakLv=v},get PUT(){return PUT},set B(v){B=v},get bonus(){return bonus},set bonus(v){bonus=v},get shield(){return shield},get bossSeen(){return bossSeen},get fx(){return fx},startBoss,endBoss,bossTick,get nmT(){return nmT},set ms3(v){ms=v},set evoStars(v){evoStars=v},get lvStars(){return evoStars%5},cap,M,planeSpeed,get SPRD(){return SPRD},missileKind,RULES,STAGES,LEVEL_COUNT,levelForTier,tierOf,loop,setWH(w,h){W=w;H=h},pauseG,resume,get ms2(){return ms},addStar,get msT(){return msT},get sp(){return sp},get inv(){return inv},get peakLv(){return peakLv},get banTx(){return banTx},set lv(v){lv=v},set inv(v){inv=v},hurt,set msT(v){msT=v},get bl(){return bl},set bl(v){bl=v},WPN,skyAt,nightAmt,get skyL(){return skyL},set skyL(v){skyL=v},set autoFire(v){autoFire=v},setJoy(a){jAng=a},get H(){return H},rs,SKY,STARS}`);
+;return {get S(){return S},set S(v){S=v},get lv(){return lv},get stars(){return stars},start,upd,draw,evo,sz,get pl(){return pl},set pl(v){pl=v},get ms(){return ms},set ms(v){ms=v},get st(){return st},set st(v){st=v},get pu(){return pu},set pu(v){pu=v},get save(){return save},set shield(v){shield=v},hangar,pick,buy,get upT(){return upT},get banT(){return banT},get fadeT(){return fadeT},get prevLv(){return prevLv},LV,SPR,lvOf,die,get hint(){return hint},get evoStars(){return evoStars},get B(){return B},rewards,setTrail,dayMis,mEvent,chkAch,MIS,ACH,COS,curTrail,rb,get mag(){return mag},set mag(v){mag=v},get slow(){return slow},set slow(v){slow=v},get trailC(){return trailC},set peak(v){peakLv=v},get PUT(){return PUT},set B(v){B=v},get bonus(){return bonus},set bonus(v){bonus=v},get shield(){return shield},get bossSeen(){return bossSeen},get fx(){return fx},startBoss,endBoss,bossTick,get nmT(){return nmT},set ms3(v){ms=v},set evoStars(v){evoStars=v},get lvStars(){return evoStars%5},cap,M,planeSpeed,get SPRD(){return SPRD},missileKind,normalMissileSkin,RULES,STAGES,LEVEL_COUNT,levelForTier,tierOf,loop,setWH(w,h){W=w;H=h},pauseG,resume,get ms2(){return ms},addStar,get msT(){return msT},get sp(){return sp},get inv(){return inv},get peakLv(){return peakLv},get banTx(){return banTx},set lv(v){lv=v},set inv(v){inv=v},hurt,set msT(v){msT=v},get bl(){return bl},set bl(v){bl=v},WPN,skyAt,nightAmt,get skyL(){return skyL},set skyL(v){skyL=v},set autoFire(v){autoFire=v},setJoy(a){jAng=a},get H(){return H},rs,SKY,STARS}`);
 const run=()=>{const r=run0();r.autoFire=false;return r};
 
 const g=run();
@@ -36,6 +36,7 @@ ok(g.LV.length===30&&g.SPR.length===30&&new Set(g.LV).size===30,'30 named stages
 ok(new Set(g.STAGES.map(s=>s.tier)).size===30&&new Set(g.SPRD).size===30,'all 30 uploaded aircraft sprites are mapped once');
 ok(g.STAGES.every((s,i)=>s.n&&s.zone===g.STAGES[Math.floor(i/5)*5].zone),'30 named aircraft span six five-level zones');
 for(const [L,r,k] of [[1,.99,'standard'],[8,.9,'interceptor'],[12,.7,'weaver'],[17,.9,'armored'],[30,.99,'armored']])ok(g.missileKind(L,r)===k,'stage '+L+' selects '+k+' missile variant');
+ok(g.normalMissileSkin(1)===0&&g.normalMissileSkin(3)===0&&g.normalMissileSkin(4)===1&&g.normalMissileSkin(29)===26&&g.normalMissileSkin(30)===26,'missile skins hold the first design through Level 3, then evolve through Level 29');
 g.start();ok(g.st.length===1,'new run has exactly one star');g.addStar();ok(g.st.length===1,'duplicate star spawn is prevented');
 for(let L=2;L<=30;L++){for(let n=0;n<5;n++){g.B=null;star();ok(g.st.length<=1,'only one collectible star during progression '+L+'/'+n)}ok(g.lv===L&&g.evoStars===(L-1)*5,'five stars unlock Level '+L);if(g.B){const final=g.B.k==='final';g.endBoss();if(final){ok(g.S==='victory'&&g.st.length===0,'final boss opens the victory screen');g.S='play';g.st=[]}else ok(g.st.length===1,'boss completion restores exactly one star')}}
 for(let n=0;n<10;n++){g.B=null;star()}ok(g.lv===30&&g.evoStars===145,'evolution caps at Level 30 / 145 stars');
@@ -85,7 +86,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  to(120);g.B.cd=0;g.upd(.016);const am=g.ms.find(m=>m.adv);ok(!!am&&am.v>g.sp*.85,'advanced missile launched (speed '+(am&&Math.round(am.v))+' vs plane '+Math.round(g.sp)+')');
  const t0=g.B.t;am.hp=1;g.pl.x=1100;g.pl.y=700;g.inv=9;g.bl=[{x:am.x,y:am.y,a:0,v:0,d:3,life:1,w:4,c:'#fff'}];g.upd(.016);ok(g.B.t>t0+5&&!g.ms.includes(am),'shooting the advanced missile destroys it and speeds boss defeat');
  // Final challenge
- to(145);ok(g.B.k==='final','final challenge starts at Level 30');g.pl.x=1100;g.pl.y=700;const bb=g.bonus;let waves=0,mx=0;for(let i=0;i<4400&&g.B;i++){g.pu=[];g.st=[];g.inv=9;g.upd(.016);mx=Math.max(mx,g.ms.length)}
+ to(145);ok(g.B.k==='final','final challenge starts at Level 30');const finalSkins=new Set();for(let i=0;i<3;i++){g.ms=[];g.B.cd=0;g.bossTick(.001);g.ms.forEach(m=>finalSkins.add(m.skin))}ok([27,28,29].every(s=>finalSkins.has(s)),'final enemy waves use the three reserved late-game missile designs ('+[...finalSkins].sort().join(',')+')');g.ms=[];g.pl.x=1100;g.pl.y=700;const bb=g.bonus;let waves=0,mx=0;for(let i=0;i<4400&&g.B;i++){g.pu=[];g.st=[];g.inv=9;g.upd(.016);mx=Math.max(mx,g.ms.length)}
  ok(g.B===null&&g.bonus>=bb+200,'survive 60 s -> VICTORY bonus +200 (bonus '+(g.bonus-bb)+')');
  ok(mx>=8,'final waves spawn many missiles (peak '+mx+')');
  // score includes bonus
@@ -150,17 +151,17 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
 // ======== Phase 7: auto-fire weapons, sky by level and joystick ========
 {const g=run();g.autoFire=true;g.setWH(1200,800);g.save.mode='n';
  const prep=L=>{g.start();g.lv=L;g.ms=[];g.pu=[];g.st=[];g.msT=99;g.inv=99;g.pl.x=300;g.pl.y=400;g.pl.a=0;g.setWH(1200,800)};
- // no guns on the opening two stages; every later aircraft has an auto-fire set
- for(const L of [1,2]){prep(L);let n=0;for(let i=0;i<60;i++){g.upd(.03);n=Math.max(n,g.bl.length)}ok(n===0&&!g.WPN[L],'Stage '+L+': no guns, fires nothing')}
- for(let L=3;L<=30;L++){prep(L);let n=0;for(let i=0;i<40;i++){g.pl.x=300;g.pl.y=400;g.upd(.03);n=Math.max(n,g.bl.length)}ok(!!g.WPN[L]&&n>0,'Stage '+L+' ('+g.WPN[L].n+') fires automatically (peak '+n+' shots on screen)')}
+ // no guns on the opening three stages; every later aircraft has an auto-fire set
+ for(const L of [1,2,3]){prep(L);let n=0;for(let i=0;i<60;i++){g.upd(.03);n=Math.max(n,g.bl.length)}ok(n===0&&!g.WPN[L],'Stage '+L+': no guns, fires nothing')}
+ for(let L=4;L<=30;L++){prep(L);let n=0;for(let i=0;i<40;i++){g.pl.x=300;g.pl.y=400;g.upd(.03);n=Math.max(n,g.bl.length)}ok(!!g.WPN[L]&&n>0,'Stage '+L+' ('+g.WPN[L].n+') fires automatically (peak '+n+' shots on screen)')}
  const dps=L=>g.WPN[L].e.reduce((a,e)=>a+e.r*e.d*e.o.length,0);ok(dps(30)>dps(20)&&dps(20)>dps(12),'firepower grows from stage 12 to 30 ('+[12,20,30].map(dps).map(v=>v.toFixed(1))+' dmg/s)');
- ok(g.WPN[8].e.some(e=>e.h)&&g.WPN[30].e.some(e=>e.h)&&!g.WPN[4].e.some(e=>e.h),'later aircraft carry homing weapons; early aircraft use guns');
+ ok(g.WPN[9].e.some(e=>e.h)&&g.WPN[30].e.some(e=>e.h)&&!g.WPN[4].e.some(e=>e.h),'later aircraft carry homing weapons; early aircraft use guns');
  // a bullet destroys a missile ahead
- prep(3);g.ms=[{x:700,y:400,a:0,life:8,v:0,r:1,h:0}];const s0=g.save.stat.shot||0;for(let i=0;i<60;i++){g.pl.x=300;g.pl.y=400;g.pl.a=0;g.upd(.02)}
- ok(g.ms.length===0&&g.save.stat.shot===s0+1,'Aircraft tier 3 gun shoots down a missile ahead (shot stat '+g.save.stat.shot+')');
+ prep(4);g.ms=[{x:700,y:400,a:0,life:8,v:0,r:1,h:0}];const s0=g.save.stat.shot||0;for(let i=0;i<60;i++){g.pl.x=300;g.pl.y=400;g.pl.a=0;g.upd(.02)}
+ ok(g.ms.length===0&&g.save.stat.shot===s0+1,'Aircraft tier 4 gun shoots down a missile ahead (shot stat '+g.save.stat.shot+')');
  // homing missile finds a target off to the side
- prep(8);g.ms=[{x:600,y:700,a:0,life:8,v:0,r:1,h:0}];for(let i=0;i<120&&g.ms.length;i++){g.pl.x=300;g.pl.y=400;g.pl.a=0;g.upd(.02)}
- ok(g.ms.length===0,'Aircraft tier 8 homing missile curves to a target that is not straight ahead');
+ prep(9);g.ms=[{x:600,y:700,a:0,life:8,v:0,r:1,h:0}];for(let i=0;i<120&&g.ms.length;i++){g.pl.x=300;g.pl.y=400;g.pl.a=0;g.upd(.02)}
+ ok(g.ms.length===0,'Aircraft tier 9 homing missile curves to a target that is not straight ahead');
  // boss missile needs many hits; killing it ends the Heavy boss
  prep(4);g.startBoss(9);const hm=g.ms.find(m=>m.big);ok(hm.hp===40,'heavy boss missile has 40 hit points');
  hm.x=600;hm.y=400;hm.v=0;hm.h=0;hm.st=null;hm.hp=2;g.bl=[{x:600,y:400,a:0,v:0,d:1,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.ms.includes(hm)&&hm.hp===1,'one hit only dents the heavy missile');
@@ -168,7 +169,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  // Commander takes damage from bullets
  prep(7);g.startBoss(17);const bt=g.B.t;g.B.x=600;g.B.y=64;g.bl=[{x:600,y:64,a:0,v:0,d:2,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.B.t>bt+.2,'bullets hitting the Commander speed up its defeat');
  // levelling up announces the weapon
- g.start();g.save.mode='n';for(let i=0;i<10;i++){g.ms=[];g.pu=[];g.st=[{x:g.pl.x,y:g.pl.y,r:0}];g.upd(.001)}ok(g.lv===3&&/Nose gun/.test(g.banTx),'Stage 3 banner names the new weapon ("'+g.banTx+'")');
+ g.start();g.save.mode='n';for(let i=0;i<15;i++){g.ms=[];g.pu=[];g.st=[{x:g.pl.x,y:g.pl.y,r:0}];g.upd(.001)}ok(g.lv===4&&/Nose gun/.test(g.banTx),'Stage 4 banner names the new weapon ("'+g.banTx+'")');
  // sky: morning -> night
  ok(g.skyAt(1)[0]!==g.skyAt(15)[0]&&g.skyAt(15)[0]!==g.skyAt(30)[0],'sky colours change level by level');
  const lum=c=>{const m=c.match(/\d+/g).map(Number);return .3*m[0]+.59*m[1]+.11*m[2]};
@@ -217,7 +218,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  for(let n=0;n<1000;n++){a.pl.x=10;a.pl.y=10;a.pu=[];for(const m of a.ms){m.x=500;m.y=500;m.v=0;m.life=8}a.upd(.02);maximum=Math.max(maximum,a.ms.length)}
  ok(maximum===a.cap(L),'live missile cap at '+w+'px / stage '+L);
  }
- a.autoFire=true;for(let L=1;L<=30;L++){a.start();a.lv=L;a.inv=999;a.st=[];a.msT=99;let peak=0;for(let n=0;n<30;n++){a.pl.x=180;a.pl.y=300;a.upd(.03);peak=Math.max(peak,a.bl.length)}ok(L<3?peak===0:peak>0,'automatic weapon behavior at stage '+L)}
+ a.autoFire=true;for(let L=1;L<=30;L++){a.start();a.lv=L;a.inv=999;a.st=[];a.msT=99;let peak=0;for(let n=0;n<30;n++){a.pl.x=180;a.pl.y=300;a.upd(.03);peak=Math.max(peak,a.bl.length)}ok(L<4?peak===0:peak>0,'automatic weapon behavior at stage '+L)}
 }
 
 {store.dw=JSON.stringify({v:3,pts:12,best:{play:12},stat:{bestLv:23},top:[]});const g=run();ok(g.save.stat.bestLv===23&&g.save.v===4,'v3 stage progress remains at its unlocked 30-plane stage');}

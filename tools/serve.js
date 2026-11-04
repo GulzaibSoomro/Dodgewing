@@ -5,7 +5,7 @@ const http=require('http');
 const path=require('path');
 const root=path.resolve(__dirname,'..');
 const port=Number(process.env.PORT)||5500;
-const types={'.css':'text/css; charset=utf-8','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.ttf':'font/ttf','.pdf':'application/pdf'};
+const types={'.css':'text/css; charset=utf-8','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.ttf':'font/ttf','.pdf':'application/pdf'};
 http.createServer((req,res)=>{
   const name=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
   const file=path.resolve(root,'.'+(name==='/'?'/index.html':name));

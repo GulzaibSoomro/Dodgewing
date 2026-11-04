@@ -9,7 +9,7 @@ The debug APK was compiled and signature-verified, but no physical Android devic
 - [ ] Drag/release the joystick; test pointer cancellation and switching apps; touching outside it must not steer.
 - [ ] Collect stars: one at a time, five per evolution; check transitions through all 30 stages and two-level regression.
 - [ ] Fight each boss at 9/17/25/30; stars must pause and return one at a time after defeat.
-- [ ] Check automatic weapons from stage 3 onward, later homing missiles, shield, magnet and slow power-ups.
+- [ ] Check automatic weapons from stage 4 onward, later homing missiles, shield, magnet and slow power-ups.
 - [ ] Check audio enable/mute, background/resume, game over, retry and browser restart.
 - [ ] Play at least ten minutes on a low-end phone; record visible stutter, heat, memory growth and battery use.
 - [ ] Profile real frame time and memory at levels 1/15/30 and during each boss with Chrome remote debugging.

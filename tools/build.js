@@ -15,6 +15,7 @@ html=html.replace(/src="(assets\/splash\/[^\"]+\.svg)"/g,(_,file)=>'src="data:im
 const sources=[...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map(m=>m[1]);
 let js=sources.map(read).join('\n');
 js=js.replace(/assets\/planes\/[\w-]+\.png/g,file=>'data:image/png;base64,'+data(file));
+js=js.replace(/assets\/missiles\/[\w-]+\.svg/g,file=>'data:image/svg+xml;base64,'+data(file));
 html=html.replace(/(<script src="[^"]+"><\/script>\s*)+/, '<script>\n'+js+'\n</script>\n');
 const out=path.join(root,'dist','dodgewing.html');
 fs.mkdirSync(path.dirname(out),{recursive:true});
