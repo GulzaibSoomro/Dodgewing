@@ -1,19 +1,19 @@
-# Testing — 0.9.6
+# Testing — 0.9.7
 
 ## Results executed for this completion pass
 
 | Check | Result |
 |---|---|
 | Deterministic Node logic suite | Passed: 418 checks, 0 failures |
-| Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 97 checks, 0 failures |
-| Self-contained `dist/dodgewing.html` browser smoke test | Passed: 37 checks, 0 failures |
+| Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 100 checks, 0 failures |
+| Self-contained `dist/dodgewing.html` browser smoke test | Passed: 40 checks, 0 failures |
 | Android debug APK | Passed: compiled for Android 15; package metadata, embedded offline game and v1/v2 signatures verified |
 | JavaScript syntax checks | Passed |
 | Physical Android device | Not tested |
 
 `npm test` rebuilt the standalone game with `node tools/build.js` and ran the logic suite. It covers save migration and malformed saves, all 30 aircraft/stages, progressive stars, campaign difficulty, weapons, missile hit points and variants, bosses, achievements, final victory, LocalStorage behavior and representative mocked rendering.
 
-The browser suites ran against `http://127.0.0.1:5500/` using the local server. They exercised the no-text, centered black-and-orange splash-to-loading sequence, app-icon metadata, full home screen, settings, medals, touch controls, pause/resume, save compatibility, all 30 campaign stages, boss intros, final victory, level regression, game-over/retry and five viewport sizes. The standalone build was also checked in Chromium: it contains all aircraft assets, splash art, app-icon data, the three new font families, and no external source-script or aircraft references.
+The browser suites ran against `http://127.0.0.1:5500/` using the local server. They exercised the no-text, centered black-and-orange splash-to-loading sequence, app-icon metadata, full-screen mobile layout, non-overlapping unlock cards, full home screen, settings, medals, touch controls, pause/resume, save compatibility, all 30 campaign stages, boss intros, final victory, level regression, game-over/retry and five viewport sizes. The standalone build was also checked in Chromium: it contains all aircraft assets, splash art, app-icon data, the three new font families, and no external source-script or aircraft references.
 
 ## Running the checks
 

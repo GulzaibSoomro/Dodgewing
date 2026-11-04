@@ -146,7 +146,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  ok(g.save.stat.runs===0&&Array.isArray(g.save.cu)&&g.save.ct==='auto'&&g.save.m.list.length===3,'old save: new fields get defaults');
  g.start();ok(g.S==='play','old save: game starts');}
 
-// ======== Phase 7: auto-fire weapons, sky by level, joystick, ad strip ========
+// ======== Phase 7: auto-fire weapons, sky by level and joystick ========
 {const g=run();g.autoFire=true;g.setWH(1200,800);g.save.mode='n';
  const prep=L=>{g.start();g.lv=L;g.ms=[];g.pu=[];g.st=[];g.msT=99;g.inv=99;g.pl.x=300;g.pl.y=400;g.pl.a=0;g.setWH(1200,800)};
  // no guns on the opening two stages; every later aircraft has an auto-fire set
@@ -181,8 +181,8 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  g.start();g.pl.a=-Math.PI/2;g.setJoy(0);g.upd(.1);ok(g.pl.a>-Math.PI/2+.3&&g.pl.a<0,'joystick pushed right turns the plane right (a='+g.pl.a.toFixed(2)+')');
  g.start();g.pl.a=-Math.PI/2;g.setJoy(null);g.upd(.1);ok(Math.abs(g.pl.a+Math.PI/2)<1e-9,'joystick released: plane keeps its heading');
  g.start();g.pl.a=0;g.setJoy(Math.PI);for(let i=0;i<40;i++)g.upd(.03);ok(Math.abs(Math.abs(g.pl.a)-Math.PI)<.2||Math.abs(g.pl.a-Math.PI)<.2,'joystick pushed left turns all the way around');
- // ad strip: canvas leaves room at the bottom
- el('ad').offsetHeight=60;el('st').offsetHeight=0;g.rs();ok(g.H===740,'game area is 60 px shorter than the screen, bottom strip stays blank (H='+g.H+')');
+ // no empty ad strip: the canvas uses the complete viewport
+ el('ad').offsetHeight=0;el('st').offsetHeight=0;g.rs();ok(g.H===800,'game area uses the full screen with no blank ad strip (H='+g.H+')');
  el('ad').offsetHeight=0;g.rs();
  // missiles get tougher with level (hit points)
  for(const [L,hp] of [[1,1],[6,1],[7,1],[16,1],[17,2],[24,2],[25,3],[30,3]]){prep(L);g.pl.x=600;g.pl.y=400;g.msT=0;g.upd(.001);const m=g.ms.find(q=>!q.bm);ok(m&&m.hp===hp&&m.hp0===hp,'Aircraft tier '+L+': new missiles have '+hp+' hit point(s)')}

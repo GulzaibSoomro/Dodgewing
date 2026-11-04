@@ -1,4 +1,4 @@
-# Dodgewing 0.9.6 completion report
+# Dodgewing 0.9.7 completion report
 
 ## Delivered
 
@@ -15,7 +15,7 @@
 
 ## Verification
 
-`npm test` passed 418 logic checks. The Chromium source suite passed 97 checks over five viewport sizes, and the self-contained release file passed 37 browser smoke checks. The release file has embedded aircraft, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 418 logic checks. The Chromium source suite passed 100 checks over five viewport sizes, and the self-contained release file passed 40 browser smoke checks. The release file has embedded aircraft, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
 
 The Android debug APK compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
 

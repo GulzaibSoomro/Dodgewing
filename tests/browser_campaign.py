@@ -28,7 +28,7 @@ async def main():
    # The real splash/loading sequence is exercised in browser_smoke.py.
    await page.evaluate("$('splash').classList.add('hide');$('loading').classList.add('hide')")
    label=f'{width}x{height}'
-   check(await page.evaluate("(()=>{const r=$('mb').getBoundingClientRect();return (r.top>=$('mh').getBoundingClientRect().bottom||r.left>=$('mh').getBoundingClientRect().right)&&r.bottom<=$('ad').getBoundingClientRect().top&&document.documentElement.scrollWidth<=innerWidth})()"),label+' menu fits above ad strip')
+   check(await page.evaluate("(()=>{const r=$('mb').getBoundingClientRect();return (r.top>=$('mh').getBoundingClientRect().bottom||r.left>=$('mh').getBoundingClientRect().right)&&r.bottom<=innerHeight&&document.documentElement.scrollWidth<=innerWidth})()"),label+' menu fits in the full mobile viewport')
    await page.evaluate('layoutShow();draw()')
    if width==390:await page.screenshot(path='/tmp/dw-menu.png')
    await page.evaluate('hangar()')
@@ -55,7 +55,7 @@ async def main():
    check(await page.evaluate('lv===28&&st.length===1'),label+' damage regresses two levels without duplicating star')
    await page.evaluate('die();upd(1);draw()')
    check(await page.is_visible('#over'),label+' game-over summary opens')
-   check(await page.evaluate("(()=>{const r=$('over').querySelector('.row').getBoundingClientRect();return r.bottom<=$('ad').getBoundingClientRect().top&&r.top>=0})()"),label+' Retry/Menu controls fit')
+   check(await page.evaluate("(()=>{const r=$('over').querySelector('.row').getBoundingClientRect();return r.bottom<=innerHeight&&r.top>=0})()"),label+' Retry/Menu controls fit')
    await page.evaluate('start();draw()');check(await page.evaluate('lv===1&&stars===0&&st.length===1'),label+' restart resets campaign')
    check(not errors,label+' no JavaScript exceptions '+str(errors))
    await page.close()

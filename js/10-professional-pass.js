@@ -30,7 +30,7 @@ start=function(){proStart();proTutorial=save.tutorial? -1:0;proTutorialT=0;proSh
 
 function showUnlock(){const card=$('unlock'),weapon=WPN[lv]?WPN[lv].n:'Evasive flying';card.innerHTML='<img src="'+SPRD[lv-1]+'" alt=""><span><b>NEW PLANE · LEVEL '+lv+'</b><small>'+LV[lv-1]+' · '+weapon+' · '+proWorld(lv).n+'</small></span>';card.classList.remove('hide');setTimeout(()=>card.classList.add('hide'),2600)}
 const proEvo=evo;
-evo=function(){const before=lv;proEvo();if(lv>before)showUnlock()};
+evo=function(){const before=lv;proEvo();if(lv>before){banT=0;showUnlock()}};
 
 function showBossIntro(){if(!B)return;proBossIntro=2.6;const card=$('boss-intro');card.innerHTML='WARNING: '+BOSS[B.L].n+'<small>Survive the encounter or destroy its threat</small>';card.classList.remove('hide')}
 const proStartBoss=startBoss;
@@ -60,7 +60,8 @@ const proDrawSky=drawSky;
 drawSky=function(){proDrawSky();drawWorldAtmosphere()};
 
 function updateTutorial(d){if(proTutorial<0||S!=='play')return;if(proTutorial===0&&(jAng!==null||keys.ArrowLeft||keys.ArrowRight||keys.a||keys.d))proTutorial=1;if(proTutorial===1&&stars>0)proTutorial=2;if(proTutorial===2&&(ms.length>0||t>8)){proTutorial=3;proTutorialT=4.5}if(proTutorial===3){proTutorialT-=d;if(proTutorialT<=0){save.tutorial=true;store();proTutorial=-1}}}
-function drawTutorial(){if(proTutorial<0||S!=='play')return;const copy=['MOVE · Use arrows, A / D, or the steering circle','COLLECT · Fly into the glowing star','DODGE · Keep away from red missiles','READY · Evolve every five stars!'][proTutorial];const w=Math.min(W-28,420),h=44,px=(W-w)/2,py=H>500?H-112:Math.max(142,H-90);glass(px,py,w,h,14);x.font='17px Pixelta,monospace';x.textAlign='center';x.fillStyle=proTutorial===2?'#ffb0a6':'#fff3e0';x.fillText(copy,W/2,py+28);x.textAlign='left'}
+function tutorialLayout(){const lines=[['MOVE · Use arrows or A / D','Or drag the steering circle'],['COLLECT · Fly into','the glowing star'],['DODGE · Keep away','from red missiles'],['READY · Evolve every five stars!']][proTutorial]||[];const w=Math.min(W-28,420),h=lines.length>1?60:44,px=(W-w)/2,py=Math.max(132,H-h-148);return{lines,w,h,px,py,font:Math.max(13,Math.min(17,(w-28)/(Math.max(1,...lines.map(line=>line.length))*.57)))}}
+function drawTutorial(){if(proTutorial<0||S!=='play')return;const box=tutorialLayout();glass(box.px,box.py,box.w,box.h,14);x.font=box.font+'px Pixelta,monospace';x.textAlign='center';x.fillStyle=proTutorial===2?'#ffb0a6':'#fff3e0';box.lines.forEach((line,i)=>x.fillText(line,W/2,box.py+(box.h-(box.lines.length-1)*18)/2+6+i*18));x.textAlign='left'}
 const proUpd=upd;
 upd=function(d){proUpd(d);proShake=Math.max(0,proShake-d*2.8);proBossIntro=Math.max(0,proBossIntro-d);if(proBossIntro<=0)$('boss-intro').classList.add('hide');updateTutorial(d)};
 const proDraw=draw;

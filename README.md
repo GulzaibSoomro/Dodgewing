@@ -1,4 +1,4 @@
-# Dodgewing 0.9.6
+# Dodgewing 0.9.7
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -75,4 +75,4 @@ See `TESTING.md` and `TEST-REPORT.md` for executed results and limitations, [and
 
 ## Assets and release work
 
-The game now uses Oxanium, Rajdhani and Pixelify Sans, each included with its SIL Open Font License in `assets/fonts`. The original Pixelta files are retained but are no longer loaded by the game or bundled release. The new Dodgewing icon is supplied as editable SVG and PNGs for browser, iPhone and Android/PWA use. Aircraft licensing remains unconfirmed. No commercial licensing, ad SDK, app-store packaging or release work was done. The bottom strip remains an empty ad placeholder.
+The game now uses Oxanium, Rajdhani and Pixelify Sans, each included with its SIL Open Font License in `assets/fonts`. The original Pixelta files are retained but are no longer loaded by the game or bundled release. The new Dodgewing icon is supplied as editable SVG and PNGs for browser, iPhone and Android/PWA use. Aircraft licensing remains unconfirmed. No commercial licensing or ad SDK is included; the game uses the full screen.

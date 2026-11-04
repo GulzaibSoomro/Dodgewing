@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.7 — 2026-11-04
+
+- Remove the unused black ad bar so gameplay and menus use the complete phone screen.
+- Smooth aircraft rendering for mobile WebView, prevent the new-plane card from colliding with the level banner, and wrap the touch tutorial above the steering circle.
+
 ## 0.9.6 — 2026-11-04
 
 - Replace the text-based launch splash with a black no-text layout featuring a centered, rounded orange Sunset Run aircraft panel.

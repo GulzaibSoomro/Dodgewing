@@ -11,7 +11,7 @@ Compared with the original uploaded project snapshot:
 - Updated `js/07-game.js` for the 30-stage hangar path, zone banners, and local score records.
 - Updated `js/08b-weapons-sky-controls.js` for late-stage weapon scaling and missile variants.
 - Updated `js/05-missions-achievements.js` for safe unknown mission handling and the local best-runs list.
-- Updated `tests/run-tests.js`; 417 logic checks pass in the current run.
+- Updated `tests/run-tests.js`; 418 logic checks pass in the current run.
 - Retained the existing source modules for game state, bosses, rendering, controls, and audio.
 
 ## Completion pass — 0.9.1
@@ -49,5 +49,10 @@ Compared with the original uploaded project snapshot:
 - Added the active no-text Sunset Run splash SVG in `assets/splash/`.
 - Updated startup markup, styles, loading setup, browser tests and the self-contained build to use the centered orange panel on black.
 - Added the Android native wrapper, Gradle wrapper, Android build preparation script and manual APK build notes.
+
+## Mobile layout fix — 0.9.7
+
+- Removed the empty ad strip, expanded the canvas to the full viewport and improved aircraft image smoothing.
+- Prevented the unlock card and level banner from displaying together, wrapped the touch tutorial above the steering circle, and updated Android package versioning and mobile browser coverage.
 
 The original snapshot backup is `backup/dodgewing-original.zip`; a separate pre-integration rollback is `backup/dodgewing-v0.8-before-30-planes.zip`.
