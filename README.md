@@ -1,4 +1,4 @@
-# Dodgewing 0.9.14
+# Dodgewing 0.10.0
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -6,7 +6,7 @@ Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework 
 
 Open `index.html`, or run `npm start` and visit `http://localhost:5500`. `dist/dodgewing.html` is a self-contained offline build with embedded sprites and font.
 
-At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** to control sound and visual effects. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
+At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes and upgrades, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** for sound, music, graphics, vibration and steering side. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
 
 ## Campaign
 
@@ -17,15 +17,17 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 - A hit loses two levels / ten evolution stars, with 1.5 seconds of protection. A hit at Level 1 ends the run. Collected run stars and earned points are not removed. Weapons follow the current stage, including after damage.
 - Stages 1–3 have no guns. Auto-fire begins at stage 4 with the nose gun and evolves through twin/wing guns, jet cannons, homing missiles and plasma. Stages 14–30 extend the plasma-storm set with a bounded rate/damage increase.
 - The game contains a transparent 30-cell missile sheet based on the supplied rocket designs. Levels 1–3 use its first missile; Levels 4–29 advance through the normal designs. The three final special designs are reserved for Final Challenge enemy waves. Normal missiles render at 48 px and use thin artwork, so they stay smaller than the player aircraft.
-- The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style, with slow horizontal and vertical cloud drift to convey forward flight.
-- Boss encounters: Heavy Missile at 9 uses a telegraphed charge; Missile Commander at 17 uses target lasers, fan volleys and rings; Advanced Seeker at 25 launches fast tracking attacks; Cosmic Overlord at 30 sends wall, ring and homing waves. Each has its own lightweight, transparent sprite, warning card, sound and large health bar.
+- The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style, with slow horizontal and vertical cloud drift to convey forward flight. The worlds introduce turbulence, mines, laser gates, drones and asteroids in order.
+- Boss encounters: Heavy Missile at 9 uses a telegraphed charge; Missile Commander at 17 uses target lasers, fan volleys and rings; Advanced Seeker at 25 launches fast tracking attacks; Cosmic Overlord at 30 sends wall, ring and homing waves. Each has its own lightweight, transparent sprite, warning card, named attack state, sound and large health bar. Bosses award coins.
 - Each evolution displays a plane-unlocked card with the new aircraft and weapon. Level 1 also gives short “move,” “collect stars” and “avoid missiles” prompts. Finishing the Level 30 boss opens a final victory screen with the run score, best plane and a Play again button.
 - S = shield; M = magnet; L = slow missiles. Active power-up names and remaining seconds appear in a transparent bar beneath the top HUD. Near misses give combo bonuses.
+- Stars, destroyed missiles and bosses award ◈ coins. The Hangar Upgrade Bay has four permanent four-rank upgrades: engine speed, shield duration, magnet range and weapon damage. Reaching Levels 5, 10, 15, 20 and 25 unlocks a paid checkpoint rescue from the game-over screen.
+- Tap the blue ability button beside Pause, or press Space, to activate the current five-level aircraft family ability: Guard Pulse, Star Pull, Time Brake, Overdrive, Afterburner or Nova Wave. Settings include effects, adaptive music, graphics mode, vibration and left-handed steering.
 - Points = `(whole seconds + stars × 5 + bonus) × 2`. Paint prices remain 0 / 400 / 1200 / 3000. Three daily missions, ten achievements and unlocked trail rewards remain.
 
 ## Saves and compatibility
 
-Browser LocalStorage key: `dw`. Points, paint ownership/selection, achievements, trails, mission history and legacy Easy/Normal/Fast best scores are preserved. New campaign scores use `best.play`; old scores are not mixed into a different campaign leaderboard. Legacy `mode` is retained as history and has no gameplay effect.
+Browser LocalStorage key: `dw`. Points, coins, upgrades, checkpoint, paint ownership/selection, achievements, trails, mission history and legacy Easy/Normal/Fast best scores are preserved. New campaign scores use `best.play`; old scores are not mixed into a different campaign leaderboard. Legacy `mode` is retained as history and has no gameplay effect.
 
 Save schema 4 maps old aircraft unlocks to the matching stage in the expanded evolution path (old Level 12 → Level 30). `legacyBestLv` retains the old milestone. Migration runs once. Unknown or retired mission IDs are ignored when rendering rewards and processing events, without deleting their saved history. A legacy day can therefore show fewer than three valid missions until the next daily rollover.
 
@@ -43,6 +45,7 @@ Progress requires the same browser and origin. Opening the file under a new orig
 | `js/05-missions-achievements.js` | Missions, achievements, rewards and results |
 | `js/06-bosses.js` | Bosses and near-miss effects |
 | `js/07-game.js` | Navigation, collection, evolution, collision, update and draw |
+| `js/07b-flight-systems.js` | Coins, upgrades, checkpoint rescue, plane abilities and sky hazards |
 | `js/08-render-helpers.js` | HUD and canvas rendering |
 | `js/08b-weapons-sky-controls.js` | Weapons, morning-to-night sky and joystick |
 | `js/09-input-and-loop.js` | Input, pause and animation timing |

@@ -4,7 +4,7 @@ let last=performance.now();
 function loop(n){if(!Number.isFinite(n))n=performance.now();if(SAFE_FRAME_MS&&n-last<SAFE_FRAME_MS){requestAnimationFrame(loop);return}const d=Math.max(0,Math.min(.05,(n-last)/1000));last=n;upd(d);draw();requestAnimationFrame(loop)}
 joyInit();
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseG()});
-addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='p'||e.key==='Escape'){S==='play'?pauseG():resume()}if(e.key===' '){e.preventDefault&&e.preventDefault()}});addEventListener('keyup',e=>{keys[e.key]=false});
+addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='p'||e.key==='Escape'){S==='play'?pauseG():resume()}if(e.key===' '){e.preventDefault&&e.preventDefault();useAbility()}});addEventListener('keyup',e=>{keys[e.key]=false});
 if(document.fonts&&document.fonts.load)document.fonts.load("16px Pixelta").then(()=>{if(S==='menu')layoutShow()},()=>{});
 addEventListener('resize',()=>{if(S==='menu')layoutShow()});
 menu();requestAnimationFrame(loop);

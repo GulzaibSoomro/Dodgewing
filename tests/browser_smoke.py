@@ -37,11 +37,17 @@ async def main():
         check(await pg.locator('#me,#mn,#mf').count()==0,'difficulty selector removed')
         for sel, name in [('Hangar', '#hangar'), ('Rewards', '#rw'), ('How to play', '#help'), ('High scores', '#scores'), ('Settings', '#settings')]:
             await pg.click('#menu >> text=' + sel); check(await pg.is_visible(name), sel + ' opens')
+            if sel == 'Hangar': check(await pg.locator('#hup .upgrade-card').count() == 4, 'Hangar shows four permanent coin upgrades')
             if sel == 'Rewards': check(await pg.locator('#rwc .medal').count() == 10, 'Rewards shows achievement medals')
-            if sel == 'Settings': check(await pg.locator('#setc').text_content() is not None and 'Screen effects' in await pg.locator('#setc').text_content(), 'Settings shows screen-effects control')
+            if sel == 'Settings':
+                setting_text = await pg.locator('#setc').text_content()
+                check(setting_text is not None and all(text in setting_text for text in ('Screen effects', 'Flight music', 'Steering side')), 'Settings shows graphics, music and steering controls')
             await pg.click(name + ' >> text=Back')
+        check(await pg.is_visible('#menu'), 'utility pages return to the home screen')
         await pg.click('#menu >> text=Play'); await pg.wait_for_timeout(200)
         check(await pg.evaluate('S') == 'play' and await pg.is_visible('#joy'), 'Play starts, steering circle visible')
+        check(await pg.is_visible('#ab') and await pg.evaluate("abilityFor(lv).n==='GUARD PULSE'"), 'plane ability button is ready at the start of a flight')
+        await pg.click('#ab'); check(await pg.evaluate('shield>0&&abilityCd>0'), 'Guard Pulse activates from the mobile ability button')
         check(await pg.evaluate('sp===150&&planeSpeed(30)===300'), 'plane speed starts at 150 and scales to 300 by Level 30')
         bb = await pg.evaluate("(()=>{const r=$('joy').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2,r.width,innerHeight-r.bottom]})()")
         check(abs(bb[2] - 120) < 1 and abs(bb[0] - 195) < 2, 'steering circle is 120 px wide (about 0.75 inch) and centred at the bottom')

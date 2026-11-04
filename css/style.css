@@ -58,6 +58,7 @@ button.ic{width:40px;height:40px;min-width:0;padding:0;display:flex;align-items:
 .pc img{height:84px;width:auto;max-width:100px;object-fit:contain}
 .pc.sel{border-color:var(--hot);box-shadow:0 0 0 2px rgba(255,179,71,.55),0 0 24px rgba(255,170,60,.3)}
 .pc button{min-width:0;padding:8px 16px;font-size:15px}
+.upgrades{display:grid;grid-template-columns:1fr;gap:8px}.upgrade-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid rgba(255,210,110,.3);border-radius:14px;background:linear-gradient(120deg,rgba(86,59,24,.36),var(--pane))}.upgrade-card span{display:flex;flex-direction:column;gap:2px}.upgrade-card b{color:#ffe19a}.upgrade-card small{font-size:13px;opacity:.72}.upgrade-card button{min-width:84px;padding:8px 10px;font-family:var(--font-score);font-size:14px}
 .rib{position:absolute;top:-8px;left:10px;padding:3px 10px;font-size:12px;border-radius:8px;color:#3a2100;background:linear-gradient(#ffd98a,#ffa530);box-shadow:0 2px 0 #9c5600}
 .ev{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .ev .e{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border-radius:14px;background:var(--glass),var(--pane);border:1px solid var(--line);font-size:14px;line-height:1.25;overflow-wrap:anywhere;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 4px 10px rgba(0,0,0,.2)}
@@ -75,10 +76,12 @@ button.ic{width:40px;height:40px;min-width:0;padding:0;display:flex;align-items:
 .ring{display:inline-block;width:22px;height:22px;line-height:18px;border:3px solid;border-radius:50%;text-align:center;font-size:.8rem;font-style:normal;box-sizing:border-box;margin-right:10px;vertical-align:middle}
 #pb{position:fixed;top:calc(27px + env(safe-area-inset-top,0px));right:16px;z-index:5;width:40px;height:40px;min-width:0;padding:0;display:flex;gap:5px;align-items:center;justify-content:center}
 #pb i{width:6px;height:16px;background:var(--ink);border-radius:2px}
+.ability-button{position:fixed;top:calc(27px + env(safe-area-inset-top,0px));right:64px;z-index:5;width:40px;height:40px;min-width:0;padding:0;border-color:rgba(159,239,255,.72);background:linear-gradient(145deg,rgba(98,226,255,.35),rgba(27,44,106,.86));font-family:var(--font-score);font-size:16px;color:#e7fbff;box-shadow:0 0 12px rgba(97,219,255,.28),inset 0 1px rgba(255,255,255,.28)}
 #joy{position:fixed;left:50%;bottom:calc(var(--adt) + 14px);width:var(--joy);height:var(--joy);margin-left:calc(var(--joy) / -2);z-index:6;border-radius:50%;touch-action:none;background:radial-gradient(circle,rgba(16,14,40,.28),rgba(16,14,40,.52));border:2px solid rgba(255,243,224,.42);box-shadow:inset 0 2px 0 rgba(255,255,255,.2),0 8px 18px rgba(0,0,0,.4)}
 #joy svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 #jk{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffd98a,#ff9a3c 65%,#d9660a);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),0 4px 8px rgba(0,0,0,.5);pointer-events:none}
 #joy.act{border-color:var(--hot)}
+body.lefty #joy{left:calc(18px + env(safe-area-inset-left,0px));margin-left:0}
 
 /* Upgrade marks, retaining all original aircraft sprites. */
 .ev .e{position:relative}.ev .e[data-rank="2"]::after,.ev .e[data-rank="3"]::after{content:"";position:absolute;top:30px;width:11px;height:3px;background:#ffe6a0;border:1px solid #754015;pointer-events:none}.ev .e[data-rank="3"]::after{box-shadow:0 5px #ffe6a0}.ev .lk::after{opacity:.2}

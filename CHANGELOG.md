@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0 — 2026-11-05
+
+- Add persistent ◈ coins from stars, defeated missiles and bosses, plus four Hangar upgrades for engine speed, shield duration, magnet range and weapon damage.
+- Add checkpoint rescue at every five-level milestone, six aircraft-family abilities, five world hazard types and coin rewards for bosses.
+- Extend Settings with adaptive music, graphics mode, vibration and left-handed steering, while retaining Android Safe Render limits.
+
 ## 0.9.14 — 2026-11-05
 
 - Add Android Safe Render mode to stop black/stale tiles affecting canvas text, aircraft and missiles on unstable phone GPU drivers.

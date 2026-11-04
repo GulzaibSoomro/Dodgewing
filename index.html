@@ -25,6 +25,7 @@
 <div id="joy" class="hide" aria-label="Steering circle"><svg viewBox="0 0 100 100"><path d="M50 10l8 10H42zM50 90l8-10H42zM10 50l10-8v16zM90 50l-10-8v16z" fill="rgba(255,243,224,.6)"/></svg><i id="jk"></i></div>
 <div id="ad" aria-hidden="true"></div>
 <button id="pb" class="hide" onclick="pauseG()" aria-label="Pause"><i></i><i></i></button>
+<button id="ab" class="hide ability-button" onclick="useAbility()" aria-label="Plane ability">G</button>
 
 <section id="splash" class="intro-screen" aria-label="Dodgewing splash screen">
   <img id="splash-art" class="splash-art" src="assets/splash/dodgewing-black-panel-splash-preview.svg" alt="Dodgewing aircraft against a sunset sky">
@@ -57,7 +58,7 @@
 <div class="ov hide" id="over">
   <h1>Run over</h1>
   <div id="res"></div>
-  <div class="row"><button class="go" onclick="start()">Retry</button><button onclick="menu()">Menu</button></div>
+  <div class="row"><button id="cont" class="hide" onclick="continueRun()">Continue</button><button class="go" onclick="start()">Retry</button><button onclick="menu()">Menu</button></div>
 </div>
 
 <div class="ov page hide" id="rw">
@@ -75,6 +76,9 @@
   <p>From Level 4 your plane shoots by itself, and later planes get stronger guns and homing missiles. The first three planes have no guns, so dodge.</p>
   <p>Bosses arrive at Levels 9, 17 and 25, and a Final Challenge at Level 30. Survive until the red bar empties, or shoot down the big boss missile.</p>
   <p>Pass close to a missile for near-miss bonus points. Combos stack.</p>
+  <p>Collect ◈ coins from stars, destroyed missiles and bosses. Spend them in the Hangar Upgrade Bay. Every five levels unlocks a checkpoint rescue option after a crash.</p>
+  <p>Tap the blue ability button beside Pause, or press Space, for your current aircraft family ability: shield, magnet, slow time, overdrive, afterburner or nova wave.</p>
+  <p>Watch for world hazards: turbulence, mines, laser gates, drones and asteroids. Each sky world brings a new threat.</p>
     <p><i class="ring" style="color:#6ec8ff">S</i>Shield blocks one hit</p>
   <p><i class="ring" style="color:#6ee7b7">M</i>Magnet pulls stars to you</p>
   <p><i class="ring" style="color:#c4a1ff">L</i>Slows missiles</p>
@@ -93,6 +97,9 @@
   <div class="scroll">
     <b class="sec">Paint and trail</b>
     <div id="hl" class="grid"></div>
+    <b class="sec">Upgrade bay</b>
+    <p class="sm">Collect ◈ coins during flights. Upgrades stay with your account.</p>
+    <div id="hup" class="upgrades"></div>
     <b class="sec">Evolution path</b>
     <p class="sm">5 stars per level. Collect one star to reveal the next. A hit drops you 2 levels; a hit at Level 1 ends the run. Reach a level in a run to light it up.</p>
     <div id="hev" class="ev"></div>
@@ -128,6 +135,7 @@
 <script src="js/05-missions-achievements.js"></script>
 <script src="js/06-bosses.js"></script>
 <script src="js/07-game.js"></script>
+<script src="js/07b-flight-systems.js"></script>
 <script src="js/08-render-helpers.js"></script>
 <script src="js/08b-weapons-sky-controls.js"></script>
 <script src="js/09-input-and-loop.js"></script>

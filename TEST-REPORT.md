@@ -1,4 +1,4 @@
-# Dodgewing 0.9.14 completion report
+# Dodgewing 0.10.0 completion report
 
 ## Delivered
 
@@ -8,7 +8,7 @@
 - A 30-cell transparent missile sprite sheet that evolves across the campaign, with three final futuristic missiles reserved for Final Challenge waves.
 - Player auto-fire begins at Level 4; the opening three aircraft are dodge-only stages.
 - Four distinct, transparent boss sprites with charge, laser/volley, tracking and final-wave encounters.
-- A revised Android WebView layer configuration to target black canvas/text/sprite artefacts without software-renderer performance loss.
+- An Android Safe Render WebView configuration to prevent black canvas/text/sprite artefacts with capped rendering work.
 - A replacement 30-cell thin missile sheet, rendered below player-plane scale while retaining the established progression and final-wave mapping.
 - A rebuilt self-contained `dist/dodgewing.html` with all 30 aircraft sprites and the current font set embedded.
 - Six five-level sky worlds, smoke/explosion/star effects, short translucent boss warnings and large boss health bars.
@@ -16,10 +16,11 @@
 - A black, no-text splash screen with a centered rounded Sunset Run aircraft panel, followed by an asset-aware loading screen.
 - A Dodgewing aircraft app icon in browser, iPhone and Android/PWA sizes, plus web-app metadata.
 - An Android 15 debug APK wrapper that bundles the offline game and launcher icon for direct phone installation.
+- Persistent coins, four Hangar upgrades, checkpoint rescue, six plane abilities, five world hazards, boss rewards and expanded accessibility/performance settings.
 
 ## Verification
 
-`npm test` passed 422 logic checks. The Chromium source suites passed 107 checks over five viewport sizes, and the self-contained release passed 47 Android-profile browser smoke checks, including the Safe Render 1× canvas path. The release file embeds aircraft, raster missile and boss sheets, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 432 logic checks. The Chromium source suites passed 112 checks over five viewport sizes, and the self-contained release passed 52 Android-profile browser smoke checks, including the Safe Render 1× canvas path. The release file embeds aircraft, raster missile and boss sheets, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
 
 The Android debug APK compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
 

@@ -1,5 +1,11 @@
 # Changed files
 
+## Progression, abilities and hazards — 0.10.0
+
+- Added `js/07b-flight-systems.js` for account upgrades, checkpoint rescue, six plane-family abilities and the five world hazard families.
+- Added persistent coins and boss coin rewards, Hangar Upgrade Bay cards, ability control, music/vibration/graphics/handedness settings and boss attack-state labels.
+- Rebuilt the standalone release and Android APK as v0.10.0.
+
 ## Android Safe Render build — 0.9.14
 
 - Added raster runtime sheets at `assets/missiles/missile-sheet.png` and `assets/bosses/boss-sheet.png`; the editable SVGs remain in the repository.
