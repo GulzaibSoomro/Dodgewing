@@ -7,6 +7,7 @@
 | Deterministic Node logic suite | Passed: 418 checks, 0 failures |
 | Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 97 checks, 0 failures |
 | Self-contained `dist/dodgewing.html` browser smoke test | Passed: 37 checks, 0 failures |
+| Android debug APK | Passed: compiled for Android 15; package metadata, embedded offline game and v1/v2 signatures verified |
 | JavaScript syntax checks | Passed |
 | Physical Android device | Not tested |
 

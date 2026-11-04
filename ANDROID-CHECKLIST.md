@@ -1,6 +1,6 @@
 # Manual Android testing checklist
 
-No physical Android device was tested during this update.
+The debug APK was compiled and signature-verified, but no physical Android device was tested during this update. Install the APK from `android/app/build/outputs/apk/debug/app-debug.apk` after following [android/README.md](android/README.md).
 
 - [ ] Record phone model, Android version, Chrome version and refresh rate.
 - [ ] Use the same origin as the old game; confirm points, paints, trails and original aircraft unlocks survive upgrade/reload.

@@ -48,5 +48,6 @@ Compared with the original uploaded project snapshot:
 
 - Added the active no-text Sunset Run splash SVG in `assets/splash/`.
 - Updated startup markup, styles, loading setup, browser tests and the self-contained build to use the centered orange panel on black.
+- Added the Android native wrapper, Gradle wrapper, Android build preparation script and manual APK build notes.
 
 The original snapshot backup is `backup/dodgewing-original.zip`; a separate pre-integration rollback is `backup/dodgewing-v0.8-before-30-planes.zip`.

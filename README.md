@@ -48,6 +48,7 @@ Progress requires the same browser and origin. Opening the file under a new orig
 | `js/10-professional-pass.js` | World themes, tutorial, boss introductions, unlock and victory cards, polished effects and settings |
 | `js/11-intro-sequence.js` | Splash screen, real asset preloading and loading progress |
 | `assets/icons/`, `manifest.webmanifest` | Source SVG, platform app icons and installable-web-app metadata |
+| `android/`, `tools/build-android.js` | Full-screen Android WebView wrapper and preparation script for an installable offline APK |
 | `tools/build.js`, `tools/serve.js` | Build the self-contained game and run the local source server without Python |
 | `tools/build.py` | Original Python build script, retained for compatible environments |
 | `tests/run-tests.js` | Deterministic mocked-DOM logic tests |
@@ -66,9 +67,11 @@ npm start
 # In another terminal:
 python3 tests/browser_smoke.py http://127.0.0.1:5500/
 python3 tests/browser_campaign.py http://127.0.0.1:5500/
+npm run prepare:android
+cd android && ./gradlew assembleDebug
 ```
 
-See `TESTING.md` and `TEST-REPORT.md` for executed results and limitations, and `ANDROID-CHECKLIST.md` for device testing. The browser scripts use `DW_BROWSER_EXECUTABLE` when supplied, then try a system Chromium or Chrome before using Playwright's downloaded browser. They also accept `DW_BROWSER_JITLESS=1`; that disables the JavaScript optimizer and is unsuitable for representative performance measurements.
+See `TESTING.md` and `TEST-REPORT.md` for executed results and limitations, [android/README.md](android/README.md) for the APK build steps, and `ANDROID-CHECKLIST.md` for device testing. The browser scripts use `DW_BROWSER_EXECUTABLE` when supplied, then try a system Chromium or Chrome before using Playwright's downloaded browser. They also accept `DW_BROWSER_JITLESS=1`; that disables the JavaScript optimizer and is unsuitable for representative performance measurements.
 
 ## Assets and release work
 

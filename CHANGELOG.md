@@ -4,6 +4,7 @@
 
 - Replace the text-based launch splash with a black no-text layout featuring a centered, rounded orange Sunset Run aircraft panel.
 - Embed the splash artwork in the self-contained mobile build.
+- Add an Android WebView wrapper, Gradle build files and a direct-install debug APK build path.
 
 ## 0.9.5 — 2026-11-04
 

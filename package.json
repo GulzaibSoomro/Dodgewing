@@ -5,6 +5,7 @@
   "description": "Dodgewing: survival + aircraft evolution + boss arcade game (HTML5 canvas, no dependencies)",
   "scripts": {
     "build": "node tools/build.js",
+    "prepare:android": "node tools/build-android.js",
     "test": "node tools/build.js && node tests/run-tests.js",
     "start": "node tools/serve.js",
     "test:browser": "python3 tests/browser_smoke.py && python3 tests/browser_campaign.py"
