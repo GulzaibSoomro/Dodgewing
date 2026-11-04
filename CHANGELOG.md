@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.13 — 2026-11-05
+
+- Replace the missile sheet with 30 thin rocket designs based on the latest supplied reference.
+- Keep the Level 1–3 opening missile, normal level-by-level progression and Final Challenge-only last three designs.
+- Reduce normal missile draw size from 62 px to 48 px so they remain clearly smaller than the player aircraft.
+
 ## 0.9.12 — 2026-11-05
 
 - Add four distinct, lightweight boss sprites: Heavy Missile, Missile Commander, Advanced Seeker and Cosmic Overlord, with their existing charge, laser/volley, tracking and final-wave attack patterns.

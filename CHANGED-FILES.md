@@ -1,5 +1,11 @@
 # Changed files
 
+## Smaller reference missile sprites — 0.9.13
+
+- Replaced `assets/missiles/missile-sheet.svg` with a thin 30-rocket sheet based on the latest supplied reference image.
+- Kept the Level 1–3 / level progression / final-wave mapping and reduced normal missile draw size to 48 px.
+- Rebuilt the mobile APK as v0.9.13.
+
 ## Boss variety and Android canvas stability — 0.9.12
 
 - Added `assets/bosses/boss-sheet.svg` and rendered a unique transparent sprite for each campaign boss.

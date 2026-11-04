@@ -1,56 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="600" viewBox="0 0 720 600">
   <defs>
-    <g id="rocket" transform="translate(10 3) scale(.84)">
-      <path d="M60 7C43 22 37 44 38 78v18h44V78c1-34-5-56-22-71Z" fill="currentColor" stroke="#171d24" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M60 7C51 15 45 25 42 37h36C75 25 69 15 60 7Z" fill="#b83232"/>
-      <path d="M39 63 17 87l20 13 10-20m34-17 22 24-20 13-10-20" fill="#687480" stroke="#171d24" stroke-width="3" stroke-linejoin="round"/>
-      <rect x="43" y="42" width="34" height="8" rx="2" fill="#e7bb42"/>
-      <rect x="47" y="56" width="26" height="5" rx="2" fill="#39434d" opacity=".85"/>
-      <path d="M60 66 66 79 60 89 54 79Z" fill="#dce9ee" opacity=".9"/>
-      <path d="M52 96h16l-3 11h-10Z" fill="#242c35"/>
-      <path d="M60 107c-7 9-6 18 0 27 6-9 7-18 0-27Z" fill="#ff8d28"/>
-      <path d="M60 111c-3 6-3 12 0 18 3-6 3-12 0-18Z" fill="#ffe37a"/>
-      <path d="M44 68h8m-8 7h8m16-7h8m-8 7h8" stroke="#edf5f6" stroke-width="1.5" opacity=".6"/>
+    <g id="rocket">
+      <path d="M51 29C51 19 55 12 60 8c5 4 9 11 9 21v56H51Z" fill="currentColor" stroke="#18202a" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M60 8c-5 4-8 11-9 20h18C68 19 65 12 60 8Z" fill="#d83531"/>
+      <path d="M52 42h16v7H52Z" fill="#e7eaeb"/><path d="M52 53h16v4H52Z" fill="#38424d" opacity=".85"/>
+      <path d="m51 62-15 23 15 6 7-17m11-12 15 23-15 6-7-17" fill="currentColor" stroke="#18202a" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M55 61h10v19H55Z" fill="#2d3640"/><path d="M60 64l4 10-4 8-4-8Z" fill="#dce8eb"/>
+      <path d="M54 85h12l-2 9h-8Z" fill="#273039"/><path d="M60 93c-6 8-5 16 0 24 5-8 6-16 0-24Z" fill="#ff982e"/><path d="M60 98c-2.5 5-2.5 10 0 15 2.5-5 2.5-10 0-15Z" fill="#fff2a5"/>
+      <path d="M53 33h14" stroke="#f7fcff" stroke-width="1.4" opacity=".7"/>
     </g>
-    <g id="future" transform="translate(10 3) scale(.82)">
-      <path d="M60 5 79 34v61L94 111 76 105 60 122 44 105 26 111 41 95V34Z" fill="currentColor" stroke="#111722" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M60 12 69 35 60 53 51 35Z" fill="#30dcff"/>
-      <path d="M48 42h24v41H48Z" fill="#172230" stroke="#8cf1ff" stroke-width="2"/>
-      <path d="M60 50c-7 8-7 19 0 28 7-9 7-20 0-28Z" fill="#30dcff"/>
-      <path d="m41 79-22 25 24-8m36-17 22 25-24-8" fill="#71839b" stroke="#111722" stroke-width="3" stroke-linejoin="round"/>
-      <circle cx="60" cy="89" r="7" fill="#30dcff" stroke="#d9fbff" stroke-width="2"/>
-      <path d="M60 112c-8 10-7 20 0 29 7-9 8-19 0-29Z" fill="#59eaff"/>
-      <path d="M60 117c-3 6-3 12 0 18 3-6 3-12 0-18Z" fill="#ffffff"/>
+    <g id="late-red">
+      <path d="M60 7 75 31v59l15 15-22-7-8 17-8-17-22 7 15-15V31Z" fill="#252b33" stroke="#141923" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M60 12 68 33 60 53 52 33Z" fill="#ee4d44"/><path d="M50 48h20v31H50Z" fill="#151b25" stroke="#ff6658" stroke-width="1.8"/><path d="M60 56c-6 7-6 16 0 23 6-7 6-16 0-23Z" fill="#ff5349"/>
+      <path d="m45 75-18 22 22-8m24-14 18 22-22-8" fill="#343d49" stroke="#141923" stroke-width="2"/><path d="M53 90h14l-3 8h-8Z" fill="#1d2530"/><path d="M60 97c-7 8-6 15 0 22 6-7 7-14 0-22Z" fill="#ff792f"/>
+    </g>
+    <g id="late-cyan">
+      <path d="M60 7 76 31v59l15 15-22-7-9 17-9-17-22 7 15-15V31Z" fill="#dce7ea" stroke="#18202a" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M60 12 68 33 60 53 52 33Z" fill="#52dcff"/><path d="M50 48h20v31H50Z" fill="#283641" stroke="#66eaff" stroke-width="1.8"/><path d="M60 56c-6 7-6 16 0 23 6-7 6-16 0-23Z" fill="#42dfff"/>
+      <path d="m45 75-18 22 22-8m24-14 18 22-22-8" fill="#8ba4b0" stroke="#18202a" stroke-width="2"/><circle cx="60" cy="89" r="5" fill="#48e5ff"/><path d="M60 97c-7 8-6 15 0 22 6-7 7-14 0-22Z" fill="#5cf1ff"/>
+    </g>
+    <g id="late-violet">
+      <path d="M60 7 76 31v59l15 15-22-7-9 17-9-17-22 7 15-15V31Z" fill="#252737" stroke="#141923" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M60 12 68 33 60 53 52 33Z" fill="#ae56ff"/><path d="M50 48h20v31H50Z" fill="#181a2b" stroke="#c46aff" stroke-width="1.8"/><path d="M60 56c-6 7-6 16 0 23 6-7 6-16 0-23Z" fill="#b650ff"/>
+      <path d="m45 75-18 22 22-8m24-14 18 22-22-8" fill="#4f466b" stroke="#141923" stroke-width="2"/><circle cx="60" cy="89" r="5" fill="#c96aff"/><path d="M60 97c-7 8-6 15 0 22 6-7 7-14 0-22Z" fill="#9f61ff"/>
     </g>
   </defs>
-  <g transform="translate(0 0)" color="#c6cbd0"><use href="#rocket"/></g>
-  <g transform="translate(120 0)" color="#65754c"><use href="#rocket"/></g>
-  <g transform="translate(240 0)" color="#e0ded5"><use href="#rocket"/></g>
-  <g transform="translate(360 0)" color="#71805a"><use href="#rocket"/></g>
-  <g transform="translate(480 0)" color="#354966"><use href="#rocket"/></g>
-  <g transform="translate(600 0)" color="#8c8981"><use href="#rocket"/></g>
-  <g transform="translate(0 120)" color="#708057"><use href="#rocket"/></g>
-  <g transform="translate(120 120)" color="#aeb1ad"><use href="#rocket"/></g>
-  <g transform="translate(240 120)" color="#59616a"><use href="#rocket"/></g>
-  <g transform="translate(360 120)" color="#d9d8d0"><use href="#rocket"/></g>
-  <g transform="translate(480 120)" color="#6f7953"><use href="#rocket"/></g>
-  <g transform="translate(600 120)" color="#c9c8c2"><use href="#rocket"/></g>
-  <g transform="translate(0 240)" color="#d5d5ce"><use href="#rocket"/></g>
-  <g transform="translate(120 240)" color="#d8dcdd"><use href="#rocket"/></g>
-  <g transform="translate(240 240)" color="#a9afb0"><use href="#rocket"/></g>
-  <g transform="translate(360 240)" color="#d8d9d5"><use href="#rocket"/></g>
-  <g transform="translate(480 240)" color="#3d4348"><use href="#rocket"/></g>
-  <g transform="translate(600 240)" color="#c8cdcf"><use href="#rocket"/></g>
-  <g transform="translate(0 360)" color="#e0e4e2"><use href="#future"/></g>
-  <g transform="translate(120 360)" color="#252c36"><use href="#future"/></g>
-  <g transform="translate(240 360)" color="#cbd5d7"><use href="#future"/></g>
-  <g transform="translate(360 360)" color="#d4d0c4"><use href="#future"/></g>
-  <g transform="translate(480 360)" color="#29323a"><use href="#future"/></g>
-  <g transform="translate(600 360)" color="#dbe2e2"><use href="#future"/></g>
-  <g transform="translate(0 480)" color="#e2e9e7"><use href="#future"/></g>
-  <g transform="translate(120 480)" color="#272b31"><use href="#future"/></g>
-  <g transform="translate(240 480)" color="#3d3b51"><use href="#future"/></g>
-  <g transform="translate(360 480)" color="#3f454d"><use href="#future"/></g>
-  <g transform="translate(480 480)" color="#e6edf1"><use href="#future"/></g>
-  <g transform="translate(600 480)" color="#b99a53"><use href="#future"/></g>
+  <g color="#aeb5ba"><use href="#rocket"/></g><g transform="translate(120 0)" color="#56603c"><use href="#rocket"/></g><g transform="translate(240 0)" color="#9ca6aa"><use href="#rocket"/></g><g transform="translate(360 0)" color="#4b5737"><use href="#rocket"/></g><g transform="translate(480 0)" color="#ced1d1"><use href="#rocket"/></g><g transform="translate(600 0)" color="#58613f"><use href="#rocket"/></g>
+  <g transform="translate(0 120)" color="#485c31"><use href="#rocket"/></g><g transform="translate(120 120)" color="#b6bdc0"><use href="#rocket"/></g><g transform="translate(240 120)" color="#263444"><use href="#rocket"/></g><g transform="translate(360 120)" color="#bfc4c7"><use href="#rocket"/></g><g transform="translate(480 120)" color="#9aa2a7"><use href="#rocket"/></g><g transform="translate(600 120)" color="#3a4729"><use href="#rocket"/></g>
+  <g transform="translate(0 240)" color="#8e9799"><use href="#rocket"/></g><g transform="translate(120 240)" color="#277bd2"><use href="#rocket"/></g><g transform="translate(240 240)" color="#aeb4b6"><use href="#rocket"/></g><g transform="translate(360 240)" color="#29343a"><use href="#rocket"/></g><g transform="translate(480 240)" color="#bd8b55"><use href="#rocket"/></g><g transform="translate(600 240)" color="#6a7845"><use href="#rocket"/></g>
+  <g transform="translate(0 360)" color="#b7bdbe"><use href="#rocket"/></g><g transform="translate(120 360)" color="#303a3d"><use href="#rocket"/></g><g transform="translate(240 360)" color="#626d72"><use href="#rocket"/></g><g transform="translate(360 360)" color="#bed2db"><use href="#rocket"/></g><g transform="translate(480 360)" color="#252b31"><use href="#rocket"/></g><g transform="translate(600 360)" color="#b4babd"><use href="#rocket"/></g>
+  <g transform="translate(0 480)" color="#5f6e3c"><use href="#rocket"/></g><g transform="translate(120 480)" color="#1b2d38"><use href="#rocket"/></g><g transform="translate(240 480)" color="#d5d7d5"><use href="#rocket"/></g><g transform="translate(360 480)"><use href="#late-red"/></g><g transform="translate(480 480)"><use href="#late-cyan"/></g><g transform="translate(600 480)"><use href="#late-violet"/></g>
 </svg>

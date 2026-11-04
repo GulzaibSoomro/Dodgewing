@@ -1,4 +1,4 @@
-# Dodgewing 0.9.12 completion report
+# Dodgewing 0.9.13 completion report
 
 ## Delivered
 
@@ -9,6 +9,7 @@
 - Player auto-fire begins at Level 4; the opening three aircraft are dodge-only stages.
 - Four distinct, transparent boss sprites with charge, laser/volley, tracking and final-wave encounters.
 - A revised Android WebView layer configuration to target black canvas/text/sprite artefacts without software-renderer performance loss.
+- A replacement 30-cell thin missile sheet, rendered below player-plane scale while retaining the established progression and final-wave mapping.
 - A rebuilt self-contained `dist/dodgewing.html` with all 30 aircraft sprites and the current font set embedded.
 - Six five-level sky worlds, smoke/explosion/star effects, short translucent boss warnings and large boss health bars.
 - A full home screen, tutorial prompts, plane-unlock cards, medal-style achievements, sound feedback, settings and a final Level 30 victory screen.
@@ -18,7 +19,7 @@
 
 ## Verification
 
-`npm test` passed 421 logic checks. The Chromium source suite passed 104 checks over five viewport sizes, and the self-contained release file passed 44 browser smoke checks. The release file has embedded aircraft, missile and boss sheets, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 422 logic checks. The Chromium source suite passed 104 checks over five viewport sizes, and the self-contained release file passed 44 browser smoke checks. The release file has embedded aircraft, missile and boss sheets, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
 
 The Android debug APK compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
 
