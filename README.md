@@ -1,4 +1,4 @@
-# Dodgewing 0.9.8
+# Dodgewing 0.9.9
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.9 — 2026-11-04
+
+- Stabilize Android canvas rendering by using an opaque medium-quality canvas, resetting frame state and using the WebView software layer to prevent black sprite and text artefacts.
+
 ## 0.9.8 — 2026-11-04
 
 - Make boss warnings and new-plane cards translucent and reduce their display time.

@@ -1,5 +1,10 @@
 # Changed files
 
+## Android canvas stability — 0.9.9
+
+- Added a stable opaque canvas frame path and Android WebView software rendering to avoid black plane and text artefacts on phones.
+- Rebuilt the mobile APK as v0.9.9.
+
 ## Flight presentation and speed — 0.9.8
 
 - Made boss warnings and new-plane cards translucent, with short display times.

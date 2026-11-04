@@ -23,6 +23,9 @@ public final class MainActivity extends Activity {
         enterImmersiveMode();
 
         game = new WebView(this);
+        // Avoid device-specific GPU artefacts around Canvas text and transparent sprites.
+        game.setBackgroundColor(Color.rgb(5, 5, 7));
+        game.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         WebSettings settings = game.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);

@@ -239,10 +239,11 @@ button.ic{width:40px;height:40px;min-width:0;padding:0;display:flex;align-items:
 <script>
 // 01-core.js: Canvas, resize, helpers
 // Classic script (no modules): all files share one global scope and load in numeric order.
-const $=id=>document.getElementById(id),cv=$('c'),x=cv.getContext('2d'),TAU=Math.PI*2;
-x.imageSmoothingEnabled=true;if('imageSmoothingQuality'in x)x.imageSmoothingQuality='high';
-let W,H;
-function rs(){const d=Math.min(devicePixelRatio||1,2),a=$('ad'),s=$('st'),AD=(a&&a.offsetHeight)||0,ST=(s&&s.offsetHeight)||0;W=innerWidth;H=Math.max(200,innerHeight-AD-ST);cv.width=W*d;cv.height=H*d;if(cv.style){cv.style.top=ST+'px';cv.style.height=H+'px'}x.setTransform(d,0,0,d,0,0)}
+const $=id=>document.getElementById(id),cv=$('c'),x=cv.getContext('2d',{alpha:false}),TAU=Math.PI*2;
+x.imageSmoothingEnabled=true;if('imageSmoothingQuality'in x)x.imageSmoothingQuality='medium';
+let W,H,DPR=1;
+function rs(){const mobile=typeof navigator!=='undefined'&&/Android/i.test(navigator.userAgent||''),d=DPR=Math.min(devicePixelRatio||1,mobile?1.5:2),a=$('ad'),s=$('st'),AD=(a&&a.offsetHeight)||0,ST=(s&&s.offsetHeight)||0;W=innerWidth;H=Math.max(200,innerHeight-AD-ST);cv.width=W*d;cv.height=H*d;if(cv.style){cv.style.top=ST+'px';cv.style.height=H+'px'}x.setTransform(d,0,0,d,0,0)}
+function frame(){x.setTransform(DPR,0,0,DPR,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);x.shadowBlur=0;x.shadowOffsetX=0;x.shadowOffsetY=0}
 if(!x.roundRect)x.roundRect=function(a,b,c,e){this.rect(a,b,c,e)};
 rs();addEventListener('resize',()=>{rs();try{pl.x=Math.min(pl.x,W);pl.y=Math.min(pl.y,H)}catch(e){}});
 
@@ -468,6 +469,7 @@ function upd(d){
 }
 
 function draw(){
+  frame();
   drawSky();x.fillStyle=cloudC;
   for(const c of clouds){x.beginPath();x.ellipse(c.x*W,c.y*H,c.s,c.s*.28,0,0,TAU);x.fill();x.beginPath();x.ellipse(c.x*W,c.y*H,c.s*.65,c.s*.18,0,0,TAU);x.fill()}
   for(const s of st){ctxStar(s.x,s.y,s.r)}

@@ -73,6 +73,7 @@ function upd(d){
 }
 
 function draw(){
+  frame();
   drawSky();x.fillStyle=cloudC;
   for(const c of clouds){x.beginPath();x.ellipse(c.x*W,c.y*H,c.s,c.s*.28,0,0,TAU);x.fill();x.beginPath();x.ellipse(c.x*W,c.y*H,c.s*.65,c.s*.18,0,0,TAU);x.fill()}
   for(const s of st){ctxStar(s.x,s.y,s.r)}
