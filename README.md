@@ -1,4 +1,4 @@
-# Dodgewing 0.12.0
+# Dodgewing 0.12.1
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -13,7 +13,7 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 - The Living Command Hangar changes sky and lighting with the selected aircraft world, opens with animated hangar doors and uses light parallax, runway depth, engine glow and ambient menu tones. Reduced Motion disables nonessential movement.
 - Pilot rank and callsign reflect campaign progress. A 30-level Flight Map marks unlocked aircraft and all four bosses; selecting an unlocked stage returns to that plane in the home carousel.
 - 30 evolution stages use 30 distinct transparent aircraft sprites supplied for this update. Sprite art is preserved as provided; each stage has a unique plane.
-- The in-flight player aircraft renders at 2× its previous width and height (96 px on typical portrait phones). Shields and weapon origins follow that size; its collision core retains the established difficulty.
+- The in-flight player aircraft renders at 1.6× its original width and height (about 77 px on typical portrait phones), 20% smaller than v0.12.0. Shields and weapon origins follow that size; its collision core retains the established difficulty.
 - Start at Level 1; each five collected stars advances one stage. Level 30 takes 145 stars without damage (29 level-ups).
 - Exactly one collectible star appears at a time. Collect it to reveal the next. During a boss, stars pause; one returns when the encounter ends. HUD pips show progress toward the next five-star milestone.
 - Difficulty grows across the 30 levels: the plane starts at 150 px/s and gains 10 px/s at each even-numbered level, reaching 300 px/s at Level 30. Regular missile speed rises from 55% to 93% of the current plane speed, spawn interval decreases from 2.8 to 0.55 seconds, turning grows, and the desktop missile cap rises from 2 to 16 (phone cap 2 to 8).

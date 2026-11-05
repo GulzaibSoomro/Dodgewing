@@ -1,4 +1,4 @@
-"""Font loading and 2x aircraft regression checks; server must already be running.
+"""Font loading and 1.6x aircraft regression checks; server must already be running.
 Usage: python3 tests/browser_typography_scale.py http://127.0.0.1:5500/
 """
 import asyncio
@@ -69,17 +69,17 @@ async def main():
                 return uiFont.includes('Barlow Semi Condensed')&&scoreFont.includes('Oxanium')&&ui>0&&score>0&&Math.abs(ui-direct)<.01&&Math.abs(ui-fallback)>1&&Math.abs(score-directScore)<.01;
             }'''), label + 'canvas text measures with the loaded UI and score fonts')
 
-            check(await page.evaluate('sz()===Math.max(48,Math.min(78,Math.min(W,H)*.11))'), label + 'physics size retains its original viewport rule')
+            check(await page.evaluate('sz()===Math.max(48,Math.min(78,Math.min(W,H)*.11))&&PLAYER_DRAW_SCALE===1.6'), label + 'physics size stays original while artwork uses the requested 1.6x scale')
             for pop in [1, 1.3]:
                 dimensions = await page.evaluate('''pop=>{
                     const original=x.drawImage,issues=[];let call=null;
                     x.drawImage=function(...args){call=args};
                     try{for(let i=0;i<30;i++){
                         call=null;drawSpr(i,1,pop);const im=SPR[i],oldScale=sz()/Math.max(im.naturalWidth,im.naturalHeight)*pop;
-                        if(!call||call.length!==5||Math.abs(call[3]-im.naturalWidth*oldScale*2)>.00001||Math.abs(call[4]-im.naturalHeight*oldScale*2)>.00001)issues.push(i+1);
+                        if(!call||call.length!==5||Math.abs(call[3]-im.naturalWidth*oldScale*PLAYER_DRAW_SCALE)>.00001||Math.abs(call[4]-im.naturalHeight*oldScale*PLAYER_DRAW_SCALE)>.00001)issues.push(i+1);
                     }}finally{x.drawImage=original}return issues;
                 }''', pop)
-                check(not dimensions, label + f'all 30 player sprites are exactly 2x at animation scale {pop}: {dimensions}')
+                check(not dimensions, label + f'all 30 player sprites are exactly 1.6x at animation scale {pop}: {dimensions}')
 
             check(await page.evaluate('''()=>{
                 start();autoFire=false;st=[];pu=[];obs=[];lv=5;evoStars=20;msT=99;
@@ -98,9 +98,9 @@ async def main():
 
             check(await page.evaluate('''()=>{
                 start();autoFire=true;lv=6;bl=[];pl={x:W/2,y:H/2,a:.7};wLv=0;fireTick(.3);
-                const offsets=[-15,-6,6,15],f=sz()*.35*2;
-                return bl.length===4&&bl.every((b,i)=>Math.abs(b.x-(pl.x+Math.cos(pl.a)*f-Math.sin(pl.a)*offsets[i]*2))<.00001&&Math.abs(b.y-(pl.y+Math.sin(pl.a)*f+Math.cos(pl.a)*offsets[i]*2))<.00001);
-            }'''), label + 'wing and nose muzzle positions follow the 2x aircraft at a rotated heading')
+                const offsets=[-15,-6,6,15],f=sz()*.35*PLAYER_DRAW_SCALE;
+                return bl.length===4&&bl.every((b,i)=>Math.abs(b.x-(pl.x+Math.cos(pl.a)*f-Math.sin(pl.a)*offsets[i]*PLAYER_DRAW_SCALE))<.00001&&Math.abs(b.y-(pl.y+Math.sin(pl.a)*f+Math.cos(pl.a)*offsets[i]*PLAYER_DRAW_SCALE))<.00001);
+            }'''), label + 'wing and nose muzzle positions follow the 1.6x aircraft at a rotated heading')
 
             check(await page.evaluate('''()=>{
                 for(let level=1;level<=3;level++){start();lv=level;autoFire=true;fireTick(10);if(bl.length)return false}return true;

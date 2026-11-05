@@ -1,4 +1,4 @@
-# Testing — 0.12.0
+# Testing — 0.12.1
 
 ## Results executed for this completion pass
 
@@ -8,7 +8,7 @@
 | Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 116 checks, 0 failures |
 | Source and standalone Living Command Hangar at 360×640, 390×800, 800×390 and 1280×800 | Passed: 88 checks each, 0 failures |
 | Self-contained `dist/dodgewing.html` browser smoke test | Passed: 56 checks, 0 failures |
-| Standalone typography and 2× player rendering at 390×800 and 1280×800 | Passed: 31 checks, 0 failures |
+| Standalone typography and 1.6× player rendering at 390×800 and 1280×800 | Passed: 31 checks, 0 failures |
 | Android debug APK | Passed: compiled for Android 15; package metadata, embedded offline game and v1/v2 signatures verified |
 | JavaScript syntax checks | Passed |
 | Physical Android device | Not tested |
@@ -17,7 +17,7 @@
 
 The browser suites ran against `http://127.0.0.1:5500/` using the local server. They exercised the no-text, centered black-and-orange splash-to-loading sequence, app-icon metadata, full-screen mobile layout, coin upgrades and rank previews, plane ability icons and cooldown ring, compact power-up timers, touch controls, the 3–2–1 resume transition, Reduced Motion persistence, game-over count-up, save compatibility, all 30 campaign stages, boss intros, final victory, level regression, game-over/retry and five viewport sizes. The standalone build was also checked in Chromium: it contains all aircraft assets, missile and boss sheets, splash art, app-icon data, Oxanium and Barlow Semi Condensed fonts with their SIL licenses, and no external source-script or aircraft references.
 
-The focused typography/scale suite ran against the standalone HTML. It verifies actual loaded font faces and text measurements, intended menu font families, all 30 sprites at normal and evolution-animation scales, original collision and collection boundaries, rotated muzzle placement, Level 4 firing onset, unchanged missile size and successful startup when font requests fail. A mobile gameplay screenshot was inspected for HUD spacing and plane size. These checks do not measure frame times on Android hardware.
+The focused typography/scale suite ran against the standalone HTML. It verifies actual loaded font faces and text measurements, the 1.6× artwork scale, intended menu font families, all 30 sprites at normal and evolution-animation scales, original collision and collection boundaries, rotated muzzle placement, Level 4 firing onset, unchanged missile size and successful startup when font requests fail. A mobile gameplay screenshot was inspected for HUD spacing and plane size. These checks do not measure frame times on Android hardware.
 
 The Command Hangar suite verifies viewport fit, five-item bottom navigation, pilot identity, hero-plane/world selection, dynamic paint lighting, boss radar, daily briefing, reward state, last-flight and checkpoint cards, the six-world route, plane inspection and carousel behavior, all 30 map nodes, four boss markers, unlock celebration, parallax, typography, contextual animation and the transition into gameplay. Settled portrait and landscape screenshots were visually inspected.
 

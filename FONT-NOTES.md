@@ -18,4 +18,4 @@ Sources retrieved online on 2026-11-05:
 
 Both families are bundled locally. Medium and SemiBold Barlow TTFs are unmodified upstream files. Source licenses are in `assets/fonts`; the standalone build also includes both SIL licenses. Startup explicitly loads the weights needed by menus and canvas labels before dismissing the loading screen. Legacy Rajdhani, Pixelify Sans and Pixelta files remain archived but are not loaded or embedded in this release.
 
-The top HUD reserves space for the action buttons and constrains long numbers to their own panels. The plane size request is independent: player sprites render at twice their previous width and height, with matching shield and muzzle placement; the existing collision core is retained.
+The top HUD reserves space for the action buttons and constrains long numbers to their own panels. Player sprites render at 1.6× their original width and height, with matching shield and muzzle placement; the existing collision core is retained.

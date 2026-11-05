@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.12.1 — 2026-11-05
+
+- Reduce the in-flight player aircraft from 2× to 1.6× its original dimensions, making it exactly 20% smaller than v0.12.0.
+- Keep the established collision and pickup boundaries while moving shields, evolution rings and weapon muzzles with the resized artwork.
+
 ## 0.12.0 — 2026-11-05
 
 - Replace the old button stack with a Living Command Hangar built around a large interactive aircraft, dynamic world lighting, runway depth and lightweight parallax.

@@ -1,5 +1,10 @@
 # Changed files
 
+## Player aircraft size adjustment — 0.12.1
+
+- Reduced the shared player-art scale from 2× to 1.6×; collision and collection distances remain unchanged.
+- Updated the real-browser size and muzzle-alignment checks, release documentation and Android package metadata.
+
 ## Living Command Hangar — 0.12.0
 
 - Rebuilt the home markup and responsive styling around a large interactive plane, live world scene, smart flight actions, daily briefing and one-thumb navigation.
