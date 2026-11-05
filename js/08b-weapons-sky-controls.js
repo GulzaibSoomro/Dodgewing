@@ -22,8 +22,8 @@ function fireTick(d){
   const fx0=Math.cos(pl.a),fy0=Math.sin(pl.a);
   w.e.forEach((e,i)=>{wcd[i]-=d;let n=0;
     while(wcd[i]<=0&&n++<3){wcd[i]+=1/(e.r*(over>0?1.65:1));
-      for(const o of e.o){const a=pl.a+(o[2]||0)+(e.sp?rnd(-e.sp,e.sp):0),fw=sz()*.35+(o[1]||0);
-        if(bl.length<(lowGraphics()?90:200))bl.push({x:pl.x+fx0*fw-fy0*o[0],y:pl.y+fy0*fw+fx0*o[0],a,v:e.v,d:e.d*weaponBoost(),life:e.h?2.2:1.15,h:e.h,c:e.c,w:e.w})}}})}
+      for(const o of e.o){const a=pl.a+(o[2]||0)+(e.sp?rnd(-e.sp,e.sp):0),fw=playerDrawSize()*.35+(o[1]||0)*PLAYER_DRAW_SCALE,side=o[0]*PLAYER_DRAW_SCALE;
+        if(bl.length<(lowGraphics()?90:200))bl.push({x:pl.x+fx0*fw-fy0*side,y:pl.y+fy0*fw+fx0*side,a,v:e.v,d:e.d*weaponBoost(),life:e.h?2.2:1.15,h:e.h,c:e.c,w:e.w})}}})}
 function hitMissile(m,j,dmg){
   if(m.hp===undefined){m.hp=1;m.hp0=1}
   m.hp-=dmg;boom(m.x,m.y,'255,200,90',m.hp>0?2:14);

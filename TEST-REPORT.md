@@ -1,4 +1,4 @@
-# Dodgewing 0.11.0 completion report
+# Dodgewing 0.11.1 completion report
 
 ## Delivered
 
@@ -19,14 +19,16 @@
 - Persistent coins, four Hangar upgrades, checkpoint rescue, six plane abilities, five world hazards, boss rewards and expanded accessibility/performance settings.
 - A mobile UI/UX pass with grouped HUD information, power-up icon timers, ability cooldown ring, smoother joystick feedback, fixed notification stacking, evolution and hit feedback, a resume countdown and count-up run results.
 - A persistent Reduced Motion option, boss danger labels and delayed boss-health damage strip that preserve Android Safe Render limits.
+- Oxanium titles/scores and Barlow Semi Condensed UI, bundled offline and preloaded before gameplay; HUD spacing reserves room for action buttons.
+- All 30 player planes draw at twice their previous width and height, with aligned shield effects and weapon muzzles.
 
 ## Verification
 
-`npm test` passed 437 logic checks. The Chromium source suites passed 116 checks over five viewport sizes, and the self-contained release passed 56 Android-profile browser smoke checks, including the Safe Render 1× canvas path. The release file embeds aircraft, raster missile and boss sheets, splash art and app-icon data, the three new font families, and no external source-script or aircraft references.
+`npm test` passed 437 logic checks. The Chromium source suites passed 116 checks over five viewport sizes, and the self-contained release passed 56 Android-profile browser smoke checks, including the Safe Render 1× canvas path. Another 31 standalone checks verified loaded fonts, font-failure recovery, all 30 doubled aircraft sprites, muzzle placement and preserved collision/collection boundaries at mobile and desktop sizes. The release file embeds aircraft, raster missile and boss sheets, splash art and app-icon data, both font families and SIL licenses, and no external source-script or aircraft references.
 
-The Android debug APK v0.11.0 compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
+The Android debug APK v0.11.1 (version code 12) compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its embedded HTML matches `dist/dodgewing.html` byte for byte, and its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
 
 ## Remaining manual work
 
 - Test joystick feel, audio, campaign balance, frame time and memory on a physical Android phone.
-- Confirm commercial rights for the Pixelta font and aircraft images before any monetized or store release.
+- Confirm commercial rights for supplied aircraft images before any monetized or store release. The active fonts use bundled SIL licenses; legacy Pixelta is not loaded.

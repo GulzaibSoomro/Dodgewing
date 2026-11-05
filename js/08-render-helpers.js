@@ -1,17 +1,17 @@
 // 08-render-helpers.js: Small canvas drawing helpers
 // Classic script (no modules): all files share one global scope and load in numeric order.
-function drawSpr(i,al,sc){const im=SPR[i];if(!im.complete||!im.naturalWidth){x.globalAlpha=al;x.fillStyle='#fff3e0';x.beginPath();x.moveTo(0,-16);x.lineTo(-10,11);x.lineTo(10,11);x.closePath();x.fill();x.globalAlpha=1;return}
-  const k=sz()/Math.max(im.naturalWidth,im.naturalHeight)*sc,w=im.naturalWidth*k,h=im.naturalHeight*k;x.globalAlpha=al;x.drawImage(im,-w/2,-h/2,w,h);drawRank(i,w,h);x.globalAlpha=1}
+function drawSpr(i,al,sc){const im=SPR[i];if(!im.complete||!im.naturalWidth){const scale=PLAYER_DRAW_SCALE*sc;x.globalAlpha=al;x.fillStyle='#fff3e0';x.beginPath();x.moveTo(0,-16*scale);x.lineTo(-10*scale,11*scale);x.lineTo(10*scale,11*scale);x.closePath();x.fill();x.globalAlpha=1;return}
+  const k=playerDrawSize()/Math.max(im.naturalWidth,im.naturalHeight)*sc,w=im.naturalWidth*k,h=im.naturalHeight*k;x.globalAlpha=al;x.drawImage(im,-w/2,-h/2,w,h);drawRank(i,w,h);x.globalAlpha=1}
 // Small gold service bars distinguish upgrades while retaining the original sprite art.
 function drawRank(i,w,h){const rank=STAGES[i].rank;if(rank<2)return;x.fillStyle='#ffe6a0';x.strokeStyle='#754015';x.lineWidth=1;for(let k=0;k<rank-1;k++){x.fillRect(-w*.12,-h*.05+k*5,w*.24,3);x.strokeRect(-w*.12,-h*.05+k*5,w*.24,3)}}
 function ctxDot(px,py,r,c){x.fillStyle=c;x.beginPath();x.arc(px,py,r,0,TAU);x.fill()}
 function ctxA(a){x.globalAlpha=a}
-function ctxT(s,px,py){x.font='17px Pixelta,monospace';x.fillText(s,px,py)}
+function ctxT(s,px,py){x.font=canvasFont(17);x.fillText(s,px,py)}
 function ctxRR(px,py,w,h){x.beginPath();x.roundRect(px,py,w,h,4);x.fill()}
 function ctxFlame(){ctxDot(-13,0,3+Math.random()*2,'#ffd166')}
 function ctxFin(){ctxDot(10,0,2,'#fff3e0')}
 function starAt(px,py,k,r,nog){x.save();x.translate(px,py);x.rotate(r);x.scale(k,k);if(!nog){x.fillStyle='rgba(255,210,80,.12)';x.beginPath();x.arc(0,0,19,0,TAU);x.fill()}x.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?7:15;x.lineTo(Math.cos(a)*q,Math.sin(a)*q)}x.closePath();x.fillStyle='#ffd84d';x.strokeStyle='#b8741a';x.lineWidth=2;x.lineJoin='round';x.fill();x.stroke();x.restore()}
-function otext(s,px,py,col){x.font='17px Pixelta,monospace';x.lineJoin='round';x.lineWidth=4;x.strokeStyle='rgba(10,8,30,.7)';x.strokeText(s,px,py);x.fillStyle=col;x.fillText(s,px,py)}
+function otext(s,px,py,col){x.font=canvasFont(17);x.lineJoin='round';x.lineWidth=4;x.strokeStyle='rgba(10,8,30,.7)';x.strokeText(s,px,py);x.fillStyle=col;x.fillText(s,px,py)}
 function ctxStar(px,py,r){starAt(px,py,1,Math.sin(r)*.35)}
 function ctxMissile(body,nose){
   x.fillStyle='rgba(255,140,50,.55)';x.beginPath();x.ellipse(-15,0,7+Math.random()*2,3.5,0,0,TAU);x.fill();ctxDot(-13,0,2.5+Math.random()*1.5,'#ffd166');
@@ -26,15 +26,16 @@ function drawEnemyMissile(m){if(Number.isFinite(m.bossSkin)){x.save();x.rotate(M
 function glass(px,py,w,h,r){x.save();const g=x.createLinearGradient(0,py,0,py+h);g.addColorStop(0,'rgba(255,255,255,.16)');g.addColorStop(1,'rgba(255,255,255,.04)');x.fillStyle='rgba(16,14,40,.55)';x.beginPath();x.roundRect(px,py,w,h,r);x.fill();x.fillStyle=g;x.fill();x.strokeStyle='rgba(255,243,224,.24)';x.lineWidth=1;x.stroke();x.restore()}
 function pips(px,py,w,h,n,fill){const gap=4,pw=(w-gap*(n-1))/n;for(let i=0;i<n;i++){const bx=px+i*(pw+gap);x.fillStyle='rgba(0,0,0,.45)';x.beginPath();x.roundRect(bx,py,pw,h,h/2);x.fill();const f=Math.max(0,Math.min(1,fill-i));if(f>0){x.fillStyle='#4fdca0';x.beginPath();x.roundRect(bx,py,Math.max(h,pw*f),h,h/2);x.fill()}}}
 function drawHud(){
-  const bw=40,lw=Math.max(150,Math.min(190,W-16-16-bw-8-100-8)),rx=16+lw+8,rw=Math.max(84,W-16-bw-8-rx),im=SPR[lv-1],starScale=1+hudStarPop*.16,coinScale=1+hudCoinPop*.12;
+  const lw=Math.max(112,Math.min(172,(W-136)*.55)),rx=16+lw+8,rw=W-112-rx,im=SPR[lv-1],starScale=reducedMotion()?1:1+hudStarPop*.12;
   glass(16,14,lw,66,14);
-  if(im&&im.complete&&im.naturalWidth){const k=50/Math.max(im.naturalWidth,im.naturalHeight);x.drawImage(im,26+(50-im.naturalWidth*k)/2,22+(50-im.naturalHeight*k)/2,im.naturalWidth*k,im.naturalHeight*k)}
-  x.textAlign='left';x.font='20px Pixelta,monospace';x.fillStyle='#ffd166';x.fillText('Lv '+lv,86,38);
-  pips(86,46,lw-82,8,5,lv>=LEVEL_COUNT?5:evoStars%5);
-  x.font='13px Pixelta,monospace';x.fillStyle='rgba(255,243,224,.8)';x.fillText(lv>=LEVEL_COUNT?'MAX EVOLUTION':(evoStars%5)+' / 5 TO NEXT',86,71);
+  if(im&&im.complete&&im.naturalWidth){const k=34/Math.max(im.naturalWidth,im.naturalHeight);x.drawImage(im,22+(34-im.naturalWidth*k)/2,22+(34-im.naturalHeight*k)/2,im.naturalWidth*k,im.naturalHeight*k)}
+  x.textAlign='left';x.font=canvasFont(18,700,'score');x.fillStyle='#ffd166';x.fillText('Lv '+lv,62,37,lw-54);
+  pips(62,45,lw-54,7,5,lv>=LEVEL_COUNT?5:evoStars%5);
+  x.font=canvasFont(13);x.fillStyle='rgba(255,243,224,.9)';x.fillText(lv>=LEVEL_COUNT?'MAX LEVEL':(evoStars%5)+' / 5 STARS',62,70,lw-54);
   glass(rx,14,rw,66,14);
-  starAt(rx+24,38,.85*starScale,0,1);x.font=(22*starScale)+'px Pixelta,monospace';x.fillStyle='#fff3e0';x.fillText(String(stars),rx+44,45);
-  x.font=(13*coinScale)+'px Pixelta,monospace';x.fillStyle=bonus>0?'#6ee7b7':'rgba(255,243,224,.8)';x.fillText(Math.floor(t)+'s  +'+bonus+'  ◈'+runCoins,rx+12,70);
+  starAt(rx+17,36,.65*starScale,0,1);x.font=canvasFont(20*starScale,600,'score');x.fillStyle='#fff3e0';x.fillText(String(stars),rx+33,43,rw-39);
+  x.font=canvasFont(14,600,'score');x.fillStyle=hudCoinPop>0?'#ffe29a':'#fff3e0';x.fillText('◈ '+runCoins,rx+10,69,rw-20);
+  x.font=canvasFont(12);x.fillStyle='#fff3e0';x.textAlign='right';x.fillText(Math.floor(t)+'s · +'+bonus,W-16,79,88);x.textAlign='left';
   const powers=[['Shield',shield,'#6ec8ff'],['Magnet',mag,'#6ee7b7'],['Slow',slow,'#c4a1ff']].filter(p=>p[1]>0);
-  if(powers.length){const py=86,pw=W-32,step=pw/powers.length;glass(16,py,pw,42,12);x.font='12px Pixelta,monospace';powers.forEach(([n,v,c],i)=>{const px=16+i*step+9,barW=Math.max(28,step-56),full=n==='Shield'?shieldTime():n==='Magnet'?8:6,ratio=Math.max(0,Math.min(1,v/full));ctxDot(px+8,py+16,8,c);x.fillStyle='#151534';x.font='11px Pixelta,monospace';x.textAlign='center';x.fillText(n.charAt(0),px+8,py+20);x.textAlign='left';x.fillStyle='#fff3e0';x.font='12px Pixelta,monospace';x.fillText(n+' '+Math.ceil(v)+'s',px+21,py+18);x.fillStyle='rgba(0,0,0,.36)';x.beginPath();x.roundRect(px+21,py+25,barW,5,3);x.fill();x.fillStyle=c;x.beginPath();x.roundRect(px+21,py+25,Math.max(4,barW*ratio),5,3);x.fill()})}
+  if(powers.length){const py=86,pw=W-32,step=pw/powers.length;glass(16,py,pw,42,12);x.font=canvasFont(12);powers.forEach(([n,v,c],i)=>{const px=16+i*step+9,barW=Math.max(28,step-56),full=n==='Shield'?shieldTime():n==='Magnet'?8:6,ratio=Math.max(0,Math.min(1,v/full));ctxDot(px+8,py+16,8,c);x.fillStyle='#151534';x.font=canvasFont(11);x.textAlign='center';x.fillText(n.charAt(0),px+8,py+20);x.textAlign='left';x.fillStyle='#fff3e0';x.font=canvasFont(12);x.fillText(n+' '+Math.ceil(v)+'s',px+21,py+18);x.fillStyle='rgba(0,0,0,.36)';x.beginPath();x.roundRect(px+21,py+25,barW,5,3);x.fill();x.fillStyle=c;x.beginPath();x.roundRect(px+21,py+25,Math.max(4,barW*ratio),5,3);x.fill()})}
 }

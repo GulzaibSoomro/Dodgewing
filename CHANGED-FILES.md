@@ -1,5 +1,12 @@
 # Changed files
 
+## Arcade typography and larger player — 0.11.1
+
+- Added the Barlow Semi Condensed Medium and SemiBold files with their SIL license, and recorded font research in `FONT-NOTES.md`.
+- Shared font helpers now cover all canvas text, alongside updated CSS roles and startup font preloading. The offline build carries the font licenses.
+- Added a separate player artwork size and updated shields and firing points for an exact 2× enlargement without widening the collision core.
+- Added focused real-browser checks for font loading, all aircraft dimensions, pickup/collision boundaries and weapon alignment.
+
 ## Mobile UI/UX and motion pass — 0.11.0
 
 - Updated the game HUD, ability control, power-up timers, boss warning and health-bar presentation, joystick feedback, evolution and hit effects.

@@ -1,4 +1,4 @@
-# Dodgewing 0.11.0
+# Dodgewing 0.11.1
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -11,6 +11,7 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 ## Campaign
 
 - 30 evolution stages use 30 distinct transparent aircraft sprites supplied for this update. Sprite art is preserved as provided; each stage has a unique plane.
+- The in-flight player aircraft renders at 2× its previous width and height (96 px on typical portrait phones). Shields and weapon origins follow that size; its collision core retains the established difficulty.
 - Start at Level 1; each five collected stars advances one stage. Level 30 takes 145 stars without damage (29 level-ups).
 - Exactly one collectible star appears at a time. Collect it to reveal the next. During a boss, stars pause; one returns when the encounter ends. HUD pips show progress toward the next five-star milestone.
 - Difficulty grows across the 30 levels: the plane starts at 150 px/s and gains 10 px/s at each even-numbered level, reaching 300 px/s at Level 30. Regular missile speed rises from 55% to 93% of the current plane speed, spawn interval decreases from 2.8 to 0.55 seconds, turning grows, and the desktop missile cap rises from 2 to 16 (phone cap 2 to 8).
@@ -79,4 +80,4 @@ See `TESTING.md` and `TEST-REPORT.md` for executed results and limitations, [and
 
 ## Assets and release work
 
-The game now uses Oxanium, Rajdhani and Pixelify Sans, each included with its SIL Open Font License in `assets/fonts`. The original Pixelta files are retained but are no longer loaded by the game or bundled release. The new Dodgewing icon is supplied as editable SVG and PNGs for browser, iPhone and Android/PWA use. Aircraft licensing remains unconfirmed. No commercial licensing or ad SDK is included; the game uses the full screen.
+The game uses Oxanium for titles and scores, and Barlow Semi Condensed for buttons, labels and instructions. Both are included with their SIL Open Font Licenses in `assets/fonts` and in the standalone build. Legacy fonts are retained as source files but are no longer loaded or bundled. [Font research and attribution limits](FONT-NOTES.md) records the verified sources and selection. The Dodgewing icon is supplied as editable SVG and PNGs for browser, iPhone and Android/PWA use. Aircraft licensing remains unconfirmed. No commercial licensing or ad SDK is included; the game uses the full screen.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.1 — 2026-11-05
+
+- Replace pixel-style gameplay text with Barlow Semi Condensed; use Oxanium for titles and scores, with local font preloading and bundled SIL licenses.
+- Reserve HUD space for pause and ability buttons, constrain long values to their panels and make labels readable with the new fonts.
+- Double every player aircraft's rendered width and height; align shield effects and weapon origins to the larger artwork while retaining the existing collision core and missile size.
+- Document online font sources and the network restriction that prevented verification of reference games' exact in-game fonts.
+
 ## 0.11.0 — 2026-11-05
 
 - Rework the in-flight interface with clearer HUD groups, animated star and coin feedback, compact power-up timers, an icon-and-ring ability control, responsive joystick feedback and a three-second resume countdown.

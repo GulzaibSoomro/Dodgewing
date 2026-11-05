@@ -44,13 +44,13 @@ function drawFx(){
     const powerOffset=shield>0||mag>0||slow>0?48:0,bw=Math.min(W-32,340),bx=(W-bw)/2,by=104+powerOffset,target=Math.max(0,1-B.t/B.T);
     if(bossBarFor!==B.L){bossBarFor=B.L;bossBarFill=target;bossBarTrail=target}
     if(reducedMotion()){bossBarFill=target;bossBarTrail=target}else{bossBarFill+=(target-bossBarFill)*.2;bossBarTrail+=(bossBarFill-bossBarTrail)*.045}
-    x.textAlign='center';otext(BOSS[B.L].n,W/2,98+powerOffset,'#ffb0a6');x.font='12px Pixelta,monospace';x.fillStyle='#ffd3ca';x.fillText('DANGER · '+B.attack,W/2,by+31);
+    x.textAlign='center';otext(BOSS[B.L].n,W/2,98+powerOffset,'#ffb0a6');x.font=canvasFont(12);x.fillStyle='#ffd3ca';x.fillText('DANGER · '+B.attack,W/2,by+31);
     x.fillStyle='rgba(0,0,0,.5)';x.beginPath();x.roundRect(bx,by,bw,16,8);x.fill();x.strokeStyle='rgba(255,255,255,.2)';x.lineWidth=1;x.stroke();
     const bar=(v,col)=>{if(v<=0)return;x.fillStyle=col;x.beginPath();x.roundRect(bx+2,by+2,Math.max(12,(bw-4)*v),12,6);x.fill()};bar(bossBarTrail,'rgba(255,166,74,.58)');const bg=x.createLinearGradient(0,by+2,0,by+14);bg.addColorStop(0,'#ff9a8f');bg.addColorStop(1,'#e5392a');bar(bossBarFill,bg);x.textAlign='left'
   }
   if(S==='play'||S==='paused'||S==='countdown'){
     const globalFx=fx.filter(f=>f.global||Math.abs(f.x-W/2)<2).slice(0,3),localFx=fx.filter(f=>!(f.global||Math.abs(f.x-W/2)<2)),powers=shield>0||mag>0||slow>0,base=B?188+(powers?48:0):(powers?150:106);
-    const drawText=(f,px,py)=>{x.globalAlpha=Math.min(1,f.l*2);x.font='18px Pixelta,monospace';x.textAlign='center';x.lineJoin='round';x.lineWidth=4;x.strokeStyle='rgba(0,0,0,.55)';x.strokeText(f.s,px,py);x.fillStyle=f.c;x.fillText(f.s,px,py);x.globalAlpha=1;x.textAlign='left'};
+    const drawText=(f,px,py)=>{x.globalAlpha=Math.min(1,f.l*2);x.font=canvasFont(18);x.textAlign='center';x.lineJoin='round';x.lineWidth=4;x.strokeStyle='rgba(0,0,0,.55)';x.strokeText(f.s,px,py);x.fillStyle=f.c;x.fillText(f.s,px,py);x.globalAlpha=1;x.textAlign='left'};
     globalFx.forEach((f,i)=>drawText(f,W/2,base+i*34));localFx.forEach(f=>drawText(f,f.x,f.y));
   }
 }

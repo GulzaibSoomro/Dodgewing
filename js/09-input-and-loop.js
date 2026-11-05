@@ -5,6 +5,6 @@ function loop(n){if(!Number.isFinite(n))n=performance.now();if(SAFE_FRAME_MS&&n-
 joyInit();
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseG()});
 addEventListener('keydown',e=>{keys[e.key]=true;if(e.key==='p'||e.key==='Escape'){S==='play'?pauseG():resume()}if(e.key===' '){e.preventDefault&&e.preventDefault();useAbility()}});addEventListener('keyup',e=>{keys[e.key]=false});
-if(document.fonts&&document.fonts.load)document.fonts.load("16px Pixelta").then(()=>{if(S==='menu')layoutShow()},()=>{});
+if(document.fonts&&document.fonts.load)document.fonts.load(canvasFont(16)).then(()=>{if(S==='menu')layoutShow()},()=>{});
 addEventListener('resize',()=>{if(S==='menu')layoutShow()});
 menu();requestAnimationFrame(loop);

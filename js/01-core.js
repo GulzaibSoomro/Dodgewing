@@ -1,6 +1,8 @@
 // 01-core.js: Canvas, resize, helpers
 // Classic script (no modules): all files share one global scope and load in numeric order.
 const $=id=>document.getElementById(id),cv=$('c'),x=cv.getContext('2d',{alpha:false,desynchronized:false}),TAU=Math.PI*2;
+const GAME_FONTS={ui:'"Barlow Semi Condensed",sans-serif',display:'Oxanium,sans-serif',score:'Oxanium,sans-serif'};
+const canvasFont=(size,weight=600,role='ui')=>weight+' '+size+'px '+GAME_FONTS[role];
 // Android WebViews with some GPU drivers can leave stale black texture tiles behind
 // canvas text and sprites. Keep their canvas deliberately small and predictable.
 const SAFE_RENDER=typeof navigator!=='undefined'&&/Android/i.test(navigator.userAgent||''),SAFE_FRAME_MS=SAFE_RENDER?25:0;

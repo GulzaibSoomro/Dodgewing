@@ -28,6 +28,8 @@ const MISSILE_SHEET_SRC='assets/missiles/missile-sheet.png',MISSILE_SHEET=new Im
 const BOSS_SHEET_SRC='assets/bosses/boss-sheet.png',BOSS_SHEET=new Image();BOSS_SHEET.src=BOSS_SHEET_SRC;
 const normalMissileSkin=L=>L<=3?0:Math.min(26,Math.max(1,Math.floor(L)-3));
 const sz=()=>Math.max(48,Math.min(78,Math.min(W,H)*.11));
+// Aircraft artwork is enlarged independently of collision and pickup distances.
+const PLAYER_DRAW_SCALE=2,playerDrawSize=()=>sz()*PLAYER_DRAW_SCALE;
 const LEVEL_COUNT=30, STARS_PER_LEVEL=5;
 const tierOf=L=>Math.max(1,Math.min(LEVEL_COUNT,Math.floor(L)||1));
 // Old 12-plane saves unlock the first stage where each legacy aircraft appeared.

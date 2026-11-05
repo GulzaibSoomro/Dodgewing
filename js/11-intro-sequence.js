@@ -12,8 +12,12 @@
   const featured=SPRD[Math.min(LEVEL_COUNT-1,29)]||SPRD[0]||'';
   $('loading-plane').src=featured;
   const sprites=Promise.all(sources.map(loadImage));
-  const fonts=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();
-  fonts.then(()=>progress('Calibrating flight controls'),()=>progress('Calibrating flight controls'));
+  const fonts=document.fonts&&document.fonts.load?Promise.all([
+    document.fonts.load('700 32px Oxanium'),document.fonts.load('600 22px Oxanium'),
+    document.fonts.load('500 16px "Barlow Semi Condensed"'),document.fonts.load('600 18px "Barlow Semi Condensed"')
+  ]).then(()=>document.fonts.ready).catch(()=>{}):Promise.resolve();
+  // A failed font request keeps the system fallback; it must not block startup.
+  fonts.then(()=>progress('Calibrating flight controls'));
   async function begin(){
     await pause(1050);
     splash.classList.add('intro-leave');loading.classList.remove('hide');setTimeout(()=>loading.classList.add('intro-show'),16);
