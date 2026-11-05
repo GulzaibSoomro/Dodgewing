@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.0 — 2026-11-05
+
+- Rework the in-flight interface with clearer HUD groups, animated star and coin feedback, compact power-up timers, an icon-and-ring ability control, responsive joystick feedback and a three-second resume countdown.
+- Make messages use a fixed non-overlapping stack; add evolution bursts, damage and shield feedback, count-up game-over results, improved upgrade previews and smooth screen entries.
+- Improve boss attack readability with a danger label, Seeker warning rings and a smoothly drained health bar with a delayed damage strip.
+- Add a persistent Reduced Motion setting that suppresses nonessential pulsing, shake, sparkles and moving atmospheric effects while retaining gameplay feedback.
+
 ## 0.10.0 — 2026-11-05
 
 - Add persistent ◈ coins from stars, defeated missiles and bosses, plus four Hangar upgrades for engine speed, shield duration, magnet range and weapon damage.

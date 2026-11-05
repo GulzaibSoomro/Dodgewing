@@ -71,7 +71,7 @@ function drawSky(){
   if(c[0]!==lastSkyT){lastSkyT=c[0];const e=$('st');if(e&&e.style)e.style.background=c[0]}
   const n=nightAmt(skyL);
   if(n>0){const tm=performance.now()/1000;x.fillStyle='#ffffff';
-    for(const s of STARS){const a=Math.max(0,Math.min(1,(n-s.th*.85)/.12));if(a<=0)continue;x.globalAlpha=a*(.72+.28*Math.sin(tm*1.5+s.p));x.beginPath();x.arc(s.x*W,s.y*H,s.s,0,TAU);x.fill()}
+    for(const s of STARS){const a=Math.max(0,Math.min(1,(n-s.th*.85)/.12));if(a<=0)continue;x.globalAlpha=a*(reducedMotion()?1:.72+.28*Math.sin(tm*1.5+s.p));x.beginPath();x.arc(s.x*W,s.y*H,s.s,0,TAU);x.fill()}
     x.globalAlpha=1}
   const k=lvMix(CLD,1+difficulty(skyL)*11);cloudC='rgba('+Math.round(k[0])+','+Math.round(k[1])+','+Math.round(k[2])+','+k[3].toFixed(3)+')'}
 

@@ -14,19 +14,20 @@ const shieldTime=()=>5+upgradeRank('shield');
 const magnetRange=()=>260+upgradeRank('magnet')*55;
 const weaponBoost=()=>1+upgradeRank('weapon')*.12;
 function buyUpgrade(id){const cost=upgradeCost(id);if(!cost||save.coins<cost)return false;save.coins-=cost;save.upg[id]=upgradeRank(id)+1;store();snd('up');buzz(18);hangar();return true}
-function upgradeCards(){return UPGRADES.map(u=>{const rank=upgradeRank(u.id),cost=upgradeCost(u.id),max=rank>=4;return '<div class="upgrade-card"><span><b>'+u.n+' · '+rank+'/4</b><small>'+u.d+'</small></span><button '+(max||save.coins<cost?'disabled':'')+' onclick="buyUpgrade(\''+u.id+'\')">'+(max?'MAX':'◈ '+cost)+'</button></div>'}).join('')}
+function upgradePreview(id,rank){const next=Math.min(4,rank+1);if(id==='eng')return 'Flight speed: +'+(rank*3)+'% → +'+(next*3)+'%';if(id==='shield')return 'Shield time: '+(5+rank)+'s → '+(5+next)+'s';if(id==='magnet')return 'Pull range: '+(260+rank*55)+' → '+(260+next*55)+' px';return 'Weapon damage: +'+(rank*12)+'% → +'+(next*12)+'%'}
+function upgradeCards(){return UPGRADES.map(u=>{const rank=upgradeRank(u.id),cost=upgradeCost(u.id),max=rank>=4,dots=Array.from({length:4},(_,i)=>'<i class="'+(i<rank?'on':'')+'"></i>').join('');return '<div class="upgrade-card"><span><b>'+u.n+'</b><small>'+upgradePreview(u.id,rank)+'</small><em class="rank-dots" aria-label="Rank '+rank+' of 4">'+dots+'</em></span><button '+(max||save.coins<cost?'disabled':'')+' onclick="buyUpgrade(\''+u.id+'\')">'+(max?'MAX':'◈ '+cost)+'</button></div>'}).join('')}
 
-let obs=[],obT=6,wind=0,abilityCd=0,boost=0,over=0,runCoins=0;
+let obs=[],obT=6,wind=0,abilityCd=0,boost=0,over=0,runCoins=0,resumeT=0,resumeTick=0,damageFlash=0,shieldFlash=0,hudStarPop=0,hudCoinPop=0,evolveBurst=0;
 const ABILITIES=[
-  {key:'G',n:'GUARD PULSE',cd:22},
-  {key:'M',n:'STAR PULL',cd:20},
-  {key:'T',n:'TIME BRAKE',cd:22},
-  {key:'O',n:'OVERDRIVE',cd:24},
-  {key:'B',n:'AFTERBURNER',cd:24},
-  {key:'N',n:'NOVA WAVE',cd:28}
+  {key:'G',icon:'✦',n:'GUARD PULSE',cd:22},
+  {key:'M',icon:'◎',n:'STAR PULL',cd:20},
+  {key:'T',icon:'◷',n:'TIME BRAKE',cd:22},
+  {key:'O',icon:'⚡',n:'OVERDRIVE',cd:24},
+  {key:'B',icon:'➤',n:'AFTERBURNER',cd:24},
+  {key:'N',icon:'✹',n:'NOVA WAVE',cd:28}
 ];
 const abilityFor=L=>ABILITIES[Math.min(ABILITIES.length-1,Math.max(0,Math.floor((Math.max(1,L)-1)/5)))];
-function syncAbilityButton(){const b=$('ab');if(!b)return;const a=abilityFor(lv);b.textContent=abilityCd>0?Math.ceil(abilityCd)+'s':a.key;b.title=abilityCd>0?a.n+' recharging':a.n;b.setAttribute&&b.setAttribute('aria-label',a.n)}
+function syncAbilityButton(){const b=$('ab');if(!b)return;const a=abilityFor(lv),ready=abilityCd<=0,icon=$('ab-icon'),ring=$('ab-ring'),progress=ready?1:Math.max(0,1-abilityCd/a.cd);if(icon)icon.textContent=ready?a.icon:Math.ceil(abilityCd);else b.textContent=ready?a.icon:Math.ceil(abilityCd)+'s';if(ring&&ring.style)ring.style.setProperty('--cool',Math.round(progress*360)+'deg');if(b.classList){b.classList.toggle('ready',ready);b.classList.toggle('cooling',!ready)}b.title=ready?a.n:a.n+' recharging';b.setAttribute&&b.setAttribute('aria-label',ready?a.n:a.n+' recharging')}
 function useAbility(){if(S!=='play'||abilityCd>0)return false;const a=abilityFor(lv);abilityCd=a.cd;
   if(a.key==='G')shield=Math.max(shield,3+upgradeRank('shield')*.5);
   else if(a.key==='M')mag=Math.max(mag,9);
@@ -36,8 +37,8 @@ function useAbility(){if(S!=='play'||abilityCd>0)return false;const a=abilityFor
   else{let cleared=0;for(let i=ms.length-1;i>=0;i--){const m=ms[i];if(!m.bm&&Math.hypot(m.x-pl.x,m.y-pl.y)<Math.max(W,H)*.34){boom(m.x,m.y,'120,220,255',8);ms.splice(i,1);cleared++}}if(cleared)awardCoins(cleared,pl.x,pl.y);}
   fx.push({x:pl.x,y:pl.y-38,s:a.n,l:1.25,c:'#9fefff'});snd('ability');buzz(14);syncAbilityButton();return true}
 
-function awardCoins(n,px,py){if(!(n>0))return;save.coins+=Math.floor(n);runCoins+=Math.floor(n);if(px!==undefined&&py!==undefined&&n>=8)fx.push({x:px,y:py-28,s:'◈ +'+Math.floor(n),l:1.15,c:'#ffe066'})}
-function unlockCheckpoint(L){if(!checkpointLevels.includes(L)||L<=save.cp||L>=LEVEL_COUNT)return;save.cp=L;store();fx.push({x:W/2,y:188,s:'CHECKPOINT · LEVEL '+L,l:1.8,c:'#9fefff'});snd('checkpoint');buzz(20)}
+function awardCoins(n,px,py){if(!(n>0))return;save.coins+=Math.floor(n);runCoins+=Math.floor(n);hudCoinPop=1;if(px!==undefined&&py!==undefined&&n>=8)fx.push({x:px,y:py-28,s:'◈ +'+Math.floor(n),l:1.15,c:'#ffe066'})}
+function unlockCheckpoint(L){if(!checkpointLevels.includes(L)||L<=save.cp||L>=LEVEL_COUNT)return;save.cp=L;store();fx.push({x:W/2,y:188,s:'CHECKPOINT · LEVEL '+L,l:1.8,c:'#9fefff',global:1});snd('checkpoint');buzz(20)}
 function checkpointCost(){const cp=Math.max(1,save.cp||1);return cp>1?20+(cp/5-1)*10:0}
 function refreshContinue(){const b=$('cont'),cost=checkpointCost();if(!b)return;const available=cost>0&&save.coins>=cost;b.classList.toggle('hide',!available);b.textContent=available?'Continue Lv '+save.cp+' · ◈ '+cost:'Continue'}
 function continueRun(){const cp=Math.max(1,save.cp||1),cost=checkpointCost();if(cp<=1||save.coins<cost)return false;save.coins-=cost;store();start();lv=cp;prevLv=cp;evoStars=(cp-1)*STARS_PER_LEVEL;peakLv=cp;sp=planeSpeed(cp);skyL=cp;inv=3;hint=0;banT=1.7;banTx='CHECKPOINT · LEVEL '+cp;banC='#9fefff';banIc=0;syncAbilityButton();snd('checkpoint');return true}
@@ -49,7 +50,7 @@ function spawnObstacle(){const ty=obstacleKind(lv);if(ty==='gate'){obs.push({ty,
 }
 function obstacleHit(i,o){if(o.ty==='cloud'){wind=Math.max(wind,1.35);fx.push({x:pl.x,y:pl.y-34,s:'TURBULENCE',l:.8,c:'#d8eeff'});obs.splice(i,1);return}
   if(inv>0){obs.splice(i,1);return}
-  if(shield>0){shield=0;inv=.8;snd('hit');boom(pl.x,pl.y,'110,200,255',14);obs.splice(i,1);buzz(22);return}
+  if(shield>0){shield=0;inv=.8;shieldFlash=.55;snd('hit');boom(pl.x,pl.y,'110,200,255',14);obs.splice(i,1);buzz(22);return}
   obs.splice(i,1);if(lv>1)hurt();else die()
 }
 function updateObstacles(d){if(S!=='play')return;wind=Math.max(0,wind-d);abilityCd=Math.max(0,abilityCd-d);boost=Math.max(0,boost-d);over=Math.max(0,over-d);if(Math.floor((abilityCd+d)*2)!==Math.floor(abilityCd*2))syncAbilityButton();

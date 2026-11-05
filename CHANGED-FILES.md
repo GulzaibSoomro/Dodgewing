@@ -1,5 +1,11 @@
 # Changed files
 
+## Mobile UI/UX and motion pass — 0.11.0
+
+- Updated the game HUD, ability control, power-up timers, boss warning and health-bar presentation, joystick feedback, evolution and hit effects.
+- Added notification stacking, a 3–2–1 resume countdown, game-over value count-up, upgrade before/after previews and a persistent Reduced Motion setting.
+- Added focused logic and mobile-browser checks for the new controls and settings, then rebuilt the standalone release and Android APK as v0.11.0.
+
 ## Progression, abilities and hazards — 0.10.0
 
 - Added `js/07b-flight-systems.js` for account upgrades, checkpoint rescue, six plane-family abilities and the five world hazard families.

@@ -1,4 +1,4 @@
-# Dodgewing 0.10.0
+# Dodgewing 0.11.0
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -6,7 +6,7 @@ Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework 
 
 Open `index.html`, or run `npm start` and visit `http://localhost:5500`. `dist/dodgewing.html` is a self-contained offline build with embedded sprites and font.
 
-At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes and upgrades, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** for sound, music, graphics, vibration and steering side. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
+At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes and upgrades, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** for sound, music, graphics, Reduced Motion, vibration and steering side. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
 
 ## Campaign
 
@@ -20,9 +20,9 @@ At launch, a black splash screen with a centered orange Sunset Run aircraft pane
 - The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style, with slow horizontal and vertical cloud drift to convey forward flight. The worlds introduce turbulence, mines, laser gates, drones and asteroids in order.
 - Boss encounters: Heavy Missile at 9 uses a telegraphed charge; Missile Commander at 17 uses target lasers, fan volleys and rings; Advanced Seeker at 25 launches fast tracking attacks; Cosmic Overlord at 30 sends wall, ring and homing waves. Each has its own lightweight, transparent sprite, warning card, named attack state, sound and large health bar. Bosses award coins.
 - Each evolution displays a plane-unlocked card with the new aircraft and weapon. Level 1 also gives short “move,” “collect stars” and “avoid missiles” prompts. Finishing the Level 30 boss opens a final victory screen with the run score, best plane and a Play again button.
-- S = shield; M = magnet; L = slow missiles. Active power-up names and remaining seconds appear in a transparent bar beneath the top HUD. Near misses give combo bonuses.
+- S = shield; M = magnet; L = slow missiles. Active power-up names, icons, countdowns and timer bars appear in a transparent strip beneath the top HUD. Near misses give combo bonuses.
 - Stars, destroyed missiles and bosses award ◈ coins. The Hangar Upgrade Bay has four permanent four-rank upgrades: engine speed, shield duration, magnet range and weapon damage. Reaching Levels 5, 10, 15, 20 and 25 unlocks a paid checkpoint rescue from the game-over screen.
-- Tap the blue ability button beside Pause, or press Space, to activate the current five-level aircraft family ability: Guard Pulse, Star Pull, Time Brake, Overdrive, Afterburner or Nova Wave. Settings include effects, adaptive music, graphics mode, vibration and left-handed steering.
+- Tap the blue ability button beside Pause, or press Space, to activate the current five-level aircraft family ability: Guard Pulse, Star Pull, Time Brake, Overdrive, Afterburner or Nova Wave. Its icon and circular cooldown show when it is ready again. Resume uses a short 3–2–1 countdown. Settings include effects, adaptive music, graphics mode, Reduced Motion, vibration and left-handed steering.
 - Points = `(whole seconds + stars × 5 + bonus) × 2`. Paint prices remain 0 / 400 / 1200 / 3000. Three daily missions, ten achievements and unlocked trail rewards remain.
 
 ## Saves and compatibility

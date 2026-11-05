@@ -1,19 +1,19 @@
-# Testing — 0.10.0
+# Testing — 0.11.0
 
 ## Results executed for this completion pass
 
 | Check | Result |
 |---|---|
-| Deterministic Node logic suite | Passed: 432 checks, 0 failures |
-| Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 112 checks, 0 failures |
-| Self-contained `dist/dodgewing.html` browser smoke test | Passed: 52 checks, 0 failures |
+| Deterministic Node logic suite | Passed: 437 checks, 0 failures |
+| Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 116 checks, 0 failures |
+| Self-contained `dist/dodgewing.html` browser smoke test | Passed: 56 checks, 0 failures |
 | Android debug APK | Passed: compiled for Android 15; package metadata, embedded offline game and v1/v2 signatures verified |
 | JavaScript syntax checks | Passed |
 | Physical Android device | Not tested |
 
-`npm test` rebuilt the standalone game with `node tools/build.js` and ran the logic suite. It covers save migration and malformed saves, all 30 aircraft/stages, progressive stars, campaign difficulty, coins, upgrades, checkpoints, signature abilities, world hazards, the Level 1–3 opening missile and later missile evolution, Final Challenge missile skins, Level 4 weapon start, four boss identities and attacks, missile hit points and variants, achievements, final victory, LocalStorage behavior and representative mocked rendering.
+`npm test` rebuilt the standalone game with `node tools/build.js` and ran the logic suite. It covers save migration and malformed saves, all 30 aircraft/stages, progressive stars, campaign difficulty, coins, upgrades, checkpoints, signature abilities, world hazards, the Level 1–3 opening missile and later missile evolution, Final Challenge missile skins, Level 4 weapon start, four boss identities and attacks, missile hit points and variants, achievements, final victory, LocalStorage behavior, the 3–2–1 resume transition, upgrade previews, Reduced Motion persistence, collection HUD feedback and representative mocked rendering.
 
-The browser suites ran against `http://127.0.0.1:5500/` using the local server. They exercised the no-text, centered black-and-orange splash-to-loading sequence, app-icon metadata, full-screen mobile layout, coin upgrades, plane abilities, short translucent announcements, the 150–300 px/s base plane-speed curve, all 30 missile sprites, four boss sprites, full home screen, expanded settings, medals, touch controls, pause/resume, save compatibility, all 30 campaign stages, boss intros, final victory, level regression, game-over/retry and five viewport sizes. The standalone build was also checked in Chromium: it contains all aircraft assets, missile and boss sheets, splash art, app-icon data, the three new font families, and no external source-script or aircraft references.
+The browser suites ran against `http://127.0.0.1:5500/` using the local server. They exercised the no-text, centered black-and-orange splash-to-loading sequence, app-icon metadata, full-screen mobile layout, coin upgrades and rank previews, plane ability icons and cooldown ring, compact power-up timers, touch controls, the 3–2–1 resume transition, Reduced Motion persistence, game-over count-up, save compatibility, all 30 campaign stages, boss intros, final victory, level regression, game-over/retry and five viewport sizes. The standalone build was also checked in Chromium: it contains all aircraft assets, missile and boss sheets, splash art, app-icon data, the three new font families, and no external source-script or aircraft references.
 
 ## Running the checks
 
