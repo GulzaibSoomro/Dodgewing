@@ -1,4 +1,4 @@
-# Dodgewing 0.11.1
+# Dodgewing 0.12.0
 
 Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
 
@@ -6,10 +6,12 @@ Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework 
 
 Open `index.html`, or run `npm start` and visit `http://localhost:5500`. `dist/dodgewing.html` is a self-contained offline build with embedded sprites and font.
 
-At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the home screen appears. Use **Play** to start a run, **Hangar** to view planes and upgrades, **Rewards** to view missions and medal badges, **High scores** to view local records, and **Settings** for sound, music, graphics, Reduced Motion, vibration and steering side. On touch screens use the bottom steering circle; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
+At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the Living Command Hangar appears. It combines the current aircraft, world lighting, campaign route, boss radar, daily briefing, reward crate, last-flight record, checkpoint return and Continue Flight action in one mobile layout. Swipe the hero aircraft to inspect unlocked planes, tap it to reveal engine/weapon/ability details, or use the Home, Hangar, Map, Rewards and Settings dock. On touch screens use the bottom steering circle during a run; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
 
 ## Campaign
 
+- The Living Command Hangar changes sky and lighting with the selected aircraft world, opens with animated hangar doors and uses light parallax, runway depth, engine glow and ambient menu tones. Reduced Motion disables nonessential movement.
+- Pilot rank and callsign reflect campaign progress. A 30-level Flight Map marks unlocked aircraft and all four bosses; selecting an unlocked stage returns to that plane in the home carousel.
 - 30 evolution stages use 30 distinct transparent aircraft sprites supplied for this update. Sprite art is preserved as provided; each stage has a unique plane.
 - The in-flight player aircraft renders at 2× its previous width and height (96 px on typical portrait phones). Shields and weapon origins follow that size; its collision core retains the established difficulty.
 - Start at Level 1; each five collected stars advances one stage. Level 30 takes 145 stars without damage (29 level-ups).
@@ -72,6 +74,7 @@ npm start
 # In another terminal:
 python3 tests/browser_smoke.py http://127.0.0.1:5500/
 python3 tests/browser_campaign.py http://127.0.0.1:5500/
+python3 tests/browser_command_hangar.py http://127.0.0.1:5500/
 npm run prepare:android
 cd android && ./gradlew assembleDebug
 ```

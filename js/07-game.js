@@ -80,6 +80,8 @@ function draw(){
   frame();
   drawSky();x.fillStyle=cloudC;
   for(const c of clouds){x.beginPath();x.ellipse(c.x*W,c.y*H,c.s,c.s*.28,0,0,TAU);x.fill();x.beginPath();x.ellipse(c.x*W,c.y*H,c.s*.65,c.s*.18,0,0,TAU);x.fill()}
+  const homeScene=S==='menu'&&menuOn;
+  if(!homeScene){
   for(const s of st){ctxStar(s.x,s.y,s.r)}
   for(const p of pu){const k=PUC[p.ty||'s'];x.fillStyle='rgba(16,14,40,.65)';x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.fill();x.strokeStyle=k[0];x.lineWidth=3;x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.stroke();x.fillStyle=k[0];x.font=canvasFont(15);x.textAlign='center';x.fillText(k[1],p.x,p.y+5);x.textAlign='left'}
   drawObstacles();
@@ -87,7 +89,8 @@ function draw(){
   for(const m of ms){x.save();x.translate(m.x,m.y);x.rotate(m.a);
     if(m.r>1&&!Number.isFinite(m.bossSkin))x.scale(m.r,m.r);drawEnemyMissile(m);if(m.st==='warn'){x.strokeStyle='rgba(255,60,60,'+(m.stT<.3?.9:.45)+')';x.lineWidth=3;x.beginPath();x.moveTo(20,0);x.lineTo(700,0);x.stroke()}x.restore()}
   drawBullets();
-  if(S==='menu'&&menuOn)showcase();
+  }
+  if(homeScene)showcase();
   if(S==='play'||S==='paused'||S==='countdown'){x.save();x.translate(pl.x,pl.y);x.rotate(pl.a+Math.PI/2);
     x.shadowColor='rgba('+trailC+',.8)';x.shadowBlur=lowGraphics()?0:10;
     const pop=reducedMotion()?1:1+.3*Math.sin(Math.min(1,upT/1.4)*Math.PI),ia=inv>0&&!reducedMotion()&&Math.floor(t*14)%2?.35:1;

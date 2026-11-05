@@ -1,5 +1,13 @@
 # Changed files
 
+## Living Command Hangar — 0.12.0
+
+- Rebuilt the home markup and responsive styling around a large interactive plane, live world scene, smart flight actions, daily briefing and one-thumb navigation.
+- Added `js/12-command-hangar.js` for aircraft previews and inspection, pilot rank, campaign map, boss radar, unlock celebration, home ambience and checkpoint return.
+- Isolated the home canvas from stale gameplay objects and made its sky follow the selected aircraft world.
+- Added `tests/browser_command_hangar.py` for 88 real-browser checks across portrait phone, short phone, landscape and desktop layouts.
+- Bumped the web and Android packages to v0.12.0 / version code 13 and rebuilt the offline release.
+
 ## Arcade typography and larger player — 0.11.1
 
 - Added the Barlow Semi Condensed Medium and SemiBold files with their SIL license, and recorded font research in `FONT-NOTES.md`.

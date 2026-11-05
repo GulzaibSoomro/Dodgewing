@@ -63,7 +63,7 @@ const skyAt=L=>lvMix(SKY,1+difficulty(L)*11).map(c=>'rgb('+c.map(Math.round).joi
 const nightAmt=L=>Math.max(0,Math.min(1,(1+difficulty(L)*11-6.8)/5.2));
 const STARS=Array.from({length:32},()=>({x:Math.random(),y:Math.random()*.8,s:.8+Math.random()*1.4,p:Math.random()*6.28,th:Math.random()}));
 let skyL=1,smokeC='95,95,120',cloudC='rgba(255,255,255,.4)',lastSkyT='';
-function updateSky(d){skyL+=((S==='menu'?1:lv)-skyL)*Math.min(1,d*1.1);smokeC=(1+difficulty(skyL)*11)<6.8?'95,95,120':'205,205,220';}
+function updateSky(d){const menuLevel=typeof homeSkyLevel==='function'?homeSkyLevel():1;skyL+=((S==='menu'?menuLevel:lv)-skyL)*Math.min(1,d*1.1);smokeC=(1+difficulty(skyL)*11)<6.8?'95,95,120':'205,205,220';}
 function drawSky(){
   const c=skyAt(skyL),g=x.createLinearGradient(0,0,0,H);
   g.addColorStop(0,c[0]);g.addColorStop(.38,c[1]);g.addColorStop(.7,c[2]);g.addColorStop(1,c[3]);

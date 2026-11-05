@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.0 — 2026-11-05
+
+- Replace the old button stack with a Living Command Hangar built around a large interactive aircraft, dynamic world lighting, runway depth and lightweight parallax.
+- Add swipeable unlocked-plane previews, tap inspection for engine/weapon/ability details, Level 4+ engine glow and a new-aircraft spotlight return animation.
+- Add a smart Continue Flight action, affordable checkpoint return, pilot callsign/rank, last-flight card, daily briefing and animated reward crate.
+- Add a six-world progress strip, next-boss radar and a complete 30-level Flight Map with unlocked-plane and boss markers.
+- Add a one-thumb five-item navigation dock, contextual icon/button motion, adaptive home ambience and Reduced Motion coverage.
+- Hide leftover gameplay objects whenever the Command Hangar is visible and retain the low-cost Android Safe Render composition.
+
 ## 0.11.1 — 2026-11-05
 
 - Replace pixel-style gameplay text with Barlow Semi Condensed; use Oxanium for titles and scores, with local font preloading and bundled SIL licenses.

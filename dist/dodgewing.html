@@ -133,6 +133,34 @@ body.reduce-motion *{animation-duration:.01ms!important;animation-iteration-coun
 
 button{font-family:var(--font-ui);letter-spacing:.02em}.chip,.mp,.hot,.victory-score,.count-value{font-variant-numeric:tabular-nums lining-nums}.sec{font-family:var(--font-display);font-weight:600}.card small,.setting small,.upgrade-card small{font-size:14px;line-height:1.4}.unlock small{line-height:1.35}#mh h1{font-size:clamp(2.65rem,11.5vw,4.6rem)}
 
+/* Living Command Hangar home screen. The canvas supplies the moving sky; these
+   bounded DOM layers keep the Android Safe Render path light and predictable. */
+#menu.command-home{--world:#ffd47c;--world-deep:#ff8d42;--plane:#ffb347;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;justify-items:stretch;align-items:stretch;gap:5px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px calc(68px + env(safe-area-inset-bottom,0px));overflow:hidden;background:linear-gradient(180deg,rgba(8,10,33,.12),rgba(8,8,30,.12) 48%,rgba(10,8,28,.68));isolation:isolate;text-align:left}
+#menu[data-world="1"]{--world:#a8d9ff;--world-deep:#397ab8}#menu[data-world="2"]{--world:#ffd098;--world-deep:#ef744d}#menu[data-world="3"]{--world:#c7b7ff;--world-deep:#6850b2}#menu[data-world="4"]{--world:#8fe7ff;--world-deep:#2779a5}#menu[data-world="5"]{--world:#ff9af0;--world-deep:#684bb5}
+.hangar-scene{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;perspective:700px}.hangar-sun{position:absolute;left:50%;top:23%;width:min(70vw,440px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,243,194,.38),rgba(255,184,92,.14) 36%,transparent 67%);opacity:.9}.hangar-grid{position:absolute;left:-25%;right:-25%;bottom:-12%;height:45%;transform:rotateX(65deg);transform-origin:50% 100%;background-image:linear-gradient(rgba(255,223,156,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(255,223,156,.14) 1px,transparent 1px);background-size:38px 30px;mask-image:linear-gradient(transparent,#000 38%);opacity:.55}.hangar-runway{position:absolute;left:50%;bottom:-9%;width:min(76vw,520px);height:52%;transform:translateX(-50%);clip-path:polygon(39% 0,61% 0,100% 100%,0 100%);background:linear-gradient(90deg,transparent 47%,rgba(255,238,177,.72) 48% 52%,transparent 53%),linear-gradient(90deg,rgba(255,180,72,.42) 0 2%,transparent 2% 98%,rgba(255,180,72,.42) 98%);opacity:.45}.hangar-door{position:absolute;top:0;bottom:0;width:51%;background:linear-gradient(90deg,rgba(5,7,24,.96),rgba(27,29,61,.86));box-shadow:inset -2px 0 rgba(255,207,123,.16)}.hangar-door.left{left:0;transform:translateX(-103%)}.hangar-door.right{right:0;transform:translateX(103%) scaleX(-1)}#menu.command-enter .hangar-door.left{animation:door-left .8s cubic-bezier(.3,.72,.2,1)}#menu.command-enter .hangar-door.right{animation:door-right .8s cubic-bezier(.3,.72,.2,1)}
+@keyframes door-left{0%{transform:translateX(0)}100%{transform:translateX(-103%)}}@keyframes door-right{0%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(103%) scaleX(-1)}}
+.command-top{display:grid;grid-template-columns:minmax(0,1fr) auto 40px;gap:7px;align-items:center;z-index:2;min-height:48px}.pilot-card{display:flex;align-items:center;gap:8px;min-width:0;height:48px;padding:5px 9px;text-align:left;border-radius:15px;background:linear-gradient(120deg,rgba(16,17,48,.82),rgba(38,32,71,.62))}.pilot-card>i{display:grid;place-items:center;width:34px;height:34px;flex:none;border:1px solid rgba(255,225,150,.72);border-radius:50%;background:radial-gradient(circle at 35% 25%,#ffeaa8,#c98725 64%,#633514);color:#3d2107;font-family:var(--font-display);font-style:normal;font-weight:800;box-shadow:0 0 12px rgba(255,199,91,.28)}.pilot-card span{min-width:0;display:flex;flex-direction:column;line-height:1.05}.pilot-card small{font-size:9px;letter-spacing:.12em;color:#bceaff}.pilot-card b{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-display);font-size:12px;color:#ffe09a}.pilot-card em{font-size:9px;font-style:normal;opacity:.64}.command-wallet{height:40px;padding:0 9px;font-size:14px;white-space:nowrap}.command-wallet .si{width:19px;height:19px}
+.command-hero{position:relative;z-index:1;min-height:0;display:grid;grid-template-rows:auto minmax(126px,1fr) auto auto;align-items:center;justify-items:center;gap:2px;width:100%}.command-brand{display:flex;align-items:center;justify-content:space-between;width:100%;padding:1px 5px}.command-brand h1{font-size:clamp(1.15rem,5.6vw,2rem)!important;line-height:1;letter-spacing:.12em;filter:drop-shadow(0 2px 0 #6b3300);transform:skewX(-4deg)}.command-brand button{min-width:0;padding:5px 9px;border:0;background:rgba(11,11,35,.45);box-shadow:none;border-radius:999px;font-size:11px}.command-brand button span{display:inline-grid;place-items:center;width:17px;height:17px;margin-right:4px;border:1px solid currentColor;border-radius:50%;font-family:var(--font-score)}
+.home-plane-wrap{position:relative;width:min(100%,520px);height:100%;min-height:126px;display:grid;place-items:center;transform:translate3d(calc(var(--px,0)*4px),calc(var(--py,0)*3px),0);transition:transform .2s ease}.home-plane-stage{position:relative;width:min(62vw,250px);height:100%;min-height:126px;max-height:245px;display:grid;place-items:center;outline:none;cursor:grab;touch-action:pan-y}.home-plane-stage:active{cursor:grabbing}.home-plane-stage:focus-visible{outline:2px solid var(--world);outline-offset:3px;border-radius:28px}.home-plane-stage>img{position:relative;z-index:3;display:block;width:clamp(130px,40vw,205px);height:clamp(130px,22vh,205px);object-fit:contain;transform:perspective(540px) rotateY(calc(var(--tilt-x,0)*7deg)) rotateX(calc(var(--tilt-y,0)*-5deg)) translateY(calc(sin(var(--float,0))*1px));filter:drop-shadow(0 12px 8px rgba(0,0,0,.42)) drop-shadow(0 0 13px var(--plane));transition:transform .22s cubic-bezier(.2,.8,.25,1),opacity .16s}.plane-aura{position:absolute;z-index:1;width:86%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),rgba(255,188,89,.12) 32%,transparent 68%);box-shadow:0 0 35px color-mix(in srgb,var(--plane) 42%,transparent);animation:hangar-breathe 3.2s ease-in-out infinite}.plane-shadow{position:absolute;z-index:2;bottom:8%;width:58%;height:17%;border-radius:50%;background:rgba(5,5,22,.4);transform:scaleY(.42);box-shadow:0 0 18px rgba(5,5,22,.38)}@keyframes hangar-breathe{50%{transform:scale(1.07);opacity:.72}}
+.plane-step{position:absolute;z-index:7;top:50%;width:34px;height:52px;min-width:0;padding:0;transform:translateY(-50%);border:0;background:rgba(12,11,37,.48);font-family:var(--font-score);font-size:35px;line-height:1;box-shadow:none}.plane-step:active{transform:translateY(-48%)}.plane-step.prev{left:2px}.plane-step.next{right:2px}.plane-step:disabled{opacity:.18}
+.boss-radar{position:absolute;z-index:6;top:2px;right:3px;display:flex;align-items:center;gap:5px;min-width:0;max-width:126px;padding:5px 7px;text-align:left;border-color:rgba(255,119,104,.38);border-radius:12px;background:linear-gradient(130deg,rgba(70,18,37,.72),rgba(14,14,45,.68));box-shadow:0 4px 12px rgba(0,0,0,.26)}.boss-radar svg{width:27px;height:27px;flex:none;color:#ff8e7f;fill:#ff8e7f}.boss-radar span{min-width:0;display:flex;flex-direction:column;line-height:1.02}.boss-radar small{font-size:7px;letter-spacing:.08em;color:#ffaaa1}.boss-radar b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-display);font-size:8px}.boss-radar em{font-size:8px;font-style:normal;color:#ffe0a6}.boss-radar svg{animation:radar-pulse 1.8s ease-in-out infinite}@keyframes radar-pulse{50%{opacity:.55;transform:scale(.92)}}
+.plane-hotspot{position:absolute;z-index:8;display:none;width:25px;height:25px;min-width:0;padding:0;border:1px solid #bdefff;border-radius:50%;background:#1d6e98;color:white;font-family:var(--font-score);font-size:10px;box-shadow:0 0 0 5px rgba(99,217,255,.12),0 0 12px rgba(99,217,255,.55)}.plane-hotspot::after{content:attr(data-label);position:absolute;left:50%;top:28px;transform:translateX(-50%);padding:2px 5px;border-radius:5px;background:rgba(8,9,29,.82);font-family:var(--font-ui);font-size:8px;white-space:nowrap}.hs-engine{left:28%;bottom:25%}.hs-weapon{right:26%;top:34%}.hs-ability{left:47%;top:18%}.home-plane-stage.inspect .plane-hotspot{display:block}.plane-inspector{position:absolute;z-index:9;left:50%;bottom:2px;display:none;width:min(92vw,310px);padding:6px 10px;transform:translateX(-50%);border:1px solid rgba(167,231,255,.42);border-radius:11px;background:rgba(9,10,34,.88);box-shadow:0 8px 18px rgba(0,0,0,.32);font-size:10px;color:#d8f3ff;text-align:center}.home-plane-stage.inspect .plane-inspector{display:block}.home-unlock{position:absolute;z-index:10;left:50%;top:48%;display:flex;flex-direction:column;align-items:center;min-width:180px;padding:8px 15px;transform:translate(-50%,-50%) scale(.78);border:1px solid #ffe09a;border-radius:13px;background:linear-gradient(130deg,rgba(95,51,16,.94),rgba(20,15,49,.94));opacity:0;pointer-events:none}.home-unlock small{font-size:8px;letter-spacing:.18em;color:#bcefff}.home-unlock b{font-family:var(--font-display);font-size:13px;color:#ffe09a}.home-plane-stage.unlock-show .home-unlock{animation:home-unlock 1.8s ease both}.home-plane-stage.unlock-show>img{animation:plane-arrive 1.15s cubic-bezier(.18,.86,.22,1)}@keyframes home-unlock{15%,72%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.04)}}@keyframes plane-arrive{0%{opacity:0;transform:translateY(-100px) scale(.55)}70%{opacity:1;transform:translateY(5px) scale(1.07)}100%{transform:none}}
+.plane-identity{display:flex;align-items:flex-end;justify-content:space-between;width:min(100%,420px);padding:0 7px 3px;border-bottom:1px solid rgba(255,230,175,.22)}.plane-identity span{display:flex;flex-direction:column}.plane-identity b{font-family:var(--font-score);font-size:11px;letter-spacing:.08em;color:var(--world)}.plane-identity strong{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-display);font-size:15px;color:#fff3e0}.plane-identity em{padding-bottom:2px;font-size:9px;font-style:normal;letter-spacing:.08em;color:#d9eaff}
+.home-route{display:flex;align-items:center;justify-content:center;width:min(100%,420px);height:24px;padding:0 6px}.route-node{position:relative;display:block;flex:1;height:3px;border:0;border-radius:0;background:rgba(255,255,255,.16);box-shadow:none;min-width:0;padding:0}.route-node::after{content:"";position:absolute;z-index:1;right:-4px;top:50%;width:8px;height:8px;transform:translateY(-50%);border:2px solid rgba(255,255,255,.4);border-radius:50%;background:#29284d}.route-node.done{background:linear-gradient(90deg,#ffd979,var(--world))}.route-node.done::after{border-color:#ffe3a0;background:var(--world)}.route-node.current::after{width:12px;height:12px;right:-6px;border-color:#fff4c4;box-shadow:0 0 0 4px rgba(255,207,102,.13),0 0 12px var(--world)}.route-node small{position:absolute;top:8px;right:-12px;width:25px;text-align:center;font-size:7px;color:#dbe8ff;opacity:.75}
+.command-actions{z-index:2;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:0;width:100%}.briefing-grid{display:grid;grid-template-columns:minmax(0,1fr) 82px;gap:6px;width:min(100%,420px)}.daily-brief{display:grid;grid-template-columns:28px 1fr;align-items:center;gap:7px;min-width:0;height:51px;padding:5px 8px;text-align:left;border-color:rgba(159,225,255,.28);background:linear-gradient(110deg,rgba(13,35,68,.73),rgba(20,16,52,.72))}.daily-brief>i{display:grid;place-items:center;width:26px;height:26px;border:1px solid #9fe4ff;border-radius:50%;font-family:var(--font-score);font-style:normal;font-size:10px;color:#bceeff}.daily-brief>span{min-width:0;display:grid;grid-template-columns:1fr auto;align-items:end;gap:0 6px;line-height:1}.daily-brief small{grid-column:1/-1;font-size:7px;letter-spacing:.11em;color:#a6ddff}.daily-brief b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#fff3e0}.daily-brief em{font-family:var(--font-score);font-size:9px;font-style:normal;color:#ffe09a}.daily-brief u{grid-column:1/-1;display:block;height:3px;margin-top:4px;overflow:hidden;border-radius:9px;background:rgba(0,0,0,.36);text-decoration:none}.daily-brief u i{display:block;width:0;height:100%;border-radius:9px;background:linear-gradient(90deg,#61d9ff,#ffe07c);transition:width .3s}.reward-crate{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-width:0;height:51px;padding:4px;color:#ffe09a;border-color:rgba(255,217,126,.3);background:linear-gradient(120deg,rgba(72,45,18,.72),rgba(25,17,50,.74))}.reward-crate svg{width:24px;height:24px}.reward-crate small{font-size:7px;letter-spacing:.1em}.reward-crate b{font-family:var(--font-score);font-size:9px}.reward-crate.ready svg{animation:crate-ready .9s ease-in-out infinite}.reward-crate.ready{box-shadow:0 0 0 1px rgba(255,215,115,.28),0 0 17px rgba(255,177,55,.3)}@keyframes crate-ready{25%{transform:rotate(-7deg)}75%{transform:rotate(7deg)}}
+.last-flight{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:7px;width:min(100%,420px);min-width:0;height:29px;padding:3px 9px;border-radius:10px;border-color:rgba(255,255,255,.12);background:rgba(12,11,38,.52);box-shadow:none;text-align:left}.last-flight span{font-size:7px;letter-spacing:.1em;color:#9fdfff}.last-flight b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}.last-flight em{font-size:8px;font-style:normal;color:#ffd987}
+#menu button.home-play{display:flex;align-items:center;justify-content:center;gap:10px;width:min(100%,420px);height:62px;padding:7px 18px;border-radius:18px}.home-play .pi{width:24px;height:24px}.home-play span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.04}.home-play b{font-family:var(--font-display);font-size:19px;letter-spacing:.05em}.home-play small{font-size:10px;font-weight:600;letter-spacing:.03em;color:#65400d}.home-play::after{content:"";position:absolute;width:38%;height:2px;margin-top:45px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:runway-light 1.8s linear infinite}@keyframes runway-light{0%{transform:translateX(-80%);opacity:0}25%,75%{opacity:1}100%{transform:translateX(80%);opacity:0}}
+.checkpoint-card{width:min(100%,420px);height:28px;min-width:0;padding:3px 10px;border-radius:9px;border-color:rgba(128,225,255,.4);background:rgba(10,39,66,.72);box-shadow:none;font-size:10px;color:#bdefff}
+.command-dock{position:absolute;z-index:8;left:8px;right:8px;bottom:calc(7px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,1fr);height:57px;padding:4px;border:1px solid rgba(255,240,202,.2);border-radius:19px;background:linear-gradient(180deg,rgba(34,31,69,.94),rgba(12,11,38,.96));box-shadow:inset 0 1px rgba(255,255,255,.16),0 10px 24px rgba(0,0,0,.42)}.command-dock button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;padding:3px;border:0;border-radius:14px;background:transparent;box-shadow:none;color:rgba(255,243,224,.65)}.command-dock button svg{width:21px;height:21px;fill:currentColor}.command-dock button span{font-size:9px}.command-dock button.on{color:#ffe19a;background:linear-gradient(180deg,rgba(255,197,81,.18),rgba(255,197,81,.04))}.command-dock button.on::before{content:"";position:absolute;top:-4px;width:28px;height:2px;border-radius:5px;background:#ffd36d;box-shadow:0 0 9px #ffd36d}.command-dock button:nth-child(2) svg{animation:dock-plane 2.8s ease-in-out infinite}@keyframes dock-plane{50%{transform:translateY(-2px)}}.command-dock button:nth-child(4) svg{animation:dock-spark 2.2s ease-in-out infinite}@keyframes dock-spark{50%{opacity:.58;transform:scale(.92)}}.command-dock button:nth-child(5):hover svg{transform:rotate(35deg)}
+
+.campaign-map{position:relative;padding:6px 4px 20px}.map-world{display:grid;grid-template-columns:50px 1fr;gap:7px;margin-bottom:8px;padding:9px;border:1px solid rgba(255,229,160,.18);border-radius:15px;background:linear-gradient(120deg,rgba(16,15,45,.76),rgba(42,29,72,.58))}.map-world>header{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.map-world>header b{font-family:var(--font-display);font-size:11px;color:#ffe09a}.map-world>header small{font-size:8px;color:#bdeaff}.map-levels{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.map-level{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;padding:5px 2px;border-radius:10px;background:rgba(7,8,29,.48);border:1px solid rgba(255,255,255,.1);font-size:8px}.map-level img{width:34px;height:34px;object-fit:contain;filter:brightness(.2)}.map-level.unlocked img{filter:drop-shadow(0 3px 3px rgba(0,0,0,.45))}.map-level.current{border-color:#ffe09a;box-shadow:0 0 12px rgba(255,199,84,.22)}.map-level.boss::after{content:"!";position:absolute;right:2px;top:2px;display:grid;place-items:center;width:12px;height:12px;border-radius:50%;background:#dc4f50;color:white;font-family:var(--font-score);font-size:8px}.map-level small{font-size:7px;opacity:.7}.map-legend{padding:8px 10px;border-radius:12px;background:rgba(12,12,38,.5);font-size:12px;text-align:center;color:#cfe9ff}
+
+@media(max-height:690px) and (orientation:portrait){#menu.command-home{gap:2px;padding-top:calc(6px + env(safe-area-inset-top,0px));padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}.command-top{min-height:43px}.pilot-card{height:43px}.pilot-card>i{width:30px;height:30px}.command-hero{grid-template-rows:auto minmax(105px,1fr) auto auto}.home-plane-stage{min-height:105px}.home-plane-stage>img{width:clamp(112px,35vw,150px);height:clamp(108px,19vh,145px)}.boss-radar{transform:scale(.9);transform-origin:top right}.briefing-grid{height:47px}.daily-brief,.reward-crate{height:47px}.last-flight{display:none}#menu button.home-play{height:55px}.home-play b{font-size:17px}.command-dock{height:52px}.command-dock button svg{width:19px;height:19px}}
+@media(max-width:360px){#menu.command-home{padding-left:8px;padding-right:8px}.pilot-card{padding-left:6px}.pilot-card em{display:none}.command-wallet{font-size:12px;padding:0 6px}.boss-radar{max-width:110px}.plane-identity strong{max-width:195px}.briefing-grid{grid-template-columns:minmax(0,1fr) 72px}}
+@media(max-height:500px) and (orientation:landscape){#menu.command-home{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:46px minmax(0,1fr) 55px;gap:6px;padding:5px 10px 58px}.command-top{grid-column:1/-1;min-height:43px}.command-hero{grid-column:1;grid-row:2/4;grid-template-rows:auto minmax(100px,1fr) auto auto}.command-actions{grid-column:2;grid-row:2/4;justify-content:center;gap:8px}.home-plane-stage{min-height:100px}.home-plane-stage>img{width:125px;height:125px}.boss-radar{top:0;right:0;transform:scale(.82);transform-origin:top right}.command-brand h1{font-size:1.3rem!important}.briefing-grid{grid-template-columns:1fr 70px}.daily-brief,.reward-crate{height:48px}.last-flight{height:31px}.command-dock{height:48px}.command-dock button svg{width:18px;height:18px}.command-dock button span{font-size:8px}#menu button.home-play{height:57px}.home-play b{font-size:17px}.home-play::after{display:none}.plane-inspector{font-size:8px}.plane-identity strong{font-size:12px}.plane-identity em{font-size:8px}}
+body.reduce-motion .hangar-door,body.reduce-motion .plane-aura,body.reduce-motion .boss-radar svg,body.reduce-motion .reward-crate svg,body.reduce-motion .home-play::after,body.reduce-motion .command-dock svg{animation:none!important}.safe-render .home-plane-wrap{transform:none}
+.home-plane-stage>img{transform:perspective(540px) rotateY(calc(var(--tilt-x,0)*7deg)) rotateX(calc(var(--tilt-y,0)*-5deg))}.home-plane-stage.engine-on::after{content:"";position:absolute;z-index:2;left:50%;top:70%;width:10px;height:27px;transform:translateX(-50%);clip-path:polygon(50% 100%,0 0,100% 0);background:linear-gradient(#fff7b0,#ffad35 44%,rgba(255,89,20,0));filter:drop-shadow(0 0 5px #ff9b2f);animation:engine-idle .24s ease-in-out infinite alternate}@keyframes engine-idle{to{height:22px;opacity:.74}}body.reduce-motion .home-plane-stage::after{animation:none!important}
+
 /* Bundled font licenses
 Copyright 2019 The Oxanium Project Authors (https://github.com/sevmeyer/oxanium)
 
@@ -336,6 +364,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#34c98f"/><path d="M6.5 12.5l4 4 7-8" fill="none" stroke="#073b27" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-spk" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="#fff3e0"/><path d="M16 8a5 5 0 010 8M19 5a9 9 0 010 14" fill="none" stroke="#fff3e0" stroke-width="2" stroke-linecap="round"/></symbol>
 <symbol id="i-spkx" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="#fff3e0"/><path d="M16 8l6 8M22 8l-6 8" fill="none" stroke="#ff8a7a" stroke-width="2.4" stroke-linecap="round"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5V21h-6v-6H9v6H3z"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2l3 7 7 4v2l-7-2v5l2 2v2l-5-1-5 1v-2l2-2v-5l-7 2v-2l7-4z"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M3 5l6-3 6 3 6-3v17l-6 3-6-3-6 3zm6-1v13m6-10v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-crate" viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v10l-9 4-9-4zm0 0l9 5 9-5m-9 5v9M7 6l9 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M10 2h4l.7 3a8 8 0 012 .9l2.7-1.3 2 3-2.2 2.2c.2.7.3 1.4.3 2.2s-.1 1.5-.3 2.2l2.2 2.2-2 3-2.7-1.3a8 8 0 01-2 .9L14 22h-4l-.7-3a8 8 0 01-2-.9l-2.7 1.3-2-3 2.2-2.2A8 8 0 014.5 12c0-.8.1-1.5.3-2.2L2.6 7.6l2-3 2.7 1.3a8 8 0 012-.9z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><path d="M12 12l6-6M12 3v2M21 12h-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="7" r="1.8"/></symbol>
 </defs></svg>
 <canvas id="c"></canvas>
 <div id="st"></div>
@@ -356,20 +390,62 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   <small id="loading-count">0%</small>
 </section>
 
-<div class="ov" id="menu">
-  <div class="top"><div class="chip"><svg class="si"><use href="#i-star"/></svg><span id="pc">0</span></div><button id="sn" class="ic" onclick="toggleSnd()" aria-label="Sound"><svg class="si s1"><use href="#i-spk"/></svg><svg class="si s2"><use href="#i-spkx"/></svg></button></div>
-  <div class="grp" id="mh"><h1>Dodgewing</h1><p class="tag">Steer. Collect stars. Evolve. Dodge.</p></div>
-  <div class="grp" id="mb">
-    <p class="sm">30 levels. One flight. Keep evolving.</p>
-    <button class="go big" onclick="start()"><svg class="pi"><use href="#i-play"/></svg>Play</button>
-    <div class="tiles">
-      <button class="tile" onclick="hangar()"><img id="thi" alt="">Hangar</button>
-      <button class="tile" onclick="rewards()"><svg class="ti"><use href="#i-star"/></svg>Rewards</button>
-      <button class="tile" onclick="helpS()"><span class="q">?</span>How to play</button>
-    </div>
-    <div class="menu-more"><button onclick="highScores()">High scores</button><button onclick="settings()">Settings</button></div>
-    <p class="sm" id="stats"></p>
+<div class="ov command-home" id="menu" data-world="0">
+  <div class="hangar-scene" aria-hidden="true">
+    <i class="hangar-sun"></i><i class="hangar-grid"></i><i class="hangar-runway"></i>
+    <i class="hangar-door left"></i><i class="hangar-door right"></i>
   </div>
+  <header class="command-top">
+    <button class="pilot-card" onclick="highScores()" aria-label="Open high scores">
+      <i id="pilot-badge">A</i><span><small id="pilot-call">PILOT DW-01</small><b id="pilot-rank">ROOKIE WING</b><em>High scores</em></span>
+    </button>
+    <div class="command-wallet chip"><svg class="si"><use href="#i-star"/></svg><span id="pc">0</span></div>
+    <button id="sn" class="ic" onclick="toggleSnd()" aria-label="Sound"><svg class="si s1"><use href="#i-spk"/></svg><svg class="si s2"><use href="#i-spkx"/></svg></button>
+  </header>
+
+  <main class="command-hero" id="mh">
+    <div class="command-brand"><h1>Dodgewing</h1><button onclick="helpS()"><span>?</span>How to play</button></div>
+    <div class="home-plane-wrap">
+      <button class="plane-step prev" onclick="previewHomePlane(-1)" aria-label="Previous unlocked plane">‹</button>
+      <div class="home-plane-stage" id="home-plane-stage" role="button" tabindex="0" aria-label="Inspect and swipe through unlocked aircraft">
+        <i class="plane-aura"></i><i class="plane-shadow"></i>
+        <img id="thi" alt="Current aircraft">
+        <button class="plane-hotspot hs-engine" data-label="ENGINE" onclick="event.stopPropagation()">E</button>
+        <button class="plane-hotspot hs-weapon" data-label="WEAPON" onclick="event.stopPropagation()">W</button>
+        <button class="plane-hotspot hs-ability" data-label="ABILITY" onclick="event.stopPropagation()">A</button>
+        <div class="plane-inspector" id="plane-inspector"></div>
+        <div class="home-unlock" id="home-unlock"><small>NEW AIRCRAFT</small><b id="home-unlock-name"></b></div>
+      </div>
+      <button class="plane-step next" onclick="previewHomePlane(1)" aria-label="Next unlocked plane">›</button>
+      <button class="boss-radar" id="boss-radar" onclick="flightMap()"><svg><use href="#i-radar"/></svg><span><small>NEXT THREAT</small><b id="boss-radar-name">HEAVY MISSILE</b><em id="boss-radar-distance">8 levels</em></span></button>
+    </div>
+    <div class="plane-identity"><span><b id="home-plane-level">LEVEL 1</b><strong id="home-plane-name">Wooden Glider</strong></span><em id="home-plane-world">SUNRISE SKIES</em></div>
+    <div class="home-route" id="home-route" aria-label="Campaign progress"></div>
+  </main>
+
+  <section class="command-actions" id="mb">
+    <div class="briefing-grid">
+      <button class="daily-brief" onclick="rewards()"><i>01</i><span><small>DAILY FLIGHT BRIEFING</small><b id="daily-title">Collect stars</b><em id="daily-progress">0 / 15</em><u><i id="daily-bar"></i></u></span></button>
+      <button class="reward-crate" id="reward-crate" onclick="rewards()"><svg><use href="#i-crate"/></svg><small>REWARDS</small><b id="reward-count">0 / 3</b></button>
+    </div>
+    <button class="last-flight" id="stats" onclick="highScores()"><span>LAST FLIGHT</span><b>No flight recorded</b><em>View flight log ›</em></button>
+    <button class="go home-play" id="home-play" onclick="start()"><svg class="pi"><use href="#i-play"/></svg><span><b id="home-play-title">CONTINUE FLIGHT</b><small id="home-play-sub">New run · Next target Level 2</small></span></button>
+    <button class="checkpoint-card hide" id="home-resume" onclick="homeCheckpoint()"></button>
+  </section>
+
+  <nav class="command-dock" aria-label="Main navigation">
+    <button class="on" onclick="menu()"><svg><use href="#i-home"/></svg><span>Home</span></button>
+    <button onclick="hangar()"><svg><use href="#i-plane"/></svg><span>Hangar</span></button>
+    <button onclick="flightMap()"><svg><use href="#i-map"/></svg><span>Map</span></button>
+    <button onclick="rewards()"><svg><use href="#i-crate"/></svg><span>Rewards</span></button>
+    <button onclick="settings()"><svg><use href="#i-gear"/></svg><span>Settings</span></button>
+  </nav>
+</div>
+
+<div class="ov page hide" id="flight-map">
+  <div class="ph"><h2>Flight map</h2><div class="chip" id="map-progress"></div></div>
+  <div class="scroll campaign-map" id="campaign-map"></div>
+  <button class="go" onclick="menu()">Back</button>
 </div>
 
 <div class="ov hide" id="over">
@@ -464,7 +540,7 @@ rs();addEventListener('resize',()=>{rs();try{pl.x=Math.min(pl.x,W);pl.y=Math.min
 // 02-save-and-assets.js: Plane skins, save data (localStorage key "dw"), plane names, sprite loading
 // Classic script (no modules): all files share one global scope and load in numeric order.
 const PLANES=[{n:'Scout',c:'#ffb347',p:0,w:1},{n:'Dart',c:'#6ee7b7',p:400,w:.7},{n:'Comet',c:'#f472b6',p:1200,w:1.15},{n:'Phantom',c:'#a5b4fc',p:3000,w:.9}];
-const saveDefaults={v:2,pts:0,coins:0,upg:{eng:0,shield:0,magnet:0,weapon:0},cp:1,best:{e:0,n:0,f:0},own:[0],sel:0,mode:'n',m:{day:'',list:[],prog:{},done:{}},ach:{},stat:{runs:0,stars:0,nm:0,shot:0,boss:0,bossK:{},wins:0,mis:0,bestLv:1,bestT:0,pu:0},cu:[],ct:'auto',fx:true,music:true,gfx:'smooth',vibe:true,left:false,motion:false,tutorial:false};
+const saveDefaults={v:2,pts:0,coins:0,upg:{eng:0,shield:0,magnet:0,weapon:0},cp:1,best:{e:0,n:0,f:0},own:[0],sel:0,mode:'n',m:{day:'',list:[],prog:{},done:{}},ach:{},stat:{runs:0,stars:0,nm:0,shot:0,boss:0,bossK:{},wins:0,mis:0,bestLv:1,bestT:0,pu:0},cu:[],ct:'auto',fx:true,music:true,gfx:'smooth',vibe:true,left:false,motion:false,tutorial:false,homeSeenLv:1};
 let save=Object.assign({},saveDefaults);
 try{const loaded=JSON.parse(localStorage.getItem('dw')||'{}');if(loaded&&typeof loaded==='object'&&!Array.isArray(loaded))Object.assign(save,loaded)}catch(e){}
 const obj=v=>v&&typeof v==='object'&&!Array.isArray(v)?v:{};
@@ -478,7 +554,7 @@ save.own=Array.isArray(save.own)?[...new Set(save.own.map(v=>Math.floor(num(v,-1
 save.sel=Math.floor(num(save.sel));if(!save.own.includes(save.sel))save.sel=0;save.mode=['e','n','f'].includes(save.mode)?save.mode:'n';
 save.m=Object.assign({day:'',list:[],prog:{},done:{}},obj(save.m));save.m.day=typeof save.m.day==='string'?save.m.day:'';save.m.list=Array.isArray(save.m.list)?save.m.list.filter(v=>typeof v==='string'):[];save.m.prog=obj(save.m.prog);save.m.done=obj(save.m.done);
 save.ach=obj(save.ach);save.stat=Object.assign({runs:0,stars:0,nm:0,shot:0,boss:0,bossK:{},wins:0,mis:0,bestLv:1,bestT:0,pu:0},obj(save.stat));for(const k of ['runs','stars','nm','shot','boss','wins','mis','bestT','pu'])save.stat[k]=Math.max(0,Math.floor(num(save.stat[k])));save.stat.bestLv=Math.max(1,Math.floor(num(save.stat.bestLv,1)));save.stat.bossK=obj(save.stat.bossK);
-save.cu=Array.isArray(save.cu)?[...new Set(save.cu.filter(v=>typeof v==='string'))]:[];save.ct=typeof save.ct==='string'?save.ct:'auto';save.top=Array.isArray(save.top)?save.top.filter(v=>v&&typeof v==='object'):[];save.fx=save.fx!==false;save.music=save.music!==false;save.gfx=save.gfx==='battery'?'battery':'smooth';save.vibe=save.vibe!==false;save.left=save.left===true;save.motion=save.motion===true;save.tutorial=save.tutorial===true;
+save.cu=Array.isArray(save.cu)?[...new Set(save.cu.filter(v=>typeof v==='string'))]:[];save.ct=typeof save.ct==='string'?save.ct:'auto';save.top=Array.isArray(save.top)?save.top.filter(v=>v&&typeof v==='object'):[];save.fx=save.fx!==false;save.music=save.music!==false;save.gfx=save.gfx==='battery'?'battery':'smooth';save.vibe=save.vibe!==false;save.left=save.left===true;save.motion=save.motion===true;save.tutorial=save.tutorial===true;save.homeSeenLv=Math.max(1,Math.min(30,Math.floor(num(save.homeSeenLv,1))));
 function store(){try{localStorage.setItem('dw',JSON.stringify(save))}catch(e){}}
 const lowGraphics=()=>SAFE_RENDER||save.gfx==='battery';
 const reducedMotion=()=>save.motion===true;
@@ -718,6 +794,8 @@ function draw(){
   frame();
   drawSky();x.fillStyle=cloudC;
   for(const c of clouds){x.beginPath();x.ellipse(c.x*W,c.y*H,c.s,c.s*.28,0,0,TAU);x.fill();x.beginPath();x.ellipse(c.x*W,c.y*H,c.s*.65,c.s*.18,0,0,TAU);x.fill()}
+  const homeScene=S==='menu'&&menuOn;
+  if(!homeScene){
   for(const s of st){ctxStar(s.x,s.y,s.r)}
   for(const p of pu){const k=PUC[p.ty||'s'];x.fillStyle='rgba(16,14,40,.65)';x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.fill();x.strokeStyle=k[0];x.lineWidth=3;x.beginPath();x.arc(p.x,p.y,15,0,TAU);x.stroke();x.fillStyle=k[0];x.font=canvasFont(15);x.textAlign='center';x.fillText(k[1],p.x,p.y+5);x.textAlign='left'}
   drawObstacles();
@@ -725,7 +803,8 @@ function draw(){
   for(const m of ms){x.save();x.translate(m.x,m.y);x.rotate(m.a);
     if(m.r>1&&!Number.isFinite(m.bossSkin))x.scale(m.r,m.r);drawEnemyMissile(m);if(m.st==='warn'){x.strokeStyle='rgba(255,60,60,'+(m.stT<.3?.9:.45)+')';x.lineWidth=3;x.beginPath();x.moveTo(20,0);x.lineTo(700,0);x.stroke()}x.restore()}
   drawBullets();
-  if(S==='menu'&&menuOn)showcase();
+  }
+  if(homeScene)showcase();
   if(S==='play'||S==='paused'||S==='countdown'){x.save();x.translate(pl.x,pl.y);x.rotate(pl.a+Math.PI/2);
     x.shadowColor='rgba('+trailC+',.8)';x.shadowBlur=lowGraphics()?0:10;
     const pop=reducedMotion()?1:1+.3*Math.sin(Math.min(1,upT/1.4)*Math.PI),ia=inv>0&&!reducedMotion()&&Math.floor(t*14)%2?.35:1;
@@ -916,7 +995,7 @@ const skyAt=L=>lvMix(SKY,1+difficulty(L)*11).map(c=>'rgb('+c.map(Math.round).joi
 const nightAmt=L=>Math.max(0,Math.min(1,(1+difficulty(L)*11-6.8)/5.2));
 const STARS=Array.from({length:32},()=>({x:Math.random(),y:Math.random()*.8,s:.8+Math.random()*1.4,p:Math.random()*6.28,th:Math.random()}));
 let skyL=1,smokeC='95,95,120',cloudC='rgba(255,255,255,.4)',lastSkyT='';
-function updateSky(d){skyL+=((S==='menu'?1:lv)-skyL)*Math.min(1,d*1.1);smokeC=(1+difficulty(skyL)*11)<6.8?'95,95,120':'205,205,220';}
+function updateSky(d){const menuLevel=typeof homeSkyLevel==='function'?homeSkyLevel():1;skyL+=((S==='menu'?menuLevel:lv)-skyL)*Math.min(1,d*1.1);smokeC=(1+difficulty(skyL)*11)<6.8?'95,95,120':'205,205,220';}
 function drawSky(){
   const c=skyAt(skyL),g=x.createLinearGradient(0,0,0,H);
   g.addColorStop(0,c[0]);g.addColorStop(.38,c[1]);g.addColorStop(.7,c[2]);g.addColorStop(1,c[3]);
@@ -1014,7 +1093,7 @@ boom=function(px,py,color,count){proBoom(px,py,color,count);if(save.fx!==false&&
 
 const proCtxStar=ctxStar;
 ctxStar=function(px,py,rot){proCtxStar(px,py,rot);if(save.fx===false||reducedMotion())return;const pulse=1+Math.sin(t*6+rot)*.18;x.save();x.translate(px,py);x.globalAlpha=.35;x.strokeStyle='#fff4b0';x.lineWidth=1.5;x.beginPath();x.moveTo(-18*pulse,0);x.lineTo(18*pulse,0);x.moveTo(0,-18*pulse);x.lineTo(0,18*pulse);x.stroke();x.restore()};
-function drawWorldAtmosphere(){const world=proWorld(Math.round(S==='menu'?1:lv));if(world.n==='STORM FRONT'){x.save();x.strokeStyle='rgba(205,232,255,.28)';x.lineWidth=1;for(let i=0;i<(lowGraphics()?10:26);i++){const q=(i*73+(reducedMotion()?0:t*180))%Math.max(1,W+H),px=(q%W),py=(q*1.7%H);x.beginPath();x.moveTo(px,py);x.lineTo(px-14,py+32);x.stroke()}if(!reducedMotion()&&Math.sin(t*2.7)> .986){x.fillStyle='rgba(235,248,255,.16)';x.fillRect(0,0,W,H)}x.restore()}else if(world.n==='DEEP SPACE'||world.n==='COSMIC FINALE'){x.save();const g=x.createRadialGradient(W*.78,H*.2,0,W*.78,H*.2,W*.32);g.addColorStop(0,world.n==='COSMIC FINALE'?'rgba(255,105,220,.2)':'rgba(80,218,255,.16)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,W,H);x.restore()}}
+function drawWorldAtmosphere(){const menuLevel=typeof homeSkyLevel==='function'?homeSkyLevel():1,world=proWorld(Math.round(S==='menu'?menuLevel:lv));if(world.n==='STORM FRONT'){x.save();x.strokeStyle='rgba(205,232,255,.28)';x.lineWidth=1;for(let i=0;i<(lowGraphics()?10:26);i++){const q=(i*73+(reducedMotion()?0:t*180))%Math.max(1,W+H),px=(q%W),py=(q*1.7%H);x.beginPath();x.moveTo(px,py);x.lineTo(px-14,py+32);x.stroke()}if(!reducedMotion()&&Math.sin(t*2.7)> .986){x.fillStyle='rgba(235,248,255,.16)';x.fillRect(0,0,W,H)}x.restore()}else if(world.n==='DEEP SPACE'||world.n==='COSMIC FINALE'){x.save();const g=x.createRadialGradient(W*.78,H*.2,0,W*.78,H*.2,W*.32);g.addColorStop(0,world.n==='COSMIC FINALE'?'rgba(255,105,220,.2)':'rgba(80,218,255,.16)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,W,H);x.restore()}}
 const proDrawSky=drawSky;
 drawSky=function(){proDrawSky();drawWorldAtmosphere()};
 
@@ -1061,6 +1140,145 @@ rewards=function(){proRewards();const panel=$('rwc');if(!panel||typeof panel.que
     window.dispatchEvent(new Event('dodgewingready'));
   }
   begin();
+})();
+
+// 12-command-hangar.js: interactive home hangar, campaign route and briefing.
+// The moving sky stays on the existing canvas; the bounded DOM scene remains
+// lightweight on Android WebViews and is fully disabled by Reduced Motion.
+(()=>{
+  if(typeof document==='undefined'||typeof document.querySelector!=='function')return;
+
+  const menuEl=$('menu'),stageEl=$('home-plane-stage');
+  if(!menuEl||!stageEl)return;
+  const bossLevels=[9,17,25,30];
+  let homePreview=Math.max(0,Math.min(LEVEL_COUNT-1,(save.stat.bestLv||1)-1));
+  let homePinnedPreview=false,homeMusicT=.4,dragStart=null,dragMoved=false,suppressHomeClick=false;
+  const clampLevel=n=>Math.max(1,Math.min(LEVEL_COUNT,Math.floor(Number(n)||1)));
+  const unlockedLevel=()=>clampLevel(save.stat.bestLv||1);
+  const worldFor=L=>Math.max(0,Math.min(5,Math.floor((clampLevel(L)-1)/5)));
+  const worldName=i=>(PRO_WORLDS[i]&&PRO_WORLDS[i].n)||ZONES[i]||'FLIGHT ZONE';
+  const weaponName=L=>(WPN[L]&&WPN[L].n)||'Evasive flying';
+
+  function pilotRank(L){
+    if(L>=30)return['Ω','LEGEND OF THE SKIES'];
+    if(L>=26)return['C','FLIGHT COMMANDER'];
+    if(L>=21)return['W','WING COMMANDER'];
+    if(L>=16)return['A','ACE CAPTAIN'];
+    if(L>=11)return['A','COMBAT ACE'];
+    if(L>=6)return['W','WING PILOT'];
+    return['R','ROOKIE WING'];
+  }
+  function currentMission(){
+    const daily=dayMis(),items=daily.list.map(id=>MIS.find(m=>m.id===id)).filter(Boolean);
+    return items.find(m=>!daily.done[m.id])||items[0]||MIS[0];
+  }
+  function inspectorText(L){
+    const ability=typeof abilityFor==='function'?abilityFor(L):null;
+    return 'ENGINE: '+planeSpeed(L)+' · WEAPON: '+weaponName(L).toUpperCase()+' · ABILITY: '+(ability?ability.n:'EVASIVE FLIGHT');
+  }
+  function renderRoute(L){
+    const active=worldFor(L),bestWorld=worldFor(unlockedLevel());
+    $('home-route').innerHTML=PRO_WORLDS.map((world,i)=>{
+      const target=Math.min(unlockedLevel()-1,i*5+Math.min(4,Math.max(0,L-1-i*5)));
+      const cls=(i<=bestWorld?' done':'')+(i===active?' current':'');
+      return '<button class="route-node'+cls+'" onclick="previewHomePlane(0,'+Math.max(0,target)+')" aria-label="'+world.n+'"><small>'+(i+1)+'</small></button>';
+    }).join('');
+  }
+  function renderBossRadar(best){
+    const next=bossLevels.find(L=>L>best),button=$('boss-radar');
+    if(!next){$('boss-radar-name').textContent='CAMPAIGN CLEAR';$('boss-radar-distance').textContent='Final route secured';button.classList.add('clear');return}
+    button.classList.remove('clear');$('boss-radar-name').textContent=BOSS[next]?BOSS[next].n.toUpperCase():'UNKNOWN THREAT';
+    $('boss-radar-distance').textContent=(next-best)+' level'+(next-best===1?'':'s')+' away';
+  }
+  function renderBriefing(){
+    const daily=dayMis(),mission=currentMission(),progress=Math.min(mission.n,Number(daily.prog[mission.id])||0),done=!!daily.done[mission.id],complete=daily.list.filter(id=>daily.done[id]).length;
+    $('daily-title').textContent=mission.t;$('daily-progress').textContent=done?'COMPLETE':progress+' / '+mission.n;
+    $('daily-bar').style.width=Math.round((done?mission.n:progress)/mission.n*100)+'%';
+    $('reward-count').textContent=complete+' / '+daily.list.length;$('reward-crate').classList.toggle('ready',complete>0);
+  }
+  function renderLastFlight(){
+    const card=$('stats'),last=Array.isArray(save.top)&&save.top.length?save.top[0]:null;
+    card.innerHTML=last?'<span>BEST FLIGHT</span><b>'+Math.max(0,Number(last.score)||0)+' pts · Level '+clampLevel(last.level)+'</b><em>Flight log ›</em>':'<span>LAST FLIGHT</span><b>No flight recorded</b><em>Start your first run ›</em>';
+  }
+  function renderMap(){
+    const best=unlockedLevel(),bossSet=new Set(bossLevels),panel=$('campaign-map');
+    $('map-progress').textContent='LEVEL '+best+' / '+LEVEL_COUNT;
+    panel.innerHTML=PRO_WORLDS.map((world,w)=>{
+      const levels=Array.from({length:5},(_,q)=>w*5+q+1).map(L=>{
+        const cls=(L<=best?' unlocked':'')+(L===best?' current':'')+(bossSet.has(L)?' boss':'');
+        return '<button class="map-level'+cls+'" onclick="openHomePlane('+(L-1)+')"><img src="'+SPRD[L-1]+'" alt=""><b>Lv '+L+'</b><small>'+weaponName(L)+'</small></button>';
+      }).join('');
+      return '<section class="map-world"><header><b>'+world.n+'</b><small>LEVELS '+(w*5+1)+'–'+(w*5+5)+'</small></header><div class="map-levels">'+levels+'</div></section>';
+    }).join('')+'<p class="map-legend">Tap an unlocked aircraft to inspect it in the Command Hangar. Red markers identify boss encounters.</p>';
+  }
+  function celebrateUnlock(best){
+    if((save.homeSeenLv||1)>=best)return;
+    save.homeSeenLv=best;store();homePreview=best-1;
+    $('home-unlock-name').textContent='LEVEL '+best+' · '+LV[best-1];
+    stageEl.classList.remove('unlock-show');void stageEl.offsetWidth;stageEl.classList.add('unlock-show');
+    if(AC)snd('up');setTimeout(()=>stageEl.classList.remove('unlock-show'),1900);
+  }
+  function refreshHome(celebrate=false){
+    const best=unlockedLevel();homePreview=Math.max(0,Math.min(best-1,homePreview));const L=homePreview+1,world=worldFor(L),rank=pilotRank(best),missionTarget=Math.min(LEVEL_COUNT,best+1),paint=PLANES[save.sel]||PLANES[0];
+    menuEl.dataset.world=String(world);menuEl.style.setProperty('--plane',paint.c);stageEl.classList.toggle('engine-on',L>=4);
+    $('thi').src=SPRD[homePreview];$('thi').alt='Level '+L+' '+LV[homePreview];
+    $('home-plane-level').textContent='LEVEL '+L+' · '+weaponName(L).toUpperCase();$('home-plane-name').textContent=LV[homePreview];$('home-plane-world').textContent=worldName(world);
+    $('plane-inspector').textContent=inspectorText(L);$('pilot-badge').textContent=rank[0];$('pilot-rank').textContent=rank[1];
+    $('pilot-call').textContent='PILOT DW-'+String(Math.max(1,(save.stat.runs||0)+1)).padStart(2,'0');
+    $('pc').textContent=Math.max(0,save.pts||0)+' · ◈ '+Math.max(0,save.coins||0);
+    $('home-play-title').textContent=best>=LEVEL_COUNT?'REPLAY FINAL CAMPAIGN':'CONTINUE FLIGHT';
+    $('home-play-sub').textContent=best>=LEVEL_COUNT?'Level 30 secured · Chase a new record':'New run · Next target Level '+missionTarget;
+    const resume=$('home-resume'),cost=checkpointCost(),canResume=(save.cp||1)>1&&save.coins>=cost;
+    resume.classList.toggle('hide',!canResume);resume.textContent=canResume?'RETURN TO CHECKPOINT · LEVEL '+save.cp+' · ◈ '+cost:'';
+    const prev=stageEl.parentElement.querySelector('.plane-step.prev'),next=stageEl.parentElement.querySelector('.plane-step.next');prev.disabled=homePreview<=0;next.disabled=homePreview>=best-1;
+    renderRoute(L);renderBossRadar(best);renderBriefing();renderLastFlight();renderMap();
+    if(celebrate)celebrateUnlock(best);
+  }
+  function enterHangar(){
+    menuEl.classList.remove('command-enter');void menuEl.offsetWidth;menuEl.classList.add('command-enter');
+    setTimeout(()=>menuEl.classList.remove('command-enter'),900);
+  }
+  function changePreview(delta,absolute){
+    const best=unlockedLevel(),next=absolute===undefined?homePreview+delta:Number(absolute);
+    homePreview=Math.max(0,Math.min(best-1,Math.floor(next)||0));stageEl.classList.remove('inspect');refreshHome(false);
+  }
+  function toggleInspection(){stageEl.classList.toggle('inspect')}
+  function openHomePlane(index){homePreview=Math.max(0,Math.min(unlockedLevel()-1,Math.floor(index)||0));homePinnedPreview=true;menu()}
+  function homeCheckpoint(){if(!continueRun())start()}
+  function flightMap(){S='menu';show('flight-map');renderMap()}
+  function homeSkyLevel(){return homePreview+1}
+  function homeMusicTick(d){
+    if(save.snd===false||save.music===false||!AC)return;
+    homeMusicT-=d;if(homeMusicT>0)return;homeMusicT=2.7;
+    const notes=[[98,147],[92,138],[110,165],[82,123],[73,110],[65,98]][worldFor(homePreview+1)],n=notes[(Math.floor(performance.now()/2500))%notes.length];
+    tone(n,.55,'sine',.012,n*1.12);
+  }
+
+  window.previewHomePlane=changePreview;window.openHomePlane=openHomePlane;window.homeCheckpoint=homeCheckpoint;window.flightMap=flightMap;window.homeSkyLevel=homeSkyLevel;
+  document.body.classList.toggle('safe-render',SAFE_RENDER);
+
+  const commandShow=show;
+  show=function(id){commandShow(id);$('flight-map').classList.toggle('hide',id!=='flight-map')};
+  const commandMenu=menu;
+  menu=function(){commandMenu();if(!homePinnedPreview)homePreview=unlockedLevel()-1;homePinnedPreview=false;refreshHome(true);enterHangar()};
+  const commandStart=start;
+  start=function(){if(S==='menu'){homeMusicT=0;snd('fl')}commandStart()};
+  const commandUpdate=upd;
+  upd=function(d){commandUpdate(d);if(S==='menu'&&menuOn)homeMusicTick(d)};
+  // The DOM hero owns the aircraft presentation; canvas keeps the moving sky.
+  showcase=function(){};
+
+  stageEl.addEventListener('pointerdown',e=>{if(e.target.closest('.plane-hotspot'))return;dragStart={x:e.clientX,y:e.clientY};dragMoved=false;try{stageEl.setPointerCapture(e.pointerId)}catch(_){}});
+  stageEl.addEventListener('pointermove',e=>{if(!dragStart)return;const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;dragMoved=dragMoved||Math.abs(dx)>8||Math.abs(dy)>8;stageEl.style.setProperty('--tilt-x',String(Math.max(-1,Math.min(1,dx/70))));stageEl.style.setProperty('--tilt-y',String(Math.max(-1,Math.min(1,dy/70))))});
+  const release=e=>{if(!dragStart)return;const dx=e.clientX-dragStart.x;stageEl.style.setProperty('--tilt-x','0');stageEl.style.setProperty('--tilt-y','0');suppressHomeClick=Math.abs(dx)>42;if(suppressHomeClick)changePreview(dx<0?1:-1);dragStart=null};
+  stageEl.addEventListener('pointerup',release);stageEl.addEventListener('pointercancel',()=>{dragStart=null;stageEl.style.setProperty('--tilt-x','0');stageEl.style.setProperty('--tilt-y','0')});
+  stageEl.addEventListener('click',e=>{if(e.target.closest('.plane-hotspot'))return;if(suppressHomeClick){suppressHomeClick=false;return}toggleInspection()});
+  stageEl.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();changePreview(-1)}else if(e.key==='ArrowRight'){e.preventDefault();changePreview(1)}else if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleInspection()}});
+  menuEl.addEventListener('pointermove',e=>{if(reducedMotion())return;const r=menuEl.getBoundingClientRect();menuEl.style.setProperty('--px',((e.clientX-r.left)/Math.max(1,r.width)-.5).toFixed(2));menuEl.style.setProperty('--py',((e.clientY-r.top)/Math.max(1,r.height)-.5).toFixed(2))},{passive:true});
+  menuEl.addEventListener('pointerleave',()=>{menuEl.style.setProperty('--px','0');menuEl.style.setProperty('--py','0')});
+  menuEl.addEventListener('pointerdown',()=>initAudio(),{passive:true});
+  addEventListener('dodgewingready',()=>{refreshHome(true);enterHangar()});
+  refreshHome(false);
 })();
 
 </script>

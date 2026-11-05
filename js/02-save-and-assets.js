@@ -1,7 +1,7 @@
 // 02-save-and-assets.js: Plane skins, save data (localStorage key "dw"), plane names, sprite loading
 // Classic script (no modules): all files share one global scope and load in numeric order.
 const PLANES=[{n:'Scout',c:'#ffb347',p:0,w:1},{n:'Dart',c:'#6ee7b7',p:400,w:.7},{n:'Comet',c:'#f472b6',p:1200,w:1.15},{n:'Phantom',c:'#a5b4fc',p:3000,w:.9}];
-const saveDefaults={v:2,pts:0,coins:0,upg:{eng:0,shield:0,magnet:0,weapon:0},cp:1,best:{e:0,n:0,f:0},own:[0],sel:0,mode:'n',m:{day:'',list:[],prog:{},done:{}},ach:{},stat:{runs:0,stars:0,nm:0,shot:0,boss:0,bossK:{},wins:0,mis:0,bestLv:1,bestT:0,pu:0},cu:[],ct:'auto',fx:true,music:true,gfx:'smooth',vibe:true,left:false,motion:false,tutorial:false};
+const saveDefaults={v:2,pts:0,coins:0,upg:{eng:0,shield:0,magnet:0,weapon:0},cp:1,best:{e:0,n:0,f:0},own:[0],sel:0,mode:'n',m:{day:'',list:[],prog:{},done:{}},ach:{},stat:{runs:0,stars:0,nm:0,shot:0,boss:0,bossK:{},wins:0,mis:0,bestLv:1,bestT:0,pu:0},cu:[],ct:'auto',fx:true,music:true,gfx:'smooth',vibe:true,left:false,motion:false,tutorial:false,homeSeenLv:1};
 let save=Object.assign({},saveDefaults);
 try{const loaded=JSON.parse(localStorage.getItem('dw')||'{}');if(loaded&&typeof loaded==='object'&&!Array.isArray(loaded))Object.assign(save,loaded)}catch(e){}
 const obj=v=>v&&typeof v==='object'&&!Array.isArray(v)?v:{};
@@ -15,7 +15,7 @@ save.own=Array.isArray(save.own)?[...new Set(save.own.map(v=>Math.floor(num(v,-1
 save.sel=Math.floor(num(save.sel));if(!save.own.includes(save.sel))save.sel=0;save.mode=['e','n','f'].includes(save.mode)?save.mode:'n';
 save.m=Object.assign({day:'',list:[],prog:{},done:{}},obj(save.m));save.m.day=typeof save.m.day==='string'?save.m.day:'';save.m.list=Array.isArray(save.m.list)?save.m.list.filter(v=>typeof v==='string'):[];save.m.prog=obj(save.m.prog);save.m.done=obj(save.m.done);
 save.ach=obj(save.ach);save.stat=Object.assign({runs:0,stars:0,nm:0,shot:0,boss:0,bossK:{},wins:0,mis:0,bestLv:1,bestT:0,pu:0},obj(save.stat));for(const k of ['runs','stars','nm','shot','boss','wins','mis','bestT','pu'])save.stat[k]=Math.max(0,Math.floor(num(save.stat[k])));save.stat.bestLv=Math.max(1,Math.floor(num(save.stat.bestLv,1)));save.stat.bossK=obj(save.stat.bossK);
-save.cu=Array.isArray(save.cu)?[...new Set(save.cu.filter(v=>typeof v==='string'))]:[];save.ct=typeof save.ct==='string'?save.ct:'auto';save.top=Array.isArray(save.top)?save.top.filter(v=>v&&typeof v==='object'):[];save.fx=save.fx!==false;save.music=save.music!==false;save.gfx=save.gfx==='battery'?'battery':'smooth';save.vibe=save.vibe!==false;save.left=save.left===true;save.motion=save.motion===true;save.tutorial=save.tutorial===true;
+save.cu=Array.isArray(save.cu)?[...new Set(save.cu.filter(v=>typeof v==='string'))]:[];save.ct=typeof save.ct==='string'?save.ct:'auto';save.top=Array.isArray(save.top)?save.top.filter(v=>v&&typeof v==='object'):[];save.fx=save.fx!==false;save.music=save.music!==false;save.gfx=save.gfx==='battery'?'battery':'smooth';save.vibe=save.vibe!==false;save.left=save.left===true;save.motion=save.motion===true;save.tutorial=save.tutorial===true;save.homeSeenLv=Math.max(1,Math.min(30,Math.floor(num(save.homeSeenLv,1))));
 function store(){try{localStorage.setItem('dw',JSON.stringify(save))}catch(e){}}
 const lowGraphics=()=>SAFE_RENDER||save.gfx==='battery';
 const reducedMotion=()=>save.motion===true;

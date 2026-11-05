@@ -1,4 +1,4 @@
-# Dodgewing 0.11.1 completion report
+# Dodgewing 0.12.0 completion report
 
 ## Delivered
 
@@ -21,12 +21,14 @@
 - A persistent Reduced Motion option, boss danger labels and delayed boss-health damage strip that preserve Android Safe Render limits.
 - Oxanium titles/scores and Barlow Semi Condensed UI, bundled offline and preloaded before gameplay; HUD spacing reserves room for action buttons.
 - All 30 player planes draw at twice their previous width and height, with aligned shield effects and weapon muzzles.
+- A Living Command Hangar with a large inspectable/swipeable aircraft, dynamic world scene, smart flight action, briefing, reward crate, pilot identity, boss radar, campaign route and one-thumb dock.
+- A complete 30-level Flight Map, checkpoint return, last-flight card, adaptive home ambience, unlock spotlight and Reduced Motion support for the new effects.
 
 ## Verification
 
-`npm test` passed 437 logic checks. The Chromium source suites passed 116 checks over five viewport sizes, and the self-contained release passed 56 Android-profile browser smoke checks, including the Safe Render 1× canvas path. Another 31 standalone checks verified loaded fonts, font-failure recovery, all 30 doubled aircraft sprites, muzzle placement and preserved collision/collection boundaries at mobile and desktop sizes. The release file embeds aircraft, raster missile and boss sheets, splash art and app-icon data, both font families and SIL licenses, and no external source-script or aircraft references.
+`npm test` passed 437 logic checks. The Chromium source suites passed 116 checks over five viewport sizes, and the 88-check Command Hangar suite passed against both source and standalone releases over four portrait, landscape and desktop sizes. The self-contained release passed 56 Android-profile browser smoke checks, including the Safe Render 1× canvas path. Another 31 standalone checks verified loaded fonts, font-failure recovery, all 30 doubled aircraft sprites, muzzle placement and preserved collision/collection boundaries at mobile and desktop sizes. The release file embeds aircraft, raster missile and boss sheets, splash art and app-icon data, both font families and SIL licenses, and no external source-script or aircraft references.
 
-The Android debug APK v0.11.1 (version code 12) compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its embedded HTML matches `dist/dodgewing.html` byte for byte, and its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
+The Android debug APK v0.12.0 (version code 13) compiled successfully with application ID `com.gulzaibsoomro.dodgewing`, Android 15 target SDK and the offline HTML asset. Its embedded HTML matches `dist/dodgewing.html` byte for byte, and its v1 and v2 debug signatures were verified. A physical Android device has not been tested.
 
 ## Remaining manual work
 

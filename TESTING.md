@@ -1,4 +1,4 @@
-# Testing — 0.11.1
+# Testing — 0.12.0
 
 ## Results executed for this completion pass
 
@@ -6,6 +6,7 @@
 |---|---|
 | Deterministic Node logic suite | Passed: 437 checks, 0 failures |
 | Source browser tests at 360×640, 390×800, 412×915, 800×390 and 1280×800 | Passed: 116 checks, 0 failures |
+| Source and standalone Living Command Hangar at 360×640, 390×800, 800×390 and 1280×800 | Passed: 88 checks each, 0 failures |
 | Self-contained `dist/dodgewing.html` browser smoke test | Passed: 56 checks, 0 failures |
 | Standalone typography and 2× player rendering at 390×800 and 1280×800 | Passed: 31 checks, 0 failures |
 | Android debug APK | Passed: compiled for Android 15; package metadata, embedded offline game and v1/v2 signatures verified |
@@ -18,6 +19,8 @@ The browser suites ran against `http://127.0.0.1:5500/` using the local server. 
 
 The focused typography/scale suite ran against the standalone HTML. It verifies actual loaded font faces and text measurements, intended menu font families, all 30 sprites at normal and evolution-animation scales, original collision and collection boundaries, rotated muzzle placement, Level 4 firing onset, unchanged missile size and successful startup when font requests fail. A mobile gameplay screenshot was inspected for HUD spacing and plane size. These checks do not measure frame times on Android hardware.
 
+The Command Hangar suite verifies viewport fit, five-item bottom navigation, pilot identity, hero-plane/world selection, dynamic paint lighting, boss radar, daily briefing, reward state, last-flight and checkpoint cards, the six-world route, plane inspection and carousel behavior, all 30 map nodes, four boss markers, unlock celebration, parallax, typography, contextual animation and the transition into gameplay. Settled portrait and landscape screenshots were visually inspected.
+
 ## Running the checks
 
 ```sh
@@ -29,6 +32,7 @@ npm start
 python3 tests/browser_smoke.py http://127.0.0.1:5500/
 python3 tests/browser_campaign.py http://127.0.0.1:5500/
 python3 tests/browser_typography_scale.py http://127.0.0.1:5500/dist/dodgewing.html
+python3 tests/browser_command_hangar.py http://127.0.0.1:5500/
 ```
 
 No result here represents testing on a physical phone. Use [ANDROID-CHECKLIST.md](ANDROID-CHECKLIST.md) for manual Android checks.
