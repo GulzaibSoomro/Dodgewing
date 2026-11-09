@@ -57,7 +57,7 @@ async def main():
             }'''), label + 'command layout and one-thumb controls fit the viewport')
             check(await page.locator('.command-dock button').count() == 5, label + 'bottom dock has Home, Hangar, Map, Rewards and Settings')
             check(await page.evaluate("$('pilot-rank').textContent==='ACE CAPTAIN'&&$('pilot-call').textContent==='PILOT DW-06'"), label + 'pilot identity reflects campaign rank and run number')
-            check(await page.evaluate("$('home-plane-level').textContent.startsWith('LEVEL 18')&&$('thi').src===SPRD[17]&&$('menu').dataset.world==='3'"), label + 'large hero plane and living world match Level 18')
+            check(await page.evaluate("$('home-plane-level').textContent.startsWith('LEVEL 18')&&$('thi').getAttribute('src')===SPRD[17]&&$('menu').dataset.world==='3'"), label + 'large hero plane and living world match Level 18')
             check(await page.evaluate("getComputedStyle($('menu')).getPropertyValue('--plane').trim()==='#ffb347'"), label + 'plane paint drives dynamic hangar lighting')
             check(await page.evaluate("$('boss-radar-name').textContent.includes('ADVANCED')&&$('boss-radar-distance').textContent==='7 levels away'"), label + 'radar previews the next boss and distance')
             check(await page.evaluate("$('daily-title').textContent==='Collect 15 stars'&&$('daily-progress').textContent==='7 / 15'&&$('daily-bar').style.width==='47%'"), label + 'daily flight briefing shows mission progress')
@@ -69,7 +69,7 @@ async def main():
             await page.click('#home-plane-stage')
             check(await page.evaluate("$('home-plane-stage').classList.contains('inspect')&&$('plane-inspector').textContent.includes('ENGINE')&&$('plane-inspector').textContent.includes('ABILITY')"), label + 'tapping the aircraft opens engine, weapon and ability inspection')
             await page.evaluate('previewHomePlane(-1)')
-            check(await page.evaluate("$('home-plane-level').textContent.startsWith('LEVEL 17')&&$('thi').src===SPRD[16]"), label + 'aircraft carousel moves through unlocked planes')
+            check(await page.evaluate("$('home-plane-level').textContent.startsWith('LEVEL 17')&&$('thi').getAttribute('src')===SPRD[16]"), label + 'aircraft carousel moves through unlocked planes')
             await page.evaluate('previewHomePlane(0,17)')
 
             await page.click('#boss-radar')
