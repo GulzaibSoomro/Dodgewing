@@ -1,5 +1,12 @@
 # Changelog
 
+## Campaign v2.2
+
+- Fly directly from the final star into the assigned boss encounter. The pickup saves the checkpoint and refills the equipped tank while steering, powers and elapsed flight time continue.
+- Remove the red health bar. Boss damage, final boss phase thresholds, attack warnings and the evasion timer remain active.
+- Celebrate a level clear with the flown aircraft, victory method, flight time, wallet and first-clear unlock. The medal animation respects reduced motion and low-graphics settings.
+- Verify the 30-level campaign, offline Android payload, checkpoint recovery and replay rewards. See [v2.2 QA](V22-PROGRESS.md) for measurements and device coverage.
+
 ## 0.12.1 — 2026-11-05
 
 - Reduce the in-flight player aircraft from 2× to 1.6× its original dimensions, making it exactly 20% smaller than v0.12.0.

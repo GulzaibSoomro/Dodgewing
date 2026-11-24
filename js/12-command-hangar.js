@@ -6,11 +6,12 @@
 
   const menuEl=$('menu'),stageEl=$('home-plane-stage');
   if(!menuEl||!stageEl)return;
-  const bossLevels=[9,17,25,30];
+  const bossLevels=[5,10,15,20,25,30];
+  let routeKey='';
   let homePreview=Math.max(0,Math.min(LEVEL_COUNT-1,(save.stat.bestLv||1)-1));
   let homePinnedPreview=false,homeMusicT=.4,dragStart=null,dragMoved=false,suppressHomeClick=false;
   const clampLevel=n=>Math.max(1,Math.min(LEVEL_COUNT,Math.floor(Number(n)||1)));
-  const unlockedLevel=()=>clampLevel(save.stat.bestLv||1);
+  const unlockedLevel=unlockedLevelCount;
   const worldFor=L=>Math.max(0,Math.min(5,Math.floor((clampLevel(L)-1)/5)));
   const worldName=i=>(PRO_WORLDS[i]&&PRO_WORLDS[i].n)||ZONES[i]||'FLIGHT ZONE';
   const weaponName=L=>(WPN[L]&&WPN[L].n)||'Evasive flying';
@@ -34,6 +35,7 @@
   }
   function renderRoute(L){
     const active=worldFor(L),bestWorld=worldFor(unlockedLevel());
+    const key=L+':'+unlockedLevel();if(key===routeKey)return;routeKey=key;
     $('home-route').innerHTML=PRO_WORLDS.map((world,i)=>{
       const target=Math.min(unlockedLevel()-1,i*5+Math.min(4,Math.max(0,L-1-i*5)));
       const cls=(i<=bestWorld?' done':'')+(i===active?' current':'');
@@ -56,17 +58,7 @@
     const card=$('stats'),last=Array.isArray(save.top)&&save.top.length?save.top[0]:null;
     card.innerHTML=last?'<span>BEST FLIGHT</span><b>'+Math.max(0,Number(last.score)||0)+' pts · Level '+clampLevel(last.level)+'</b><em>Flight log ›</em>':'<span>LAST FLIGHT</span><b>No flight recorded</b><em>Start your first run ›</em>';
   }
-  function renderMap(){
-    const best=unlockedLevel(),bossSet=new Set(bossLevels),panel=$('campaign-map');
-    $('map-progress').textContent='LEVEL '+best+' / '+LEVEL_COUNT;
-    panel.innerHTML=PRO_WORLDS.map((world,w)=>{
-      const levels=Array.from({length:5},(_,q)=>w*5+q+1).map(L=>{
-        const cls=(L<=best?' unlocked':'')+(L===best?' current':'')+(bossSet.has(L)?' boss':'');
-        return '<button class="map-level'+cls+'" onclick="openHomePlane('+(L-1)+')"><img src="'+SPRD[L-1]+'" alt=""><b>Lv '+L+'</b><small>'+weaponName(L)+'</small></button>';
-      }).join('');
-      return '<section class="map-world"><header><b>'+world.n+'</b><small>LEVELS '+(w*5+1)+'–'+(w*5+5)+'</small></header><div class="map-levels">'+levels+'</div></section>';
-    }).join('')+'<p class="map-legend">Tap an unlocked aircraft to inspect it in the Command Hangar. Red markers identify boss encounters.</p>';
-  }
+  function renderMap(){chapterMap()}
   function celebrateUnlock(best){
     if((save.homeSeenLv||1)>=best)return;
     save.homeSeenLv=best;store();homePreview=best-1;
@@ -77,17 +69,15 @@
   function refreshHome(celebrate=false){
     const best=unlockedLevel();homePreview=Math.max(0,Math.min(best-1,homePreview));const L=homePreview+1,world=worldFor(L),rank=pilotRank(best),missionTarget=Math.min(LEVEL_COUNT,best+1),paint=PLANES[save.sel]||PLANES[0];
     menuEl.dataset.world=String(world);menuEl.style.setProperty('--plane',paint.c);stageEl.classList.toggle('engine-on',L>=4);
-    $('thi').src=SPRD[homePreview];$('thi').alt='Level '+L+' '+LV[homePreview];
-    $('home-plane-level').textContent='LEVEL '+L+' · '+weaponName(L).toUpperCase();$('home-plane-name').textContent=LV[homePreview];$('home-plane-world').textContent=worldName(world);
+    if($('thi').getAttribute('src')!==SPRD[homePreview])$('thi').src=SPRD[homePreview];$('thi').alt='Level '+L+' '+LV[homePreview];
+    $('home-plane-level').textContent='LEVEL '+L+'  /  '+chapterAt(L).name.toUpperCase();$('home-plane-name').textContent=LV[homePreview];
+    $('home-mission').textContent=LEVEL_CONFIG[L-1].target+' stars · '+LEVEL_CONFIG[L-1].chapter.name;
     $('plane-inspector').textContent=inspectorText(L);$('pilot-badge').textContent=rank[0];$('pilot-rank').textContent=rank[1];
     $('pilot-call').textContent='PILOT DW-'+String(Math.max(1,(save.stat.runs||0)+1)).padStart(2,'0');
-    $('pc').textContent=Math.max(0,save.pts||0)+' · ◈ '+Math.max(0,save.coins||0);
-    $('home-play-title').textContent=best>=LEVEL_COUNT?'REPLAY FINAL CAMPAIGN':'CONTINUE FLIGHT';
-    $('home-play-sub').textContent=best>=LEVEL_COUNT?'Level 30 secured · Chase a new record':'New run · Next target Level '+missionTarget;
-    const resume=$('home-resume'),cost=checkpointCost(),canResume=(save.cp||1)>1&&save.coins>=cost;
-    resume.classList.toggle('hide',!canResume);resume.textContent=canResume?'RETURN TO CHECKPOINT · LEVEL '+save.cp+' · ◈ '+cost:'';
+    $('pc').textContent=String(save.campaign.wallet);
+    $('home-play-title').textContent='New Flight';
+    $('home-play-sub').textContent='Campaign Map · '+unlockedLevel()+' / 30 unlocked';
     const prev=stageEl.parentElement.querySelector('.plane-step.prev'),next=stageEl.parentElement.querySelector('.plane-step.next');prev.disabled=homePreview<=0;next.disabled=homePreview>=best-1;
-    renderRoute(L);renderBossRadar(best);renderBriefing();renderLastFlight();renderMap();
     if(celebrate)celebrateUnlock(best);
   }
   function enterHangar(){
@@ -101,7 +91,7 @@
   function toggleInspection(){stageEl.classList.toggle('inspect')}
   function openHomePlane(index){homePreview=Math.max(0,Math.min(unlockedLevel()-1,Math.floor(index)||0));homePinnedPreview=true;menu()}
   function homeCheckpoint(){if(!continueRun())start()}
-  function flightMap(){S='menu';show('flight-map');renderMap()}
+  function flightMap(){if(adBreakPending||rewardedRescuePending)return;S='menu';show('flight-map');renderMap()}
   function homeSkyLevel(){return homePreview+1}
   function homeMusicTick(d){
     if(save.snd===false||save.music===false||!AC)return;
@@ -116,7 +106,7 @@
   const commandShow=show;
   show=function(id){commandShow(id);$('flight-map').classList.toggle('hide',id!=='flight-map')};
   const commandMenu=menu;
-  menu=function(){commandMenu();if(!homePinnedPreview)homePreview=unlockedLevel()-1;homePinnedPreview=false;refreshHome(true);enterHangar()};
+  menu=function(){commandMenu();if(!homePinnedPreview)homePreview=save.campaign.selected-1;homePinnedPreview=false;refreshHome(true);enterHangar()};
   const commandStart=start;
   start=function(){if(S==='menu'){homeMusicT=0;snd('fl')}commandStart()};
   const commandUpdate=upd;
@@ -130,7 +120,7 @@
   stageEl.addEventListener('pointerup',release);stageEl.addEventListener('pointercancel',()=>{dragStart=null;stageEl.style.setProperty('--tilt-x','0');stageEl.style.setProperty('--tilt-y','0')});
   stageEl.addEventListener('click',e=>{if(e.target.closest('.plane-hotspot'))return;if(suppressHomeClick){suppressHomeClick=false;return}toggleInspection()});
   stageEl.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();changePreview(-1)}else if(e.key==='ArrowRight'){e.preventDefault();changePreview(1)}else if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleInspection()}});
-  menuEl.addEventListener('pointermove',e=>{if(reducedMotion())return;const r=menuEl.getBoundingClientRect();menuEl.style.setProperty('--px',((e.clientX-r.left)/Math.max(1,r.width)-.5).toFixed(2));menuEl.style.setProperty('--py',((e.clientY-r.top)/Math.max(1,r.height)-.5).toFixed(2))},{passive:true});
+  menuEl.addEventListener('pointermove',e=>{if(SAFE_RENDER||reducedMotion())return;const r=menuEl.getBoundingClientRect();menuEl.style.setProperty('--px',((e.clientX-r.left)/Math.max(1,r.width)-.5).toFixed(2));menuEl.style.setProperty('--py',((e.clientY-r.top)/Math.max(1,r.height)-.5).toFixed(2))},{passive:true});
   menuEl.addEventListener('pointerleave',()=>{menuEl.style.setProperty('--px','0');menuEl.style.setProperty('--py','0')});
   menuEl.addEventListener('pointerdown',()=>initAudio(),{passive:true});
   addEventListener('dodgewingready',()=>{refreshHome(true);enterHangar()});

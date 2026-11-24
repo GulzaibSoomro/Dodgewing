@@ -2,15 +2,112 @@ plugins {
     id "com.android.application"
 }
 
+def keystoreProps = new Properties()
+// Reference the existing legitimate signing file without copying private material.
+def externalSigningProperties = System.getenv("DODGEWING_SIGNING_PROPERTIES")
+def keystoreFile = externalSigningProperties ? new File(externalSigningProperties) : rootProject.file("keystore.properties")
+if (keystoreFile.exists()) {
+    keystoreFile.withInputStream { keystoreProps.load(it) }
+}
+
+// Prefer the ignored properties file when present, but also support ephemeral
+// environment variables so release passwords never need to be written to disk.
+def signingStoreFile = keystoreProps["storeFile"] ?: System.getenv("DODGEWING_UPLOAD_STORE_FILE")
+if (externalSigningProperties && signingStoreFile && !new File(signingStoreFile).isAbsolute()) {
+    signingStoreFile = new File(new File(keystoreFile.parentFile, "app"), signingStoreFile).canonicalPath
+}
+def signingStorePassword = keystoreProps["storePassword"] ?: System.getenv("DODGEWING_UPLOAD_STORE_PASSWORD")
+def signingKeyAlias = keystoreProps["keyAlias"] ?: System.getenv("DODGEWING_UPLOAD_KEY_ALIAS")
+def signingKeyPassword = keystoreProps["keyPassword"] ?: System.getenv("DODGEWING_UPLOAD_KEY_PASSWORD")
+def signingStoreExists = signingStoreFile && file(signingStoreFile).exists()
+def releaseSigningReady = signingStoreExists && signingStorePassword && signingKeyAlias && signingKeyPassword &&
+        !signingStorePassword.toString().contains('CHANGE_ME') && !signingKeyPassword.toString().contains('CHANGE_ME')
+
 android {
     namespace "com.gulzaibsoomro.dodgewing"
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
-        applicationId "com.gulzaibsoomro.dodgewing"
-        minSdk 23
-        targetSdk 35
-        versionCode 14
-        versionName "0.12.1"
+        applicationId "com.gzsstudio.dodgewing"
+        minSdk 24
+        targetSdk 36
+        versionCode 23
+        versionName "0.14.0"
+    }
+
+    signingConfigs {
+        release {
+            if (releaseSigningReady) {
+                storeFile file(signingStoreFile)
+                storePassword signingStorePassword
+                keyAlias signingKeyAlias
+                keyPassword signingKeyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        debug { applicationIdSuffix ".debug"; versionNameSuffix "-debug" }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            if (releaseSigningReady) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation "com.google.android.gms:play-services-ads:24.4.0"
+    implementation "com.google.android.ump:user-messaging-platform:3.2.0"
+}
+
+tasks.register('validateReleaseBundle', JavaExec) {
+    dependsOn 'bundleRelease'
+    classpath = rootProject.buildscript.configurations.classpath
+    mainClass = 'com.android.tools.build.bundletool.BundleToolMain'
+    args 'validate', '--bundle=' + layout.buildDirectory.file('outputs/bundle/release/app-release.aab').get().asFile.absolutePath
+}
+
+tasks.register('dumpReleaseManifest', JavaExec) {
+    dependsOn 'validateReleaseBundle'
+    classpath = rootProject.buildscript.configurations.classpath
+    mainClass = 'com.android.tools.build.bundletool.BundleToolMain'
+    args 'dump', 'manifest', '--bundle=' + layout.buildDirectory.file('outputs/bundle/release/app-release.aab').get().asFile.absolutePath
+}
+
+// Prevent publishing accidental demo ads or an unsigned release artifact.
+// The checks run only when a release build is requested, not for local debug testing.
+gradle.taskGraph.whenReady { graph ->
+    if (graph.allTasks.any { task -> task.path == ':app:bundleRelease' || task.path == ':app:assembleRelease' }) {
+        if (!releaseSigningReady && !project.hasProperty('allowUnsignedRelease')) {
+            throw new GradleException('Release signing is not configured. See android/RELEASE-BUILD.md')
+        }
+        // Resource overlays: debug reads src/main, release reads src/release.
+        def idsText = file('src/release/res/values/ads.xml').text
+        if (idsText.contains('ca-app-pub-3940256099942544')) {
+            throw new GradleException('Release build blocked: demo IDs still present in src/release/res/values/ads.xml.')
+        }
+        if (idsText.contains('YOUR_') || idsText.contains('REPLACE_ME')) {
+            throw new GradleException('Release build blocked: placeholder production AdMob IDs.')
+        }
+        def ids = [:]
+        def matcher = (idsText =~ /<string name="(admob_[a-z_]+)"[^>]*>([^<]+)<\/string>/)
+        matcher.each { match -> ids[match[1]] = match[2].trim() }
+        def publisher = '5426938423910801'
+        def expectations = [
+            admob_app_id: ~/ca-app-pub-${publisher}~[0-9]{10}/,
+            admob_banner_id: ~/ca-app-pub-${publisher}\/[0-9]{10}/,
+            admob_interstitial_id: ~/ca-app-pub-${publisher}\/[0-9]{10}/,
+            admob_rewarded_rescue_id: ~/ca-app-pub-${publisher}\/[0-9]{10}/
+        ]
+        expectations.each { name, pattern ->
+            if (!(ids[name] ==~ pattern)) {
+                throw new GradleException("Invalid or missing production AdMob ID: ${name}")
+            }
+        }
     }
 }

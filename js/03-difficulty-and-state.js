@@ -7,3 +7,7 @@ const difficulty=L=>Math.max(0,Math.min(1,(L-1)/(LEVEL_COUNT-1)));
 const phone=()=>Math.min(W,H)<600;
 const cap=L=>{const b=Math.round(2+(M().m30-2)*difficulty(L));return phone()?Math.max(2,Math.round(b*.5)):b};
 let lv=1,prevLv=1,upT=0,fadeT=0,banT=0,trailC='255,243,224',evoStars=0,inv=0,dnT=0,peakLv=1,banTx='',banC='#ffe066';
+
+const levelPressure=()=>LEVEL_CONFIG[lv-1].pressure;
+const flightScore=()=>Math.floor((Math.floor(t)+stars*5+bonus)*levelPressure().score);
+function recordModeBest(score){save.campaignBest=Math.max(num(save.campaignBest),score)}

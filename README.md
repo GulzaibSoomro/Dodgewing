@@ -1,86 +1,38 @@
-# Dodgewing 0.12.1
+# Dodgewing v2.2
 
-Existing HTML5 canvas game expanded to a single 30-stage campaign. No framework or runtime dependencies. The purple/glass interface, 30 supplied aircraft sprites, four paints, weapons, bosses, joystick, missions, achievements and saved purchases remain.
+Dodgewing is an offline HTML5 canvas flight game from GZS Studio. Fly 30 campaign levels, collect stars to upgrade individual aircraft in the Forge, and defeat each assigned boss to open the next level. An unarmed aircraft can win by evading the boss until its timer expires.
 
 ## Play
 
-Open `index.html`, or run `npm start` and visit `http://localhost:5500`. `dist/dodgewing.html` is a self-contained offline build with embedded sprites and font.
+Open `index.html`, or run `npm start` and visit `http://localhost:5500`. Select a level from the Campaign Map. Steer with the touch joystick, touch steering, or the arrow keys. Use the pause button or P/Esc to pause.
 
-At launch, a black splash screen with a centered orange Sunset Run aircraft panel leads into an asset-loading screen, then the Living Command Hangar appears. It combines the current aircraft, world lighting, campaign route, boss radar, daily briefing, reward crate, last-flight record, checkpoint return and Continue Flight action in one mobile layout. Swipe the hero aircraft to inspect unlocked planes, tap it to reveal engine/weapon/ability details, or use the Home, Hangar, Map, Rewards and Settings dock. On touch screens use the bottom steering circle during a run; elsewhere on the screen does not steer. On a keyboard use left/right arrows or A/D. P/Esc pauses or resumes.
-
-## Campaign
-
-- The Living Command Hangar changes sky and lighting with the selected aircraft world, opens with animated hangar doors and uses light parallax, runway depth, engine glow and ambient menu tones. Reduced Motion disables nonessential movement.
-- Pilot rank and callsign reflect campaign progress. A 30-level Flight Map marks unlocked aircraft and all four bosses; selecting an unlocked stage returns to that plane in the home carousel.
-- 30 evolution stages use 30 distinct transparent aircraft sprites supplied for this update. Sprite art is preserved as provided; each stage has a unique plane.
-- The in-flight player aircraft renders at 1.6× its original width and height (about 77 px on typical portrait phones), 20% smaller than v0.12.0. Shields and weapon origins follow that size; its collision core retains the established difficulty.
-- Start at Level 1; each five collected stars advances one stage. Level 30 takes 145 stars without damage (29 level-ups).
-- Exactly one collectible star appears at a time. Collect it to reveal the next. During a boss, stars pause; one returns when the encounter ends. HUD pips show progress toward the next five-star milestone.
-- Difficulty grows across the 30 levels: the plane starts at 150 px/s and gains 10 px/s at each even-numbered level, reaching 300 px/s at Level 30. Regular missile speed rises from 55% to 93% of the current plane speed, spawn interval decreases from 2.8 to 0.55 seconds, turning grows, and the desktop missile cap rises from 2 to 16 (phone cap 2 to 8).
-- A hit loses two levels / ten evolution stars, with 1.5 seconds of protection. A hit at Level 1 ends the run. Collected run stars and earned points are not removed. Weapons follow the current stage, including after damage.
-- Stages 1–3 have no guns. Auto-fire begins at stage 4 with the nose gun and evolves through twin/wing guns, jet cannons, homing missiles and plasma. Stages 14–30 extend the plasma-storm set with a bounded rate/damage increase.
-- The game contains a transparent 30-cell missile sheet based on the supplied rocket designs. Levels 1–3 use its first missile; Levels 4–29 advance through the normal designs. The three final special designs are reserved for Final Challenge enemy waves. Normal missiles render at 48 px and use thin artwork, so they stay smaller than the player aircraft.
-- The campaign has six five-level sky worlds: Sunrise Skies, Storm Front, Sunset Run, Midnight Flight, Deep Space and Cosmic Finale. Each changes the sky treatment while retaining the shared purple-and-gold arcade style, with slow horizontal and vertical cloud drift to convey forward flight. The worlds introduce turbulence, mines, laser gates, drones and asteroids in order.
-- Boss encounters: Heavy Missile at 9 uses a telegraphed charge; Missile Commander at 17 uses target lasers, fan volleys and rings; Advanced Seeker at 25 launches fast tracking attacks; Cosmic Overlord at 30 sends wall, ring and homing waves. Each has its own lightweight, transparent sprite, warning card, named attack state, sound and large health bar. Bosses award coins.
-- Each evolution displays a plane-unlocked card with the new aircraft and weapon. Level 1 also gives short “move,” “collect stars” and “avoid missiles” prompts. Finishing the Level 30 boss opens a final victory screen with the run score, best plane and a Play again button.
-- S = shield; M = magnet; L = slow missiles. Active power-up names, icons, countdowns and timer bars appear in a transparent strip beneath the top HUD. Near misses give combo bonuses.
-- Stars, destroyed missiles and bosses award ◈ coins. The Hangar Upgrade Bay has four permanent four-rank upgrades: engine speed, shield duration, magnet range and weapon damage. Reaching Levels 5, 10, 15, 20 and 25 unlocks a paid checkpoint rescue from the game-over screen.
-- Tap the blue ability button beside Pause, or press Space, to activate the current five-level aircraft family ability: Guard Pulse, Star Pull, Time Brake, Overdrive, Afterburner or Nova Wave. Its icon and circular cooldown show when it is ready again. Resume uses a short 3–2–1 countdown. Settings include effects, adaptive music, graphics mode, Reduced Motion, vibration and left-handed steering.
-- Points = `(whole seconds + stars × 5 + bonus) × 2`. Paint prices remain 0 / 400 / 1200 / 3000. Three daily missions, ten achievements and unlocked trail rewards remain.
-
-## Saves and compatibility
-
-Browser LocalStorage key: `dw`. Points, coins, upgrades, checkpoint, paint ownership/selection, achievements, trails, mission history and legacy Easy/Normal/Fast best scores are preserved. New campaign scores use `best.play`; old scores are not mixed into a different campaign leaderboard. Legacy `mode` is retained as history and has no gameplay effect.
-
-Save schema 4 maps old aircraft unlocks to the matching stage in the expanded evolution path (old Level 12 → Level 30). `legacyBestLv` retains the old milestone. Migration runs once. Unknown or retired mission IDs are ignored when rendering rewards and processing events, without deleting their saved history. A legacy day can therefore show fewer than three valid missions until the next daily rollover.
-
-Progress requires the same browser and origin. Opening the file under a new origin does not transfer another origin's LocalStorage. An unavailable LocalStorage leaves the game playable but unable to persist changes. Missing or malformed saved values fall back to safe defaults; retired missions remain stored, while unknown trail IDs are ignored.
-
-## Source map
-
-| File | Role |
-|---|---|
-| `index.html`, `css/style.css` | Menus, overlays, responsive layout and styles |
-| `js/01-core.js` | Canvas sizing and helpers |
-| `js/02-save-and-assets.js`, `assets/missiles/missile-sheet.png`, `assets/bosses/boss-sheet.png` | Save migration, aircraft, missile and boss assets |
-| `js/03-difficulty-and-state.js` | Single-campaign difficulty curve and evolution state |
-| `js/04-audio.js` | Generated audio |
-| `js/05-missions-achievements.js` | Missions, achievements, rewards and results |
-| `js/06-bosses.js` | Bosses and near-miss effects |
-| `js/07-game.js` | Navigation, collection, evolution, collision, update and draw |
-| `js/07b-flight-systems.js` | Coins, upgrades, checkpoint rescue, plane abilities and sky hazards |
-| `js/08-render-helpers.js` | HUD and canvas rendering |
-| `js/08b-weapons-sky-controls.js` | Weapons, morning-to-night sky and joystick |
-| `js/09-input-and-loop.js` | Input, pause and animation timing |
-| `js/10-professional-pass.js` | World themes, tutorial, boss introductions, unlock and victory cards, polished effects and settings |
-| `js/11-intro-sequence.js` | Splash screen, real asset preloading and loading progress |
-| `assets/icons/`, `manifest.webmanifest` | Source SVG, platform app icons and installable-web-app metadata |
-| `android/`, `tools/build-android.js` | Full-screen Android WebView wrapper and preparation script for an installable offline APK |
-| `tools/build.js`, `tools/serve.js` | Build the self-contained game and run the local source server without Python |
-| `tools/build.py` | Original Python build script, retained for compatible environments |
-| `tests/run-tests.js` | Deterministic mocked-DOM logic tests |
-| `tests/browser_smoke.py` | Real Chromium interaction and old-save checks |
-| `tests/browser_campaign.py` | Full progression and five viewport sizes |
-
-Classic scripts share a global scope. `tests/expected_from_spreadsheet.json` is retained as a historical 12-level/mode fixture; it is not the current campaign specification.
+The final star now saves a boss checkpoint and refills the equipped tank while you keep flying. Your position, steering, active powers and flight clock carry into the fight. Watch the attack warning and evasion timer. Weapons still deal damage and can end the encounter early. After a clear, the result screen identifies the aircraft, victory method and first-clear reward. Next Level opens its briefing. Clearing level 30 returns you to the map through the primary action.
 
 ## Build and test
 
+Run these commands from the repository root with Node.js and npm installed.
+
 ```sh
 npm test
-pip install playwright
-python3 -m playwright install chromium
-npm start
-# In another terminal:
-python3 tests/browser_smoke.py http://127.0.0.1:5500/
-python3 tests/browser_campaign.py http://127.0.0.1:5500/
-python3 tests/browser_command_hangar.py http://127.0.0.1:5500/
 npm run prepare:android
-cd android && ./gradlew assembleDebug
 ```
 
-See `TESTING.md` and `TEST-REPORT.md` for executed results and limitations, [android/README.md](android/README.md) for the APK build steps, and `ANDROID-CHECKLIST.md` for device testing. The browser scripts use `DW_BROWSER_EXECUTABLE` when supplied, then try a system Chromium or Chrome before using Playwright's downloaded browser. They also accept `DW_BROWSER_JITLESS=1`; that disables the JavaScript optimizer and is unsuitable for representative performance measurements.
+`npm test` builds the standalone `dist/dodgewing.html`, runs the campaign rules suite, and checks native ad integration. `prepare:android` stages the offline WebView payload. To build a local debug APK, follow the [Android build instructions](android/README.md).
 
-## Assets and release work
+For the focused v2.2 browser regression, make the Node.js `playwright` package available, create a `test-results` directory, and run the following after Android staging. Set `CHROME_BINARY` to your Chromium executable. `DW_PLAYWRIGHT_MODULE` can point to a Playwright installation outside this checkout.
 
-The game uses Oxanium for titles and scores, and Barlow Semi Condensed for buttons, labels and instructions. Both are included with their SIL Open Font Licenses in `assets/fonts` and in the standalone build. Legacy fonts are retained as source files but are no longer loaded or bundled. [Font research and attribution limits](FONT-NOTES.md) records the verified sources and selection. The Dodgewing icon is supplied as editable SVG and PNGs for browser, iPhone and Android/PWA use. Aircraft licensing remains unconfirmed. No commercial licensing or ad SDK is included; the game uses the full screen.
+```sh
+node tests/v22-flight.js
+```
+
+## Project layout
+
+| Path | Contents |
+| --- | --- |
+| `index.html`, `js/`, `css/` | Browser entry point, gameplay, persistence, input, rendering and UI |
+| `assets/` | Aircraft, bosses, missiles, home art, launcher and splash artwork, fonts and licenses |
+| `android/` | Native WebView host, ad integration, Android resources and Gradle wrapper |
+| `tools/`, `tests/` | Build scripts, focused regressions and historical test fixtures |
+| `docs/qa/v2.2/` | Verified payload hashes, screenshots and browser frame measurements |
+
+The campaign release is v2.2. Android retains version name `0.14.0`, code 23, and the debug application ID `com.gzsstudio.dodgewing.debug`. For handset coverage and performance limits, see the [v2.2 QA report](V22-PROGRESS.md). Earlier development notes remain in the repository for historical reference. Font sources and attribution are documented in [FONT-NOTES.md](FONT-NOTES.md).

@@ -23,28 +23,29 @@ function fireTick(d){
   w.e.forEach((e,i)=>{wcd[i]-=d;let n=0;
     while(wcd[i]<=0&&n++<3){wcd[i]+=1/(e.r*(over>0?1.65:1));
       for(const o of e.o){const a=pl.a+(o[2]||0)+(e.sp?rnd(-e.sp,e.sp):0),fw=playerDrawSize()*.35+(o[1]||0)*PLAYER_DRAW_SCALE,side=o[0]*PLAYER_DRAW_SCALE;
-        if(bl.length<(lowGraphics()?90:200))bl.push({x:pl.x+fx0*fw-fy0*side,y:pl.y+fy0*fw+fx0*side,a,v:e.v,d:e.d*weaponBoost(),life:e.h?2.2:1.15,h:e.h,c:e.c,w:e.w})}}})}
+        const tier=forgeTier('weapons'),paired=tier>=2&&i===0;
+        for(const offset of paired?[-3,3]:[0])if(bl.length<(SAFE_RENDER?90:200))bl.push({pierce:tier===3?1:0,x:pl.x+fx0*fw-fy0*(side+offset),y:pl.y+fy0*fw+fx0*(side+offset),a,v:e.v,d:e.d*weaponBoost()*(paired?.58:tier?1.06:1),life:e.h?2.2:1.15,h:e.h,skin:normalMissileSkin(lv),c:e.c,w:e.w})}}})}
 function hitMissile(m,j,dmg){
   if(m.hp===undefined){m.hp=1;m.hp0=1}
   m.hp-=dmg;boom(m.x,m.y,'255,200,90',m.hp>0?2:14);
   if(m.hp>0)return;
-  ms.splice(j,1);snd('hit');awardCoins(1);save.stat.shot=(save.stat.shot||0)+1;mEvent('shot',1);
-  if(m.big){bonus+=10;if(B)B.t=B.T}else if(m.adv){bonus+=5;if(B)B.t+=B.T*.2}
+  chapterTask('shot');ms.splice(j,1);snd('hit');awardCoins(1);save.stat.shot=(save.stat.shot||0)+1;mEvent('shot',1);
+
   chkAch()}
 function bulletTick(d){
   for(let i=bl.length-1;i>=0;i--){const b=bl[i];
     if(b.h){let tg=null,bd=420;for(const m of ms){const q=Math.hypot(m.x-b.x,m.y-b.y);if(q<bd){bd=q;tg=m}}
       if(tg)b.a+=Math.max(-5*d,Math.min(5*d,angd(Math.atan2(tg.y-b.y,tg.x-b.x),b.a)));
-      pt.push({x:b.x,y:b.y,vx:0,vy:0,l:.22,m:.22,c:'255,255,255',r:1.8})}
+      pushParticle({x:b.x,y:b.y,vx:0,vy:0,l:.22,m:.22,c:'255,255,255',r:1.8})}
     b.x+=Math.cos(b.a)*b.v*d;b.y+=Math.sin(b.a)*b.v*d;b.life-=d;
     let dead=b.life<=0||b.x<-30||b.x>W+30||b.y<-30||b.y>H+30;
-    if(!dead)for(let j=ms.length-1;j>=0;j--){const m=ms[j];if(Math.hypot(m.x-b.x,m.y-b.y)<9*(m.r||1)+b.w){dead=true;hitMissile(m,j,b.d);break}}
-    if(!dead&&B&&B.k==='cmdr'&&Math.abs(b.x-B.x)<36&&Math.abs(b.y-B.y)<20){dead=true;B.t+=b.d*.12;boom(b.x,b.y,'255,220,120',3)}
+    if(!dead)for(let j=ms.length-1;j>=0;j--){const m=ms[j];if(m!==b.passed&&Math.hypot(m.x-b.x,m.y-b.y)<9*(m.r||1)+b.w){dead=!b.pierce;if(b.pierce){b.pierce--;b.passed=m}hitMissile(m,j,b.d);break}}
+    if(!dead&&B&&B.entry>=1&&proBossIntro<=0&&bossContains(b.x,b.y)){dead=true;B.hp=Math.max(0,B.hp-b.d*(B.L===20&&B.wn>0?.25:1));B.flash=.14;boom(b.x,b.y,'255,220,120',3)}
     if(dead)bl.splice(i,1)}}
 function drawBullets(){
   x.lineCap='round';
   for(const b of bl){
-    if(b.h){x.save();x.translate(b.x,b.y);x.rotate(b.a);x.scale(.5,.5);ctxMissile('#ffffff','#2f6fd6');x.restore()}
+    if(b.h){x.save();x.translate(b.x,b.y);x.rotate(b.a);x.scale(.5,.5);drawEnemyMissile({skin:b.skin});x.restore()}
     else{const tx=b.x-Math.cos(b.a)*b.w*3.4,ty=b.y-Math.sin(b.a)*b.w*3.4;x.strokeStyle='rgba(50,25,0,.4)';x.lineWidth=b.w*.7+2;x.beginPath();x.moveTo(b.x,b.y);x.lineTo(tx,ty);x.stroke();x.strokeStyle=b.c;x.lineWidth=b.w*.7;x.beginPath();x.moveTo(b.x,b.y);x.lineTo(tx,ty);x.stroke()}}
   x.lineCap='butt';
   for(const m of ms)if(m.hp0>1&&m.hp>0&&m.hp<m.hp0){const w=34*(m.r||1)*.7;x.fillStyle='rgba(0,0,0,.55)';x.fillRect(m.x-w/2-1,m.y-26*(m.r||1)-1,w+2,6);x.fillStyle='#ff6b5e';x.fillRect(m.x-w/2,m.y-26*(m.r||1),w*m.hp/m.hp0,4)}}
@@ -70,7 +71,7 @@ function drawSky(){
   x.fillStyle=g;x.fillRect(0,0,W,H);
   if(c[0]!==lastSkyT){lastSkyT=c[0];const e=$('st');if(e&&e.style)e.style.background=c[0]}
   const n=nightAmt(skyL);
-  if(n>0){const tm=performance.now()/1000;x.fillStyle='#ffffff';
+  if(n>0){const tm=S==='paused'||S==='countdown'?pauseSkyTime:performance.now()/1000;x.fillStyle='#ffffff';
     for(const s of STARS){const a=Math.max(0,Math.min(1,(n-s.th*.85)/.12));if(a<=0)continue;x.globalAlpha=a*(reducedMotion()?1:.72+.28*Math.sin(tm*1.5+s.p));x.beginPath();x.arc(s.x*W,s.y*H,s.s,0,TAU);x.fill()}
     x.globalAlpha=1}
   const k=lvMix(CLD,1+difficulty(skyL)*11);cloudC='rgba('+Math.round(k[0])+','+Math.round(k[1])+','+Math.round(k[2])+','+k[3].toFixed(3)+')'}
@@ -82,7 +83,7 @@ function joyAng(e){const j=$('joy'),r=j.getBoundingClientRect(),R=r.width/2,dx=e
   if(k&&k.style)k.style.transform=d>1?'translate('+(dx/d*m).toFixed(1)+'px,'+(dy/d*m).toFixed(1)+'px)':'translate(0,0)'}
 function joyRel(){jAng=null;jId=null;const k=$('jk'),j=$('joy');if(k&&k.style)k.style.transform='translate(0,0)';if(j&&j.classList)j.classList.remove('act')}
 function joyInit(){const j=$('joy');
-  j.addEventListener('pointerdown',e=>{e.preventDefault();jId=e.pointerId;try{j.setPointerCapture(e.pointerId)}catch(_){}j.classList.add('act');joyAng(e)});
+  j.addEventListener('pointerdown',e=>{if(jId!==null||S!=='play')return;e.preventDefault();jId=e.pointerId;try{j.setPointerCapture(e.pointerId)}catch(_){}j.classList.add('act');joyAng(e)});
   j.addEventListener('pointermove',e=>{if(e.pointerId===jId)joyAng(e)});
   const up=e=>{if(e.pointerId===jId)joyRel()};
   j.addEventListener('pointerup',up);j.addEventListener('pointercancel',up);j.addEventListener('lostpointercapture',up)}

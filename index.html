@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="game-viewport">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2a8"/><stop offset="1" stop-color="#ffb21e"/></linearGradient>
 <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.3l7.1-.7z" fill="url(#gs)" stroke="#a35a00" stroke-width="1.3" stroke-linejoin="round"/></symbol>
@@ -50,6 +51,7 @@
     <i class="hangar-sun"></i><i class="hangar-grid"></i><i class="hangar-runway"></i>
     <i class="hangar-door left"></i><i class="hangar-door right"></i>
   </div>
+  <div class="home-content">
   <header class="command-top">
     <button class="pilot-card" onclick="highScores()" aria-label="Open high scores">
       <i id="pilot-badge">A</i><span><small id="pilot-call">PILOT DW-01</small><b id="pilot-rank">ROOKIE WING</b><em>High scores</em></span>
@@ -59,7 +61,8 @@
   </header>
 
   <main class="command-hero" id="mh">
-    <div class="command-brand"><h1>Dodgewing</h1><button onclick="helpS()"><span>?</span>How to play</button></div>
+    <div class="command-brand" aria-label="Dodgewing, GZS Studio"><div class="brand-mark"><svg class="brand-wing left" viewBox="0 0 100 28" aria-hidden="true"><path d="M98 7H4L30 15h63M92 17H32l18 7h39"/></svg><div class="brand-center"><h1>Dodgewing</h1><div class="brand-sub"><i></i><span>★ &nbsp; GZS STUDIO &nbsp; ★</span><i></i></div></div><svg class="brand-wing right" viewBox="0 0 100 28" aria-hidden="true"><path d="M98 7H4L30 15h63M92 17H32l18 7h39"/></svg></div></div>
+    <div class="home-showcase">
     <div class="home-plane-wrap">
       <button class="plane-step prev" onclick="previewHomePlane(-1)" aria-label="Previous unlocked plane">‹</button>
       <div class="home-plane-stage" id="home-plane-stage" role="button" tabindex="0" aria-label="Inspect and swipe through unlocked aircraft">
@@ -72,22 +75,16 @@
         <div class="home-unlock" id="home-unlock"><small>NEW AIRCRAFT</small><b id="home-unlock-name"></b></div>
       </div>
       <button class="plane-step next" onclick="previewHomePlane(1)" aria-label="Next unlocked plane">›</button>
-      <button class="boss-radar" id="boss-radar" onclick="flightMap()"><svg><use href="#i-radar"/></svg><span><small>NEXT THREAT</small><b id="boss-radar-name">HEAVY MISSILE</b><em id="boss-radar-distance">8 levels</em></span></button>
     </div>
-    <div class="plane-identity"><span><b id="home-plane-level">LEVEL 1</b><strong id="home-plane-name">Wooden Glider</strong></span><em id="home-plane-world">SUNRISE SKIES</em></div>
-    <div class="home-route" id="home-route" aria-label="Campaign progress"></div>
+    <div class="plane-identity"><span><b id="home-plane-level">LEVEL 1</b><strong id="home-plane-name">Wooden Glider</strong><small id="home-mission"></small></span></div>
+    </div>
   </main>
-
+  </div>
   <section class="command-actions" id="mb">
-    <div class="briefing-grid">
-      <button class="daily-brief" onclick="rewards()"><i>01</i><span><small>DAILY FLIGHT BRIEFING</small><b id="daily-title">Collect stars</b><em id="daily-progress">0 / 15</em><u><i id="daily-bar"></i></u></span></button>
-      <button class="reward-crate" id="reward-crate" onclick="rewards()"><svg><use href="#i-crate"/></svg><small>REWARDS</small><b id="reward-count">0 / 3</b></button>
-    </div>
-    <button class="last-flight" id="stats" onclick="highScores()"><span>LAST FLIGHT</span><b>No flight recorded</b><em>View flight log ›</em></button>
-    <button class="go home-play" id="home-play" onclick="start()"><svg class="pi"><use href="#i-play"/></svg><span><b id="home-play-title">CONTINUE FLIGHT</b><small id="home-play-sub">New run · Next target Level 2</small></span></button>
-    <button class="checkpoint-card hide" id="home-resume" onclick="homeCheckpoint()"></button>
+    <button id="reward-credit-home" class="hide" onclick="redeemNativeRescue()">Use earned rescue</button>
+    <button id="resume-flight" class="hide" onclick="recoverFlight()">Resume Flight</button>
+    <button class="go home-play" id="home-play" onclick="chooseFlight()"><svg class="pi"><use href="#i-play"/></svg><span><b id="home-play-title">New Flight</b><small id="home-play-sub">Next target · Level 2</small></span></button>
   </section>
-
   <nav class="command-dock" aria-label="Main navigation">
     <button class="on" onclick="menu()"><svg><use href="#i-home"/></svg><span>Home</span></button>
     <button onclick="hangar()"><svg><use href="#i-plane"/></svg><span>Hangar</span></button>
@@ -98,85 +95,93 @@
 </div>
 
 <div class="ov page hide" id="flight-map">
+  <div class="page-content">
   <div class="ph"><h2>Flight map</h2><div class="chip" id="map-progress"></div></div>
   <div class="scroll campaign-map" id="campaign-map"></div>
+  </div>
   <button class="go" onclick="menu()">Back</button>
 </div>
 
 <div class="ov hide" id="over">
   <h1>Run over</h1>
   <div id="res"></div>
-  <div class="row"><button id="cont" class="hide" onclick="continueRun()">Continue</button><button class="go" onclick="start()">Retry</button><button onclick="menu()">Menu</button></div>
+  <div class="row"><button id="cont" class="hide" onclick="continueRun()">Continue</button><button id="rewarded-rescue" class="hide" onclick="requestRewardedRescue()">Watch Ad · Rescue Plane</button><button id="over-retry" class="go" onclick="instantRetry()">Retry</button><button onclick="hangar('forge')">Forge</button><button onclick="flightMap()">Campaign Map</button><button onclick="menu()">Menu</button></div>
 </div>
 
 <div class="ov page hide" id="rw">
+  <div class="page-content">
   <div class="ph"><h2>Rewards</h2></div>
-  <div class="scroll" id="rwc"></div>
-  <button class="go" onclick="menu()">Back</button>
-</div>
-
-<div class="ov page hide" id="help">
-  <div class="ph"><h2>How to play</h2></div>
-  <div class="scroll htxt">
-  <p>Put your finger on the circle at the bottom and push up, down, left or right: the plane turns that way (keyboard: arrows or A, D). It never stops moving.</p>
-  <p>The sky moves from morning to night as your plane evolves.</p>
-  <p>Stars appear one at a time. Every 5 stars your plane evolves through 30 unique aircraft. A missile hit drops you 2 levels. A hit at Level 1 ends the run.</p>
-  <p>From Level 4 your plane shoots by itself, and later planes get stronger guns and homing missiles. The first three planes have no guns, so dodge.</p>
-  <p>Bosses arrive at Levels 9, 17 and 25, and a Final Challenge at Level 30. Survive until the red bar empties, or shoot down the big boss missile.</p>
-  <p>Pass close to a missile for near-miss bonus points. Combos stack.</p>
-  <p>Collect ◈ coins from stars, destroyed missiles and bosses. Spend them in the Hangar Upgrade Bay. Every five levels unlocks a checkpoint rescue option after a crash.</p>
-  <p>Tap the blue ability button beside Pause, or press Space, for your current aircraft family ability: shield, magnet, slow time, overdrive, afterburner or nova wave.</p>
-  <p>Watch for world hazards: turbulence, mines, laser gates, drones and asteroids. Each sky world brings a new threat.</p>
-    <p><i class="ring" style="color:#6ec8ff">S</i>Shield blocks one hit</p>
-  <p><i class="ring" style="color:#6ee7b7">M</i>Magnet pulls stars to you</p>
-  <p><i class="ring" style="color:#c4a1ff">L</i>Slows missiles</p>
-  <p>Daily missions and achievements (see Rewards) unlock new trail colours.</p>
+  <nav class="arcade-tabs" aria-label="Reward categories"><button id="daily-tab" onclick="rewardView('daily')">Daily</button><button id="achievements-tab" onclick="rewardView('achievements')">Achievements</button></nav><div class="scroll" id="rwc"></div>
   </div>
   <button class="go" onclick="menu()">Back</button>
 </div>
 
-<div class="ov hide" id="pause">
-  <h1>Paused</h1>
-  <div class="row"><button class="go" onclick="resume()">Resume</button><button onclick="menu()">Menu</button></div>
+<div class="ov page hide" id="help">
+  <div class="page-content">
+  <div class="ph"><h2>How to play</h2></div>
+  <div class="scroll flight-guide"><section><h3>Flight controls</h3><p>Turn with the joystick or drag in Touch Anywhere. Steer around missiles and hazards. Tap Pause to stop the flight, then Resume when ready.</p></section>
+<section><h3>Collect stars</h3><p>Fly into the single mission star. Another appears in a random position after two seconds of active flight. Your wallet keeps every earned star, even after a crash.</p></section>
+<section><h3>Fuel survival</h3><p>A new aircraft has 60 seconds of fuel. Fuel drains while flying and an empty tank ends the attempt. Each retry refills the tank for free.</p></section>
+<section><h3>Aircraft Forge</h3><p>Spend wallet stars on a larger tank or better equipment. Each aircraft has its own upgrades.</p></section>
+<section><h3>Campaign progression</h3><p>Each of the 30 levels assigns one aircraft. The final star saves a checkpoint and refills your tank as the boss arrives. Destroy the boss or survive its timer to unlock the next level.</p></section>
+<section><h3>Temporary power-ups</h3><p>Shield absorbs a hit. Magnet pulls the current star toward you. Slow Motion slows missiles while your fuel and star timers keep running.</p></section></div>
+  </div>
+  <button class="go" onclick="settings()">Back</button>
 </div>
 
+<div class="ov hide" id="pause" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+  <div class="pause-card">
+    <span class="pause-eyebrow">FLIGHT PAUSED</span>
+    <h1 id="pause-title">Paused</h1>
+    <button onclick="save.tutorial=true;proTutorial=-1;store();this.hidden=true" id="skip-tutorial">Skip tutorial</button><button id="pause-forge" onclick="openFlightForge()">Visit Forge</button><div class="pause-actions"><button class="go pause-resume" onclick="resume()">Resume</button><button class="pause-menu" onclick="chooseFlight()">Restart</button><button onclick="menu()">Main Menu</button></div>
+  </div>
+</div>
+<div class="ov hide" id="resume-countdown" role="status" aria-live="polite" aria-label="Resuming flight"><span class="countdown-label">GET READY</span><strong id="resume-count">3</strong></div>
+
 <div class="ov page hide" id="hangar">
+  <div class="page-content">
   <div class="ph"><h2>Hangar</h2><div class="chip" id="hp"></div></div>
-  <div class="scroll">
-    <b class="sec">Paint and trail</b>
+  <nav class="forge-tabs" aria-label="Hangar sections"><button id="tab-aircraft" onclick="selectHangar('aircraft')">Aircraft</button><button id="tab-forge" onclick="selectHangar('forge')">Forge</button><button id="tab-paints" onclick="selectHangar('paints')">Paints</button></nav>
+  <div class="scroll"><section id="hangar-paints" class="hide">
+    <b class="sec">Aircraft paints</b>
     <div id="hl" class="grid"></div>
-    <b class="sec">Upgrade bay</b>
-    <p class="sm">Collect ◈ coins during flights. Upgrades stay with your account.</p>
-    <div id="hup" class="upgrades"></div>
-    <b class="sec">Evolution path</b>
-    <p class="sm">5 stars per level. Collect one star to reveal the next. A hit drops you 2 levels; a hit at Level 1 ends the run. Reach a level in a run to light it up.</p>
-    <div id="hev" class="ev"></div>
+    </section><section id="hangar-forge" class="hide"></section><section id="hangar-aircraft"><div id="aircraft-showroom"></div></section>
+  </div>
   </div>
   <button class="go" onclick="menu()">Back</button>
 </div>
 
 <div class="ov page hide" id="scores">
+  <div class="page-content">
   <div class="ph"><h2>High scores</h2></div>
   <div class="scroll" id="scorec"></div>
+  </div>
   <button class="go" onclick="menu()">Back</button>
 </div>
 
 <div class="ov page hide" id="settings">
+  <div class="page-content">
   <div class="ph"><h2>Settings</h2></div>
   <div class="scroll" id="setc"></div>
+  </div>
   <button class="go" onclick="menu()">Back</button>
 </div>
 
 <div class="ov hide" id="victory">
   <h1>Victory!</h1>
   <div id="vic" class="card"></div>
-  <div class="row"><button class="go" onclick="start()">Play again</button><button onclick="menu()">Menu</button></div>
+  <div class="row"><button class="go" onclick="chooseFlight()">New Flight</button><button onclick="menu()">Menu</button></div>
 </div>
 
 <div id="boss-intro" class="boss-intro hide" aria-live="assertive"></div>
+<aside id="chapter-notice" class="hide" aria-live="polite"><span><b id="chapter-title"></b><small id="chapter-tech"></small></span><button onclick="openFlightForge()">Forge</button></aside>
 <div id="unlock" class="unlock hide" aria-live="polite"></div>
+</div>
 
+<script src="js/00-diagnostics.js"></script>
 <script src="js/01-core.js"></script>
+<script src="js/08c-chapters.js"></script>
+<script src="js/01b-level-campaign.js"></script>
 <script src="js/02-save-and-assets.js"></script>
 <script src="js/03-difficulty-and-state.js"></script>
 <script src="js/04-audio.js"></script>
@@ -186,8 +191,14 @@
 <script src="js/07b-flight-systems.js"></script>
 <script src="js/08-render-helpers.js"></script>
 <script src="js/08b-weapons-sky-controls.js"></script>
+<script src="js/08d-forge.js"></script>
 <script src="js/09-input-and-loop.js"></script>
 <script src="js/10-professional-pass.js"></script>
 <script src="js/11-intro-sequence.js"></script>
 <script src="js/12-command-hangar.js"></script>
+<script src="js/13-release-campaign.js"></script>
+<script src="js/14-flight-modes.js"></script>
+<script src="js/15-ad-integration.js"></script>
+<script src="js/16-flight-recovery.js"></script>
+<script src="js/17-skybound-ui.js"></script>
 </body></html>

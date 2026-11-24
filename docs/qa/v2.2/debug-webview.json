@@ -1,0 +1,414 @@
+﻿[
+    {
+        "file":  "assets/bosses/boss-sheet.png",
+        "sha256":  "30a56373f92b75482a4641a18b1219b358ed8237bd770b911c21b0053165dc26"
+    },
+    {
+        "file":  "assets/bosses/boss-sheet.svg",
+        "sha256":  "f0fc4144d9d26549a5e0deb6c75f2aae518b8c5dc2394ea09cf1e56b5314433f"
+    },
+    {
+        "file":  "assets/bosses/level_10.png",
+        "sha256":  "f9dfbe6463af37ac54dfb08f4ba710ad261d52a699eeb22fdcbf3737aa17a92b"
+    },
+    {
+        "file":  "assets/bosses/level_15.png",
+        "sha256":  "4e2bd2cd5a67a7bd1c9997a7709104990e2073204209ea7965120539e9eb5978"
+    },
+    {
+        "file":  "assets/bosses/level_20.png",
+        "sha256":  "9512f563d1aa26a0e9753eaee35a86c0625fadbeaad67156820d7774758802e6"
+    },
+    {
+        "file":  "assets/bosses/level_25.png",
+        "sha256":  "11de04b3158f179844c5a0f4b7e9bbe8af3eb1ee91399ffa19577ccc0372f694"
+    },
+    {
+        "file":  "assets/bosses/level_30.png",
+        "sha256":  "96589d57ef3878caf90430648eae7dff42c6c9307b37d3b44a29ff57ce0205bb"
+    },
+    {
+        "file":  "assets/bosses/level_5.png",
+        "sha256":  "47a2798c96547c499e68f66f023b5719d043706209c058c7a83d6475f9b416ab"
+    },
+    {
+        "file":  "assets/fonts/BarlowSemiCondensed-Medium.ttf",
+        "sha256":  "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48"
+    },
+    {
+        "file":  "assets/fonts/BarlowSemiCondensed-OFL.txt",
+        "sha256":  "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f"
+    },
+    {
+        "file":  "assets/fonts/BarlowSemiCondensed-SemiBold.ttf",
+        "sha256":  "bd299f4bc5b44d30be8d42e9bad3a5df7d66af1cd55d0ed72a8b8916360a1424"
+    },
+    {
+        "file":  "assets/fonts/Inter-OFL.txt",
+        "sha256":  "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    {
+        "file":  "assets/fonts/Inter-Variable.ttf",
+        "sha256":  "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+    },
+    {
+        "file":  "assets/fonts/Oxanium-OFL.txt",
+        "sha256":  "fe17c0f2581d71b4e1ea7e636e7f4877c29223e11bb1dd1a871e8c3f2a86336b"
+    },
+    {
+        "file":  "assets/fonts/Oxanium-Variable.ttf",
+        "sha256":  "2ce01d946e1e1ffc8d7eecfffbda8623bedd63eaf811a20488c4b69af45babb0"
+    },
+    {
+        "file":  "assets/fonts/PixelifySans-OFL.txt",
+        "sha256":  "b66ba46f511a851ab09998b5a5a9fdbb102545a3864cb993095e1745996873a7"
+    },
+    {
+        "file":  "assets/fonts/PixelifySans-Variable.ttf",
+        "sha256":  "9ba86cd010a4de309d263ceff8e8044092c9db7efda869620cb9ff1c4389e8a5"
+    },
+    {
+        "file":  "assets/fonts/Pixelta-LICENSE.pdf",
+        "sha256":  "9a36515cdcade5a7ad29f0c4a24a29ac487b68bcbff3141d52aadd72c5482acf"
+    },
+    {
+        "file":  "assets/fonts/Pixelta.ttf",
+        "sha256":  "49f419470c0cf1b958000f353b9525b266ae7d21af21a25f31a7d15d7ec585a1"
+    },
+    {
+        "file":  "assets/fonts/Rajdhani-OFL.txt",
+        "sha256":  "f62ef357d3a1c3d27edd35a6e1ba350e8a8d13499797964eeadefbf0b3b15d1f"
+    },
+    {
+        "file":  "assets/fonts/Rajdhani-SemiBold.ttf",
+        "sha256":  "94bbd25a18ca665999feb05a537de9fd2b860dcfb78bbe9ca00270825bf235da"
+    },
+    {
+        "file":  "assets/home/arcade-sky.svg",
+        "sha256":  "6707dcd5b496fe8ce8b32d1b3f90915f877318e6ce410761b6d06c405178bf20"
+    },
+    {
+        "file":  "assets/home/cinematic-sky.png",
+        "sha256":  "1b4b9c60bdeb184691f974d0bea64726e9396941e3c4a66f7259bdb21ed34411"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-1024.png",
+        "sha256":  "946e993f3ca0828a26f96c7c411ebbecad4f4e54819a539d49e7be263626c832"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-16.png",
+        "sha256":  "6ab213295b79adedd20e12abff22ff59d071d7f61941b1fea9f8a79580f9e2cd"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-180.png",
+        "sha256":  "2f4e8c1f479b105349b0d81ac8509f982e9823e7819ff9cdbe3b4ad8b69eeab5"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-192.png",
+        "sha256":  "f9755fe66faddfd1ded600f08975dd8c0b39c54a2110e024b18bc12e19d4a8d0"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-32.png",
+        "sha256":  "f31e213419b2f70f3370e26e7910797b92a3695b379ea487b12b3f6e514b9aad"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-48.png",
+        "sha256":  "37cfa7b79e97af832a5973e7f18f3c38612f12c842453a7b0dba256307f7b1a7"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon-512.png",
+        "sha256":  "7eaf50dfe6fd312d21770a9923a4735a8542b2117cbfc6e270f401f82b1e922a"
+    },
+    {
+        "file":  "assets/icons/dodgewing-app-icon.svg",
+        "sha256":  "2a6966a5ea092a1290a2101df6842b9fc859bc1dd326bb5ea70d99d5ee794639"
+    },
+    {
+        "file":  "assets/icons/favicon.ico",
+        "sha256":  "9c1304c9abfa36e6fe396b2359daa47b10c5b42b470234142a2c633a2477f8a1"
+    },
+    {
+        "file":  "assets/missiles/missile-sheet.png",
+        "sha256":  "2b79c3f661f1162ab50f3e1156f7df51c80e38805de04a0e78b53699038c7c83"
+    },
+    {
+        "file":  "assets/missiles/missile-sheet.svg",
+        "sha256":  "748ca2e3f7c732fe32825f20817ff4093f82b62eacd4f1cdab4fe1f0aeef5322"
+    },
+    {
+        "file":  "assets/planes/01_wooden_glider.png",
+        "sha256":  "c122545cd5a54e8f6a2bf9540afedd229cef24233def9cea9251468e671fb8e7"
+    },
+    {
+        "file":  "assets/planes/02_early_biplane.png",
+        "sha256":  "7032eaebf09598ce1e2e2eaa1114aecc70e43f53a4fb6897f0b20447e2c9fdd9"
+    },
+    {
+        "file":  "assets/planes/03_ww1_biplane.png",
+        "sha256":  "ce9035225d3fbc7a5130d22c4cde060980931eff34c3a8dc47eb6bd981fbeef4"
+    },
+    {
+        "file":  "assets/planes/04_classic_monoplane.png",
+        "sha256":  "f078e8cab80e4ff7ba83d25d1c5630fcdb7829581fdece03868551801c2536f8"
+    },
+    {
+        "file":  "assets/planes/05_ww2_fighter.png",
+        "sha256":  "37b28ef2e21d110568a32e2dd6e6cf1da576e41af473c75c6e6c2c0b02428d2f"
+    },
+    {
+        "file":  "assets/planes/06_early_jet.png",
+        "sha256":  "7c15e0394e3babdc7326c50b2193f4ee1fd22cf8753f5d1631b23b63087e157c"
+    },
+    {
+        "file":  "assets/planes/07_supersonic_jet.png",
+        "sha256":  "c4eac404c2345993cb545450cd29a4d8be89383a3d70907a14f966e34c14c25f"
+    },
+    {
+        "file":  "assets/planes/08_modern_fighter.png",
+        "sha256":  "3ef292a5ec0174892f805bc4079f52d925f2b463724523c46f75fbaf130609e2"
+    },
+    {
+        "file":  "assets/planes/09_stealth_aircraft.png",
+        "sha256":  "de126c43e1b787505428d78b6ad5bd2461e567d8e836f5481d384564904cc738"
+    },
+    {
+        "file":  "assets/planes/10_advanced_fighter.png",
+        "sha256":  "f730ba3774196a1ba157d4fafd4c7b9996122776fc9077db396e6281c55c3bbd"
+    },
+    {
+        "file":  "assets/planes/11_next_generation.png",
+        "sha256":  "d057244e3c308d2ec69207447da838a7b9108d461d8af5c697c4fc3a763ba9b1"
+    },
+    {
+        "file":  "assets/planes/12_futuristic.png",
+        "sha256":  "2221a6502507c3d2518942fad2d6de0a8ced4c6891eb095b7bde2ce8f54446cb"
+    },
+    {
+        "file":  "assets/planes/plane_01.png",
+        "sha256":  "e685049597feae064c1d8ded000213df3d907ac09cac3a8bca259d919b1d2a11"
+    },
+    {
+        "file":  "assets/planes/plane_02.png",
+        "sha256":  "b4c63eace25dfd20c97252d87fb38f7ae7f43da84940a0d6441ffcfaf8f01de1"
+    },
+    {
+        "file":  "assets/planes/plane_03.png",
+        "sha256":  "de04176d22478ffbd65b8d64af053203d36d3743e8b8791321fa2d4261ad0082"
+    },
+    {
+        "file":  "assets/planes/plane_04.png",
+        "sha256":  "5eab3e0a428862ed8c13e7d6cdf2058f57be8d93d79015fcec45030fe59abece"
+    },
+    {
+        "file":  "assets/planes/plane_05.png",
+        "sha256":  "f772bdf9205aa6bd322ae150eef60c04289aaced7bc3ddba5d288015ae590716"
+    },
+    {
+        "file":  "assets/planes/plane_06.png",
+        "sha256":  "6381d8d98622a634ce14469ddde14757e1dd9d1c5af4b84bd4d7f9382707996a"
+    },
+    {
+        "file":  "assets/planes/plane_07.png",
+        "sha256":  "261f96eecdd335734e6547fdfd8596aefc83ed1b93ae613897549b9f8320cb46"
+    },
+    {
+        "file":  "assets/planes/plane_08.png",
+        "sha256":  "a39000e046143d93669068e5e3853855b798d5e4da22b74549be47b5aad8fe33"
+    },
+    {
+        "file":  "assets/planes/plane_09.png",
+        "sha256":  "9ed522e3505e06a19653d462ced645dfe3c37c8437e9b90b524d87089147afff"
+    },
+    {
+        "file":  "assets/planes/plane_10.png",
+        "sha256":  "f3efda86c2cd3cf0b538b9b60a2d48dcbb8135fcc646a09230f4a9936be0cb99"
+    },
+    {
+        "file":  "assets/planes/plane_11.png",
+        "sha256":  "63b7888e816b6179c5aa51d848c5d5ba8406736b1331098442f348b06a1e3dfb"
+    },
+    {
+        "file":  "assets/planes/plane_12.png",
+        "sha256":  "ce45951f4b61ef82b87f0a2a79e3da31131fd1895e7b8c65c4abe07bfcfac024"
+    },
+    {
+        "file":  "assets/planes/plane_13.png",
+        "sha256":  "5c9fde5811fc3375b895ff92b26293813a0bc55b2287938ee18d3e2d6918e64c"
+    },
+    {
+        "file":  "assets/planes/plane_14.png",
+        "sha256":  "29073665e59314c5931f6072eeb73d4239baae263fb3fc82cc13a770792d8a52"
+    },
+    {
+        "file":  "assets/planes/plane_15.png",
+        "sha256":  "f3817bd10869a4e40537a98e88ffe0a06f8af2604ada36c8fbe28e22ee66158a"
+    },
+    {
+        "file":  "assets/planes/plane_16.png",
+        "sha256":  "7933fedb82ad5068aee06dadff1158c1cb93124702cfe12a010c31914437ecac"
+    },
+    {
+        "file":  "assets/planes/plane_17.png",
+        "sha256":  "52c4b37a3c5a3d23d5eb6ee98aceace3997ccc2c45e8141bc99585c2e915ebf5"
+    },
+    {
+        "file":  "assets/planes/plane_18.png",
+        "sha256":  "51cd8b6bd83334f440f9bc350458ca9f9cf79302c7f8fe9f7433a520b390e257"
+    },
+    {
+        "file":  "assets/planes/plane_19.png",
+        "sha256":  "4dbe7e0c001857b1dd249edd731891b1294aec8af1189d1fa7574819b267efb6"
+    },
+    {
+        "file":  "assets/planes/plane_20.png",
+        "sha256":  "daa7ee7607bcf2499588158f00bcd5bbf70c5ea1a7a6a2ea30842aab13aab4ae"
+    },
+    {
+        "file":  "assets/planes/plane_21.png",
+        "sha256":  "e5e3cfb4043d713a4aee942a44cfcedc2fec2891acc6176565d713c3787e0d91"
+    },
+    {
+        "file":  "assets/planes/plane_22.png",
+        "sha256":  "416685607f71fb5647caf84e134917127f4aa41600e8f02b7eb1f6876aa5c95c"
+    },
+    {
+        "file":  "assets/planes/plane_23.png",
+        "sha256":  "8ad8d707632323753cd617c70be748df5c65410809d35472a65cda1199c67621"
+    },
+    {
+        "file":  "assets/planes/plane_24.png",
+        "sha256":  "4e51c7f6be5c37b4c016f273e2eea6c693141a00fd88cfeadf7b67f4e215deb7"
+    },
+    {
+        "file":  "assets/planes/plane_25.png",
+        "sha256":  "69e2172a7801c1556d8209e42803a9874080a70fbdfb417a9918009ec4366e93"
+    },
+    {
+        "file":  "assets/planes/plane_26.png",
+        "sha256":  "004777efa958648d1c8e705b14e40b3ce1e8909a521234a4ee7a11066039f8bc"
+    },
+    {
+        "file":  "assets/planes/plane_27.png",
+        "sha256":  "a64e07909cc64f69e0884eeb0eac0a9ba1f518cbfa8097e7a900cf705ce92f2b"
+    },
+    {
+        "file":  "assets/planes/plane_28.png",
+        "sha256":  "0cde8e0e10d7c4dafd10ed89f1e948d0171c942b0755a664875c1457adcc0426"
+    },
+    {
+        "file":  "assets/planes/plane_29.png",
+        "sha256":  "f83ec30e2bf51a500421761a57ea5726be87024a1c784bb11099646a18af1e8a"
+    },
+    {
+        "file":  "assets/planes/plane_30.png",
+        "sha256":  "db6586b3cdc984092145d06e279748bb63bebab8d9fdad775a6f6ac5f2b241ef"
+    },
+    {
+        "file":  "assets/splash/dodgewing-black-panel-splash-preview.svg",
+        "sha256":  "eba9d5495a9a85b7d9a4b2b215a6b9026a6b1d186ea627de6a99e4fcd0480036"
+    },
+    {
+        "file":  "css/style.css",
+        "sha256":  "1f64c9536e61f238eb8f22f2f03502c23977736f962bb5e7e0badd9b1afbd0a6"
+    },
+    {
+        "file":  "dodgewing.html",
+        "sha256":  "f2f1a9e45669caf9b7d19d29671ddbc0d3d3783cb3e033d58f51089c06104d4a"
+    },
+    {
+        "file":  "js/00-diagnostics.js",
+        "sha256":  "860898d1d339c78a58c33d45a1dec34d83248476ec4f8a4e8f984cc1cb7e66a5"
+    },
+    {
+        "file":  "js/01-core.js",
+        "sha256":  "88d7d9dedb5fb36a609479448181146763276a1505130db9c72ae62d611acfe4"
+    },
+    {
+        "file":  "js/01b-level-campaign.js",
+        "sha256":  "dcc9fb853b2ce697ea9c12ed17a3fffa2a316e7d3a51b177f9c84626544cdca7"
+    },
+    {
+        "file":  "js/02-save-and-assets.js",
+        "sha256":  "903fe25f60c953b30ccd26be8d29b463b788eac542a0e1353002790fff927419"
+    },
+    {
+        "file":  "js/03-difficulty-and-state.js",
+        "sha256":  "e4bf6989e6c1e722191c9c9f52dee820264cc69d98ebd235f74491b5417506f1"
+    },
+    {
+        "file":  "js/04-audio.js",
+        "sha256":  "dc8c86167afe6672e46a053fbbbf650bf1e83cf719d833b6fdacbc41b28fd94a"
+    },
+    {
+        "file":  "js/05-missions-achievements.js",
+        "sha256":  "fb701e571ce79272e0ab5af1bce5bb2633b03d071b4c499769e9088af5bdcfac"
+    },
+    {
+        "file":  "js/06-bosses.js",
+        "sha256":  "9c9b3b5a6295f85d5ed84e013fffd81097685cf31fa28cdb1680782da8ed7158"
+    },
+    {
+        "file":  "js/07-game.js",
+        "sha256":  "962131527a86e5da8770dce2c191b2787c8cd3d9e185fdb0869d764ed2c9a11e"
+    },
+    {
+        "file":  "js/07b-flight-systems.js",
+        "sha256":  "910b07bd8e6d4d5fb789bbef824783bb374c7b14a4fb06d91c9d57e2c7fc0681"
+    },
+    {
+        "file":  "js/08-render-helpers.js",
+        "sha256":  "fdfa23c9d84ba97ceca8d63f447ab47ec933f6ac03a3db3782e0059baac0842f"
+    },
+    {
+        "file":  "js/08b-weapons-sky-controls.js",
+        "sha256":  "4acd3dfcfbdb9a08499463dde7718d36f8ecdea0755017140571dd84ac57d2fd"
+    },
+    {
+        "file":  "js/08c-chapters.js",
+        "sha256":  "d7553353250e092f241df0bf819db8c1ce9eb59ba2a7f7ff10a1f03a5182e79f"
+    },
+    {
+        "file":  "js/08d-forge.js",
+        "sha256":  "570261e3298475d5da3b389c43e143a4c9de8c69265f96d1c23c9dff6e4b9475"
+    },
+    {
+        "file":  "js/09-input-and-loop.js",
+        "sha256":  "ae6d93b70e76607b0f4e7c2c8dc834f1e6c8d6e9c58717cd0199db6fad2ddb5f"
+    },
+    {
+        "file":  "js/10-professional-pass.js",
+        "sha256":  "a9e26ff412fe7da5c5b5aabfc47ba25182a098cb3f84de86b1f263142f38e507"
+    },
+    {
+        "file":  "js/11-intro-sequence.js",
+        "sha256":  "64dd030de146b9d0e04a8b4810da6fb70acb6c7aebd19dc37145f83c875cc331"
+    },
+    {
+        "file":  "js/12-command-hangar.js",
+        "sha256":  "de4d24ad132eb6305712e89eb661929661ae3e472e6ea064637c1c65de830806"
+    },
+    {
+        "file":  "js/13-release-campaign.js",
+        "sha256":  "361f63d6d59b145fb74e5fa48ecac294de6c24527cdfd3496238a27ad86de0f9"
+    },
+    {
+        "file":  "js/14-flight-modes.js",
+        "sha256":  "856efa0e1095e9a4190ee59a867cb20cacac0ab92f4b32519f04b023e275ffd9"
+    },
+    {
+        "file":  "js/15-ad-integration.js",
+        "sha256":  "109e18ce6053ecbfb6e3d3c7220bbc9153cebbbcfe189ebb58a4f1dca8901b91"
+    },
+    {
+        "file":  "js/16-flight-recovery.js",
+        "sha256":  "c181719fce48486e9d6fdc452f618cdb56de7dec9fd62fec9cb86d22f14097d2"
+    },
+    {
+        "file":  "js/17-skybound-ui.js",
+        "sha256":  "3801395ae086fa0a03e6dffbfd43da608ea897019e2fbd8b615bea50f8121f5b"
+    },
+    {
+        "file":  "manifest.webmanifest",
+        "sha256":  "e968a99798939380b811845db69e340b517672559454c029fdf05336cd67ee32"
+    }
+]

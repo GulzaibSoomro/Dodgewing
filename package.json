@@ -1,12 +1,12 @@
 {
   "name": "dodgewing",
-  "version": "0.12.1",
+  "version": "0.14.0",
   "private": true,
   "description": "Dodgewing: survival + aircraft evolution + boss arcade game (HTML5 canvas, no dependencies)",
   "scripts": {
     "build": "node tools/build.js",
     "prepare:android": "node tools/build-android.js",
-    "test": "node tools/build.js && node tests/run-tests.js",
+    "test": "node tools/build.js && node tests/release-tests.js && node tests/validate_admob_native.js",
     "start": "node tools/serve.js",
     "test:browser": "python3 tests/browser_smoke.py && python3 tests/browser_campaign.py && python3 tests/browser_typography_scale.py && python3 tests/browser_command_hangar.py"
   }

@@ -1,0 +1,13 @@
+{
+  "frames": 290,
+  "frameMedianMs": 16.6,
+  "frameP95Ms": 34,
+  "drawP95Ms": 1.5,
+  "framesOver50Ms": 11,
+  "maxParticles": 91,
+  "maxMissiles": 9,
+  "particleLimit": 150,
+  "state": "play",
+  "phase": 3,
+  "diagnostics": []
+}

@@ -9,8 +9,10 @@ const data=file=>fs.readFileSync(path.join(root,file)).toString('base64');
 let html=read('index.html');
 let css=read('css/style.css');
 // The standalone HTML and APK redistribute the fonts, so carry their licenses.
-css+='\n/* Bundled font licenses\n'+['Oxanium-OFL.txt','BarlowSemiCondensed-OFL.txt'].map(file=>read('assets/fonts/'+file)).join('\n\n').replace(/\*\//g,'* /').replace(/[ \t]+$/gm,'')+'\n*/\n';
+css+='\n/* Bundled font licenses\n'+['Oxanium-OFL.txt','BarlowSemiCondensed-OFL.txt','Inter-OFL.txt'].map(file=>read('assets/fonts/'+file)).join('\n\n').replace(/\*\//g,'* /').replace(/[ \t]+$/gm,'')+'\n*/\n';
 css=css.replace(/url\("\.\.\/(assets\/fonts\/[\w\-.]+)"\)/g,(_,file)=>'url("data:font/ttf;base64,'+data(file)+'")');
+// The standalone build also carries the original Home background offline.
+css=css.replace(/url\("\.\.\/(assets\/home\/[\w\-.]+\.(?:png|svg))"\)/g,(_,file)=>'url("data:image/'+(file.endsWith('.svg')?'svg+xml':'png')+';base64,'+data(file)+'")');
 html=html.replace('<link rel="stylesheet" href="css/style.css">','<style>\n'+css+'\n</style>');
 html=html.replace(/href="(assets\/icons\/[^\"]+\.(?:png|ico))"/g,(_,file)=>'href="data:'+(file.endsWith('.ico')?'image/x-icon':'image/png')+';base64,'+data(file)+'"');
 html=html.replace(/src="(assets\/splash\/[^\"]+\.svg)"/g,(_,file)=>'src="data:image/svg+xml;base64,'+data(file)+'"');

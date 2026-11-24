@@ -17,7 +17,7 @@ global.localStorage={getItem:k=>store[k]||null,setItem:(k,v)=>{store[k]=v}};
 global._ev={};global.addEventListener=(t,f)=>{(_ev[t]=_ev[t]||[]).push(f)};global.setTimeout=()=>{};
 global.Image=class{set src(v){this._s=v;this.complete=true;this.naturalWidth=100;this.naturalHeight=120}};
 const run0=new Function(js+`
-;return {get S(){return S},set S(v){S=v},get lv(){return lv},get stars(){return stars},start,upd,draw,evo,sz,get pl(){return pl},set pl(v){pl=v},get ms(){return ms},set ms(v){ms=v},get st(){return st},set st(v){st=v},get pu(){return pu},set pu(v){pu=v},get save(){return save},set shield(v){shield=v},hangar,pick,buy,get upT(){return upT},get banT(){return banT},get fadeT(){return fadeT},get prevLv(){return prevLv},LV,SPR,lvOf,die,get hint(){return hint},get evoStars(){return evoStars},get B(){return B},rewards,setTrail,dayMis,mEvent,chkAch,MIS,ACH,COS,curTrail,rb,get mag(){return mag},set mag(v){mag=v},get slow(){return slow},set slow(v){slow=v},get trailC(){return trailC},set peak(v){peakLv=v},get PUT(){return PUT},set B(v){B=v},get bonus(){return bonus},set bonus(v){bonus=v},get shield(){return shield},get bossSeen(){return bossSeen},get fx(){return fx},startBoss,endBoss,bossTick,get nmT(){return nmT},set ms3(v){ms=v},set evoStars(v){evoStars=v},get lvStars(){return evoStars%5},cap,M,planeSpeed,get SPRD(){return SPRD},missileKind,normalMissileSkin,BOSS,RULES,STAGES,LEVEL_COUNT,levelForTier,tierOf,loop,setWH(w,h){W=w;H=h},pauseG,resume,get ms2(){return ms},addStar,get msT(){return msT},get sp(){return sp},get inv(){return inv},get peakLv(){return peakLv},get banTx(){return banTx},set lv(v){lv=v},set inv(v){inv=v},hurt,set msT(v){msT=v},get bl(){return bl},set bl(v){bl=v},WPN,MISSILE_DRAW_SIZE,skyAt,nightAmt,get skyL(){return skyL},set skyL(v){skyL=v},set autoFire(v){autoFire=v},setJoy(a){jAng=a},get H(){return H},rs,SKY,STARS,UPGRADES,buyUpgrade,upgradeCost,abilityFor,useAbility,obstacleKind,spawnObstacle,continueRun,get obs(){return obs},set obs(v){obs=v},get abilityCd(){return abilityCd},get over(){return over},get runCoins(){return runCoins},get resumeT(){return resumeT},get damageFlash(){return damageFlash},get hudStarPop(){return hudStarPop},get hudCoinPop(){return hudCoinPop},get evolveBurst(){return evolveBurst},reducedMotion,toggleMotion}`);
+;return {get S(){return S},set S(v){S=v},get lv(){return lv},get stars(){return stars},start,upd,draw,evo,sz,get pl(){return pl},set pl(v){pl=v},get ms(){return ms},set ms(v){ms=v},get st(){return st},set st(v){st=v},get pu(){return pu},set pu(v){pu=v},get save(){return save},set shield(v){shield=v},hangar,pick,buy,get upT(){return upT},get banT(){return banT},get fadeT(){return fadeT},get prevLv(){return prevLv},LV,SPR,lvOf,die,get hint(){return hint},get evoStars(){return evoStars},get B(){return B},rewards,setTrail,dayMis,mEvent,chkAch,MIS,ACH,COS,curTrail,rb,get mag(){return mag},set mag(v){mag=v},get slow(){return slow},set slow(v){slow=v},get trailC(){return trailC},set peak(v){peakLv=v},get PUT(){return PUT},set B(v){B=v},get bonus(){return bonus},set bonus(v){bonus=v},get shield(){return shield},get bossSeen(){return bossSeen},get fx(){return fx},startBoss,endBoss,bossTick,get nmT(){return nmT},set ms3(v){ms=v},set evoStars(v){evoStars=v},get lvStars(){return evoStars%5},cap,M,planeSpeed,get SPRD(){return SPRD},missileKind,normalMissileSkin,BOSS,RULES,STAGES,LEVEL_COUNT,levelForTier,tierOf,loop,setWH(w,h){W=w;H=h},pauseG,resume,get ms2(){return ms},addStar,get msT(){return msT},get sp(){return sp},get inv(){return inv},get peakLv(){return peakLv},get banTx(){return banTx},set lv(v){lv=v},set inv(v){inv=v},hurt,set msT(v){msT=v},get bl(){return bl},set bl(v){bl=v},WPN,MISSILE_DRAW_SIZE,skyAt,nightAmt,get skyL(){return skyL},set skyL(v){skyL=v},set autoFire(v){autoFire=v},setJoy(a){jAng=a},get H(){return H},rs,SKY,STARS,UPGRADES,buyUpgrade,upgradeCost,abilityFor,useAbility,obstacleKind,spawnObstacle,continueRun,requestRewardedRescue,onRewardedRescueResult,refreshRewardedRescue,get rewardedRescueUsed(){return rewardedRescueUsed},get rewardedRescuePending(){return rewardedRescuePending},get obs(){return obs},set obs(v){obs=v},get abilityCd(){return abilityCd},get over(){return over},get runCoins(){return runCoins},get resumeT(){return resumeT},get damageFlash(){return damageFlash},get hudStarPop(){return hudStarPop},get hudCoinPop(){return hudCoinPop},get evolveBurst(){return evolveBurst},reducedMotion,toggleMotion}`);
 const run=()=>{const r=run0();r.autoFire=false;return r};
 
 const g=run();
@@ -54,7 +54,8 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
 // ======== Phase 3 ========
 {const g=run();g.save.mode='n';
  const S1=()=>{g.ms=[];g.pu=[];g.st=[{x:g.pl.x,y:g.pl.y,r:0}];g.upd(0.001)};
- const to=n=>{g.start();for(let i=0;i<n;i++){g.B=null;S1()}};
+ // Existing combat assertions start after the new protected boss introduction.
+ const to=n=>{g.start();for(let i=0;i<n;i++){g.B=null;S1()}if(g.B){g.inv=3;g.upd(1.2);g.inv=0}};
  const clean=()=>{g.ms=[];g.pu=[];g.st=[]};
  // near miss
  g.start();g.pl.x=600;g.pl.y=400;g.setWH(1200,800);const nb=g.bonus;
@@ -170,7 +171,7 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  // boss missile needs many hits; killing it ends the Heavy boss
  prep(4);g.startBoss(9);const hm=g.ms.find(m=>m.big);ok(hm.hp===40,'heavy boss missile has 40 hit points');
  hm.x=600;hm.y=400;hm.v=0;hm.h=0;hm.st=null;hm.hp=2;g.bl=[{x:600,y:400,a:0,v:0,d:1,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.ms.includes(hm)&&hm.hp===1,'one hit only dents the heavy missile');
- g.bl=[{x:600,y:400,a:0,v:0,d:1,life:1,w:3,c:'#fff'}];g.upd(.001);g.upd(.001);ok(!g.ms.includes(hm)&&g.B===null,'shooting the heavy missile down defeats the boss ('+g.bonus+' bonus)');
+ g.bl=[{x:600,y:400,a:0,v:0,d:1,life:1,w:3,c:'#fff'}];g.upd(.001);g.upd(1.2);g.upd(.001);ok(!g.ms.includes(hm)&&g.B===null,'shooting the heavy missile down defeats the boss after its protected introduction ('+g.bonus+' bonus)');
  // Commander takes damage from bullets
  prep(7);g.startBoss(17);const bt=g.B.t;g.B.x=600;g.B.y=176;g.bl=[{x:600,y:176,a:0,v:0,d:2,life:1,w:3,c:'#fff'}];g.upd(.001);ok(g.B.t>bt+.2,'bullets hitting the Commander speed up its defeat');
  // levelling up announces the weapon
@@ -241,4 +242,24 @@ g.start();g.loop(undefined);ok(Number.isFinite(g.skyL),'missing frame timestamp 
  g.start();g.lv=6;g.spawnObstacle();ok(g.obs.length===1&&g.obs[0].ty==='mine','active campaign spawns the level world hazard');
  const before=g.save.coins;g.startBoss(9);g.endBoss();ok(g.save.coins>=before+35,'boss defeat grants a coin reward');
  g.start();g.lv=4;g.autoFire=true;g.save.upg.weapon=1;g.ms=[];g.st=[];g.pu=[];g.msT=99;g.upd(.5);ok(g.bl.some(b=>b.d>1),'Weapon Calibrator raises projectile damage');
+}
+
+// Native rewarded rescue bridge: deterministic JS checks (SDK itself needs a device).
+{
+ const a=run(); let requests=0;
+ window.DodgewingAds={requestRewardedRescue(){requests++},onGameOver(){}};
+ a.start();a.lv=8;a.peak=8;a.die();a.upd(1);
+ ok(a.S==='over','rewarded rescue: game-over screen is reached');
+ ok(a.requestRewardedRescue()&&requests===1&&a.rewardedRescuePending,'rewarded rescue: explicit tap requests native ad once');
+ ok(!a.requestRewardedRescue()&&requests===1,'rewarded rescue: multiple taps cannot queue ads');
+ a.onRewardedRescueResult(false);
+ ok(a.S==='over'&&!a.rewardedRescuePending&&!a.rewardedRescueUsed,'rewarded rescue: failed/unfinished ad never grants rescue');
+ ok(a.requestRewardedRescue()&&requests===2,'rewarded rescue: retry after ad failure allowed');
+ a.onRewardedRescueResult(true);
+ ok(a.S==='play'&&a.lv===8&&a.inv>=4&&a.rewardedRescueUsed,'rewarded rescue: earned ad resumes from crash level with protection');
+ a.die();a.upd(1);
+ ok(!a.requestRewardedRescue()&&requests===2,'rewarded rescue: only one ad-funded rescue in a chain');
+ a.start();a.die();a.upd(1);
+ ok(a.requestRewardedRescue()&&requests===3,'rewarded rescue: fresh normal retry resets limit');
+ delete window.DodgewingAds;
 }

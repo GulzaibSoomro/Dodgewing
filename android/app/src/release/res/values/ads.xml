@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Production AdMob IDs. Used ONLY for release builds. -->
+    <string name="admob_app_id" translatable="false">ca-app-pub-5426938423910801~3768372423</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-5426938423910801/5819820697</string>
+    <string name="admob_interstitial_id" translatable="false">ca-app-pub-5426938423910801/5129555550</string>
+    <string name="admob_rewarded_rescue_id" translatable="false">ca-app-pub-5426938423910801/1775624742</string>
+</resources>

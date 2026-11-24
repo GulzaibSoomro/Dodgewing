@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="820" viewBox="0 0 440 820" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#53bafd"/><stop offset=".68" stop-color="#a6e4ff"/><stop offset="1" stop-color="#d5f1ff"/></linearGradient><path id="cloud" d="M0 28q0-12 15-12 5-17 26-12 10-11 24-3 11 6 11 16 18-4 22 11z"/></defs>
+<path fill="url(#sky)" d="M0 0h440v820H0z"/>
+<g fill="#e1f6ff"><use href="#cloud" transform="translate(-44 105) scale(1.5)"/><use href="#cloud" transform="translate(303 152) scale(1.1)"/><use href="#cloud" transform="translate(24 340) scale(.8)"/><use href="#cloud" transform="translate(350 388) scale(1.4)"/><use href="#cloud" transform="translate(192 498) scale(.6)"/></g>
+<g fill="#fff" opacity=".87"><use href="#cloud" transform="translate(-50 475) scale(1.7)"/><use href="#cloud" transform="translate(302 238) scale(.56)"/></g>
+<path fill="#c5eaff" d="M0 680q20-40 60-29 25-48 77-22 29-18 55 7 43-28 77 0 33-34 65-16 46-47 106-21v221H0z"/><path fill="#e6f6ff" d="M0 743q30-24 56-10 44-48 95-20 25-19 61 2 32-39 82-15 28-27 57-16 42-36 89-14v150H0z"/>
+</svg>

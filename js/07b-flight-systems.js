@@ -7,7 +7,7 @@ const UPGRADES=[
   {id:'weapon',n:'Weapon calibrator',d:'+12% weapon damage per rank',cost:[60,120,190,280]}
 ];
 const checkpointLevels=[1,5,10,15,20,25];
-const upgradeRank=id=>Math.max(0,Math.min(4,save.upg[id]||0));
+const upgradeRank=id=>0;
 const upgradeCost=id=>{const u=UPGRADES.find(q=>q.id===id),r=upgradeRank(id);return u&&r<4?u.cost[r]:0};
 const engineBoost=()=>1+upgradeRank('eng')*.03;
 const shieldTime=()=>5+upgradeRank('shield');
@@ -28,36 +28,93 @@ const ABILITIES=[
 ];
 const abilityFor=L=>ABILITIES[Math.min(ABILITIES.length-1,Math.max(0,Math.floor((Math.max(1,L)-1)/5)))];
 function syncAbilityButton(){const b=$('ab');if(!b)return;const a=abilityFor(lv),ready=abilityCd<=0,icon=$('ab-icon'),ring=$('ab-ring'),progress=ready?1:Math.max(0,1-abilityCd/a.cd);if(icon)icon.textContent=ready?a.icon:Math.ceil(abilityCd);else b.textContent=ready?a.icon:Math.ceil(abilityCd)+'s';if(ring&&ring.style)ring.style.setProperty('--cool',Math.round(progress*360)+'deg');if(b.classList){b.classList.toggle('ready',ready);b.classList.toggle('cooling',!ready)}b.title=ready?a.n:a.n+' recharging';b.setAttribute&&b.setAttribute('aria-label',ready?a.n:a.n+' recharging')}
-function useAbility(){if(S!=='play'||abilityCd>0)return false;const a=abilityFor(lv);abilityCd=a.cd;
+function useAbility(){if(S!=='play'||abilityCd>0)return false;const a=abilityFor(lv);abilityCd=a.cd;triggerDefense();chapterTask('ability');
   if(a.key==='G')shield=Math.max(shield,3+upgradeRank('shield')*.5);
   else if(a.key==='M')mag=Math.max(mag,9);
   else if(a.key==='T')slow=Math.max(slow,7);
   else if(a.key==='O')over=7;
   else if(a.key==='B')boost=6;
   else{let cleared=0;for(let i=ms.length-1;i>=0;i--){const m=ms[i];if(!m.bm&&Math.hypot(m.x-pl.x,m.y-pl.y)<Math.max(W,H)*.34){boom(m.x,m.y,'120,220,255',8);ms.splice(i,1);cleared++}}if(cleared)awardCoins(cleared,pl.x,pl.y);}
-  fx.push({x:pl.x,y:pl.y-38,s:a.n,l:1.25,c:'#9fefff'});snd('ability');buzz(14);syncAbilityButton();return true}
+  fx.push({x:pl.x,y:pl.y-38,s:a.n,l:1.25,c:'#9fefff'});snd('ability');buzz(14);syncAbilityButton();store();return true}
 
-function awardCoins(n,px,py){if(!(n>0))return;save.coins+=Math.floor(n);runCoins+=Math.floor(n);hudCoinPop=1;if(px!==undefined&&py!==undefined&&n>=8)fx.push({x:px,y:py-28,s:'◈ +'+Math.floor(n),l:1.15,c:'#ffe066'})}
+function awardCoins(n,px,py){if(!flightMode)return;if(!(n>0))return;save.coins+=Math.floor(n);runCoins+=Math.floor(n);hudCoinPop=1;if(px!==undefined&&py!==undefined&&n>=8)fx.push({x:px,y:py-28,s:'◈ +'+Math.floor(n),l:1.15,c:'#ffe066'})}
 function unlockCheckpoint(L){if(!checkpointLevels.includes(L)||L<=save.cp||L>=LEVEL_COUNT)return;save.cp=L;store();fx.push({x:W/2,y:188,s:'CHECKPOINT · LEVEL '+L,l:1.8,c:'#9fefff',global:1});snd('checkpoint');buzz(20)}
 function checkpointCost(){const cp=Math.max(1,save.cp||1);return cp>1?20+(cp/5-1)*10:0}
 function refreshContinue(){const b=$('cont'),cost=checkpointCost();if(!b)return;const available=cost>0&&save.coins>=cost;b.classList.toggle('hide',!available);b.textContent=available?'Continue Lv '+save.cp+' · ◈ '+cost:'Continue'}
-function continueRun(){const cp=Math.max(1,save.cp||1),cost=checkpointCost();if(cp<=1||save.coins<cost)return false;save.coins-=cost;store();start();lv=cp;prevLv=cp;evoStars=(cp-1)*STARS_PER_LEVEL;peakLv=cp;sp=planeSpeed(cp);skyL=cp;inv=3;hint=0;banT=1.7;banTx='CHECKPOINT · LEVEL '+cp;banC='#9fefff';banIc=0;syncAbilityButton();snd('checkpoint');return true}
+function continueRun(){return false}
+
+// Optional Android-only rewarded rescue. A successful ad starts a fresh flight
+// at the level of the plane's last crash; the completed run's score is retained.
+// Limit: one ad-funded rescue in each rescue chain; normal Retry resets this.
+let rewardedRescueUsed=false, rewardedRescuePending=false, rewardedRescueLevel=1;
+function refreshNativeRescue(){
+  const button=$('reward-credit-home'),credit=save.nativeRescueCredit;
+  if(button){button.classList.toggle('hide',!credit);if(credit)button.textContent='Use earned rescue · Lv '+credit.level}
+}
+function receiveNativeRescue(id,level){
+  if(typeof id!=='string'||!/^[0-9a-f-]{36}$/i.test(id)||!Number.isInteger(level)||level<1||level>LEVEL_COUNT)return false;
+  if(save.nativeLastRescueId===id)return true;
+  if(save.nativeRescueCredit)return false;
+  const prior=save.nativeLastRescueId;save.nativeRescueCredit={id,level};save.nativeLastRescueId=id;
+  try{writeLevelProfile(save);const check=JSON.parse(localStorage.getItem(LEVEL_KEY));if(!check.nativeRescueCredit||check.nativeRescueCredit.id!==id)throw Error('save failed')}
+  catch(e){delete save.nativeRescueCredit;if(prior===undefined)delete save.nativeLastRescueId;else save.nativeLastRescueId=prior;return false}
+  rewardedRescuePending=false;refreshNativeRescue();refreshRewardedRescue();return true;
+}
+window.receiveNativeRescue=receiveNativeRescue;
+function redeemNativeRescue(){
+  const credit=save.nativeRescueCredit;if(!credit||adBreakPending||(S!=='menu'&&S!=='over'))return false;
+  delete save.nativeRescueCredit;save.nativeRescueInFlight=credit;
+  try{writeLevelProfile(save)}catch(e){delete save.nativeRescueInFlight;save.nativeRescueCredit=credit;return false}
+  rewardedRescuePending=false;
+  const level=Math.min(credit.level,unlockedLevelCount()),checkpoint=save.campaign.checkpoints[level-1];
+  beginAttempt(level,checkpoint?'boss':'stars');rewardedRescueUsed=true;inv=4;shield=2;hint=0;banT=2;banTx='REWARDED RESCUE · LEVEL '+lv;banC='#9fefff';banIc=0;
+  syncAbilityButton();ensureBossEntry();commitFlight();refreshNativeRescue();snd('checkpoint');return true;
+}
+function refreshRewardedRescue(){
+  const button=$('rewarded-rescue');if(!button)return;
+  const supported=typeof window!=='undefined'&&window.DodgewingAds&&typeof window.DodgewingAds.requestRewardedRescue==='function';
+  const credit=save.nativeRescueCredit;
+  const showIt=(!!credit||!!supported&&!rewardedRescueUsed)&&S==='over';
+  button.classList.toggle('hide',!showIt);
+  button.disabled=rewardedRescuePending;
+  const over=$('over');if(over&&over.querySelectorAll)over.querySelectorAll('.row button').forEach(b=>{if(b!==button)b.disabled=rewardedRescuePending||adBreakPending});
+  button.textContent=rewardedRescuePending?'Loading rewarded ad…':credit?'Use earned rescue · Lv '+credit.level:'Watch Ad · Rescue Lv '+Math.max(1,rewardedRescueLevel);
+}
+function requestRewardedRescue(){if(adBreakPending)return false;
+  if(save.nativeRescueCredit)return redeemNativeRescue();
+  if(S!=='over'||rewardedRescueUsed||rewardedRescuePending)return false;
+  if(!window.DodgewingAds||typeof window.DodgewingAds.requestRewardedRescue!=='function')return false;
+  rewardedRescuePending=true;refreshRewardedRescue();
+  try{window.DodgewingAds.requestRewardedRescue(rewardedRescueLevel,adScreenSerial)}catch(e){onRewardedRescueResult(false)}
+  return true;
+}
+function onRewardedRescueResult(earned){
+  if(!rewardedRescuePending)return;
+  rewardedRescuePending=false;
+  if(!earned||S!=='over'){refreshRewardedRescue();return}
+  const resumeLevel=Math.max(1,Math.min(LEVEL_COUNT,rewardedRescueLevel));
+  const level=Math.min(resumeLevel,unlockedLevelCount()),checkpoint=save.campaign.checkpoints[level-1];
+  beginAttempt(level,checkpoint?'boss':'stars');rewardedRescueUsed=true;
+  inv=4;shield=2;hint=0;banT=2;banTx='REWARDED RESCUE · LEVEL '+lv;banC='#9fefff';banIc=0;
+  syncAbilityButton();ensureBossEntry();commitFlight();snd('checkpoint');
+}
+window.onRewardedRescueResult=onRewardedRescueResult;
 
 const obstacleKind=L=>L<6?'cloud':L<11?'mine':L<16?'gate':L<21?'drone':'asteroid';
-function spawnObstacle(){const ty=obstacleKind(lv);if(ty==='gate'){obs.push({ty,y:-20,vy:54+lv*1.4,gap:rnd(W*.28,W*.72),gw:Math.max(78,W*.22),life:15});return}
+function spawnObstacle(){const ty=obstacleKind(lv);if(ty==='gate'){obs.push({ty,y:-20,vy:54+lv*1.4,gap:rnd(W*.28,W*.72),gw:Math.max(94,W*.34),life:15});return}
   const e=edge(),a=Math.atan2(H*.5-e.y,W*.5-e.x)+rnd(-.5,.5),v=ty==='cloud'?45:65+lv*2,r=ty==='cloud'?38:ty==='asteroid'?19:16;
   obs.push({ty,x:e.x,y:e.y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r,life:13,ph:rnd(0,TAU)})
 }
 function obstacleHit(i,o){if(o.ty==='cloud'){wind=Math.max(wind,1.35);fx.push({x:pl.x,y:pl.y-34,s:'TURBULENCE',l:.8,c:'#d8eeff'});obs.splice(i,1);return}
   if(inv>0){obs.splice(i,1);return}
   if(shield>0){shield=0;inv=.8;shieldFlash=.55;snd('hit');boom(pl.x,pl.y,'110,200,255',14);obs.splice(i,1);buzz(22);return}
-  obs.splice(i,1);if(lv>1)hurt();else die()
+  obs.splice(i,1);if(absorbImpact())return;if(lv>1)hurt();else die()
 }
 function updateObstacles(d){if(S!=='play')return;wind=Math.max(0,wind-d);abilityCd=Math.max(0,abilityCd-d);boost=Math.max(0,boost-d);over=Math.max(0,over-d);if(Math.floor((abilityCd+d)*2)!==Math.floor(abilityCd*2))syncAbilityButton();
-  obT-=d;const max=lowGraphics()?1:2;if(!B&&obT<=0&&obs.length<max){spawnObstacle();obT=rnd(8.5,12.5)}
+  obT-=d;const max=SAFE_RENDER?1:2;if(!B&&obT<=0&&obs.length<max){spawnObstacle();obT=rnd(8.5,12.5)*levelPressure().hazardInterval}
   for(let i=obs.length-1;i>=0;i--){const o=obs[i];o.life-=d;if(o.ty==='gate')o.y+=o.vy*d;else{o.x+=o.vx*d;o.y+=o.vy*d}if(o.life<=0||o.y>H+60||o.x<-80||o.x>W+80){obs.splice(i,1);continue}
     const contact=o.ty==='gate'?Math.abs(pl.y-o.y)<10&&Math.abs(pl.x-o.gap)>o.gw*.5:Math.hypot(pl.x-o.x,pl.y-o.y)<o.r+sz()*.24;
-    if(contact)obstacleHit(i,o)
+    if(contact){obstacleHit(i,o);if(S!=='play')return}
   }
 }
 function drawObstacles(){for(const o of obs){x.save();if(o.ty==='gate'){const y=o.y,g=o.gap,w=o.gw;x.strokeStyle='rgba(255,76,92,.78)';x.shadowColor='rgba(255,60,72,.55)';x.shadowBlur=lowGraphics()?0:10;x.lineWidth=5;x.beginPath();x.moveTo(0,y);x.lineTo(g-w/2,y);x.moveTo(g+w/2,y);x.lineTo(W,y);x.stroke();x.fillStyle='#ffcf81';x.fillRect(g-w/2-8,y-8,8,16);x.fillRect(g+w/2,y-8,8,16)}
